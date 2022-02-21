@@ -1,6 +1,7 @@
 import { Drawer as MuiDrawer, Theme, useMediaQuery } from "@mui/material";
 import { DrawerProps as MuiDrawerProps } from "@mui/material/Drawer";
 import { ReactNode, VFC } from "react";
+import { StyleConst } from "../../../constants/styleConstants";
 import { DrawerContents } from "./Contents";
 
 const BaseDrawer: VFC<MuiDrawerProps> = (props) => {
@@ -8,7 +9,7 @@ const BaseDrawer: VFC<MuiDrawerProps> = (props) => {
     <MuiDrawer
       PaperProps={{
         sx: {
-          width: 240,
+          width: StyleConst.DRAWER_WIDTH,
           backgroundColor: "#031525",
         },
       }}
@@ -17,16 +18,22 @@ const BaseDrawer: VFC<MuiDrawerProps> = (props) => {
   );
 };
 
-const DrawerFrame: VFC<{ children: ReactNode; isOpen: boolean }> = ({
-  children,
-  isOpen,
-}) => {
+const DrawerFrame: VFC<{
+  children: ReactNode;
+  isOpen: boolean;
+  onClose: MuiDrawerProps["onClose"];
+}> = ({ children, isOpen, onClose }) => {
   const isMobile = useMediaQuery<Theme>((theme) =>
     theme.breakpoints.down("sm")
   );
 
   return isMobile ? (
-    <BaseDrawer variant="temporary" children={children} open={isOpen} />
+    <BaseDrawer
+      variant="temporary"
+      children={children}
+      open={isOpen}
+      onClose={onClose}
+    />
   ) : (
     <BaseDrawer
       variant="permanent"
@@ -36,6 +43,13 @@ const DrawerFrame: VFC<{ children: ReactNode; isOpen: boolean }> = ({
   );
 };
 
-export const Drawer: VFC<{ isOpen: boolean }> = ({ isOpen }) => (
-  <DrawerFrame isOpen={isOpen} children={<DrawerContents />} />
+export const Drawer: VFC<{
+  isOpen: boolean;
+  onClose: MuiDrawerProps["onClose"];
+}> = ({ isOpen, onClose }) => (
+  <DrawerFrame
+    isOpen={isOpen}
+    onClose={onClose}
+    children={<DrawerContents />}
+  />
 );
