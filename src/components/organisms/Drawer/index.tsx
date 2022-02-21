@@ -9,6 +9,7 @@ const BaseDrawer: VFC<MuiDrawerProps> = (props) => {
       PaperProps={{
         sx: {
           width: 240,
+          backgroundColor: "#031525",
         },
       }}
       {...props}

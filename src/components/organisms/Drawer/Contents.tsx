@@ -22,21 +22,50 @@ export const DrawerContents: VFC = () => {
   return (
     <>
       <Stack justifyContent="center" alignItems="center">
-        <Typography variant="h5" gutterBottom component="div">
+        <Typography
+          variant="h5"
+          gutterBottom
+          component="div"
+          sx={{ color: "#FFFFFF" }}
+        >
           Onlystory
         </Typography>
-        <Typography variant="subtitle1" gutterBottom component="div">
+        <Typography
+          variant="subtitle1"
+          gutterBottom
+          component="div"
+          sx={{ color: "#999999" }}
+        >
           inhouse app
         </Typography>
       </Stack>
-      <Divider />
-      <List subheader={<ListSubheader>有料会員管理</ListSubheader>}>
+      <Divider sx={{ backgroundColor: "#FFFFFF" }} />
+      <List
+        subheader={
+          <ListSubheader sx={{ background: "#031525", color: "#FFFFFF" }}>
+            有料会員管理
+          </ListSubheader>
+        }
+      >
         {items.map((item, index) => (
-          <ListItemButton key={`drawer.item.${index}`} sx={{ maxHeight: 48 }}>
-            <ListItemIcon sx={{ color: "inherit" }}>{item.icon}</ListItemIcon>
+          <ListItemButton
+            key={`drawer.item.${index}`}
+            sx={{
+              maxHeight: 48,
+              color: "#FFFFFF",
+              "&:hover": {
+                background: "#0c2d48",
+                color: "#039be5",
+              },
+            }}
+          >
+            <ListItemIcon sx={{ color: "#999999" }}>{item.icon}</ListItemIcon>
             <ListItemText
               primary={item.label}
-              primaryTypographyProps={{ fontSize: 14, fontWeight: "medium" }}
+              primaryTypographyProps={{
+                fontSize: 14,
+                fontWeight: "medium",
+              }}
             />
           </ListItemButton>
         ))}

@@ -1,11 +1,10 @@
 import { CssBaseline } from "@mui/material";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { ThemeProvider } from "@mui/material/styles";
+import { themeWithComponentStyles } from "../src/constants/theme";
 import { VIEWPORTS } from "./viewports";
 
-const theme = createTheme({});
-
 const withThemeProvider = (Story, context) => (
-  <ThemeProvider theme={theme}>
+  <ThemeProvider theme={themeWithComponentStyles}>
     <CssBaseline />
     <Story {...context} />
   </ThemeProvider>
