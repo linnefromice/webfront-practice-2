@@ -1,6 +1,7 @@
 import { Drawer as MuiDrawer, Theme, useMediaQuery } from "@mui/material";
 import { DrawerProps as MuiDrawerProps } from "@mui/material/Drawer";
 import { ReactNode, VFC } from "react";
+import { DrawerContents } from "./Contents";
 
 const BaseDrawer: VFC<MuiDrawerProps> = (props) => {
   return (
@@ -15,7 +16,7 @@ const BaseDrawer: VFC<MuiDrawerProps> = (props) => {
   );
 };
 
-export const Drawer: VFC<{ children: ReactNode; isOpen: boolean }> = ({
+const DrawerFrame: VFC<{ children: ReactNode; isOpen: boolean }> = ({
   children,
   isOpen,
 }) => {
@@ -33,3 +34,7 @@ export const Drawer: VFC<{ children: ReactNode; isOpen: boolean }> = ({
     />
   );
 };
+
+export const Drawer: VFC<{ isOpen: boolean }> = ({ isOpen }) => (
+  <DrawerFrame isOpen={isOpen} children={<DrawerContents />} />
+);
