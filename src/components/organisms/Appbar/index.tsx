@@ -1,5 +1,4 @@
 import MenuOpenIcon from "@mui/icons-material/MenuOpen";
-import SearchIcon from "@mui/icons-material/Search";
 import {
   AppBar as MuiAppBar,
   Avatar,
@@ -59,13 +58,22 @@ export const AppBar: VFC<{ openDrawer: () => void }> = ({ openDrawer }) => {
               </IconButton>
             </Tooltip>
           )}
-          <Tooltip title="Contacts">
-            <IconButton sx={{ ml: 1 }}>
-              <SearchIcon fontSize="small" />
-            </IconButton>
+        </Stack>
+        <Stack
+          direction="row"
+          justifyContent="flex-end"
+          alignItems="center"
+          sx={{ width: "100%", height: "100%" }}
+        >
+          <Tooltip
+            title="Account Name"
+            placement="bottom"
+            disableFocusListener
+            disableTouchListener
+          >
+            <Avatar>A</Avatar>
           </Tooltip>
         </Stack>
-        <Avatar>A</Avatar>
       </Stack>
     </AppBarFrame>
   );
