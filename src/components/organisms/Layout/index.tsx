@@ -1,4 +1,6 @@
+import { Box } from "@mui/material";
 import { ReactNode, VFC } from "react";
+import { StyleConst } from "../../../constants/styleConstants";
 import { useDrawerState } from "../../../libs/stores/useDrawer";
 import { AppBar } from "../AppBar";
 import { Drawer } from "../Drawer";
@@ -8,9 +10,14 @@ export const Layout: VFC<{ children: ReactNode }> = ({ children }) => {
 
   return (
     <>
-      <Drawer isOpen={isOpen} onClose={close} />
       <AppBar openDrawer={open} />
-      {children}
+      <Box height={StyleConst.APP_BAR_HEIGHT} width="100vw" />
+      <Box sx={{ display: "flex" }}>
+        <Drawer isOpen={isOpen} onClose={close} />
+        <Box component="main" sx={{ flexGrow: 1 }}>
+          {children}
+        </Box>
+      </Box>
     </>
   );
 };

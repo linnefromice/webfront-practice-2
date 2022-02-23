@@ -24,7 +24,7 @@ const AppBarFrame: VFC<{ children: ReactNode }> = ({ children }) => {
         width: isMobile
           ? "100vw"
           : `calc(100vw - ${StyleConst.DRAWER_WIDTH}px)`,
-        height: 64,
+        height: StyleConst.APP_BAR_HEIGHT,
       }}
     >
       <Toolbar sx={{ width: "100%", height: "100%" }}>{children}</Toolbar>

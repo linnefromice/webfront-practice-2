@@ -7,6 +7,9 @@ import { DrawerContents } from "./Contents";
 const BaseDrawer: VFC<MuiDrawerProps> = (props) => {
   return (
     <MuiDrawer
+      sx={{
+        width: StyleConst.DRAWER_WIDTH,
+      }}
       PaperProps={{
         sx: {
           width: StyleConst.DRAWER_WIDTH,

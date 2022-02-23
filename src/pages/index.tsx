@@ -9,7 +9,12 @@ const IndexPage: NextPage = () => {
     theme.breakpoints.down("sm")
   );
 
-  return <>{isMobile ? <h1>MOBILE</h1> : <h1>WEB</h1>}</>;
+  return (
+    <>
+      {isMobile ? <h1>MOBILE</h1> : <h1>WEB</h1>}
+      <h1>Contents Area</h1>
+    </>
+  );
 };
 
 export default IndexPage;
