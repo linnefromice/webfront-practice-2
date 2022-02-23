@@ -8,7 +8,6 @@ import "../../styles/globals.css";
 import { Layout } from "../components/organisms/Layout";
 import { themeWithComponentStyles } from "../constants/theme";
 import createEmotionCache from "../libs/createEmotionCache";
-
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache();
 
