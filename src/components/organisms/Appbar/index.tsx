@@ -54,7 +54,7 @@ export const AppBar: VFC<{ openDrawer: () => void }> = ({ openDrawer }) => {
           {isMobile && (
             <Tooltip title="Menu">
               <IconButton sx={{ ml: 1 }} onClick={openDrawer}>
-                <MenuOpenIcon fontSize="small" />
+                <MenuOpenIcon fontSize="large" />
               </IconButton>
             </Tooltip>
           )}
@@ -71,7 +71,7 @@ export const AppBar: VFC<{ openDrawer: () => void }> = ({ openDrawer }) => {
             disableFocusListener
             disableTouchListener
           >
-            <Avatar>A</Avatar>
+            <Avatar sx={{ width: 40, height: 40 }}>A</Avatar>
           </Tooltip>
         </Stack>
       </Stack>
