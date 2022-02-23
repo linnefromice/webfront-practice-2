@@ -31,18 +31,13 @@ const DrawerFrame: VFC<{
   );
 
   return isMobile ? (
-    <BaseDrawer
-      variant="temporary"
-      children={children}
-      open={isOpen}
-      onClose={onClose}
-    />
+    <BaseDrawer variant="temporary" open={isOpen} onClose={onClose}>
+      {children}
+    </BaseDrawer>
   ) : (
-    <BaseDrawer
-      variant="permanent"
-      ModalProps={{ keepMounted: true }}
-      children={children}
-    />
+    <BaseDrawer variant="permanent" ModalProps={{ keepMounted: true }}>
+      {children}
+    </BaseDrawer>
   );
 };
 
@@ -50,9 +45,7 @@ export const Drawer: VFC<{
   isOpen: boolean;
   onClose: MuiDrawerProps["onClose"];
 }> = ({ isOpen, onClose }) => (
-  <DrawerFrame
-    isOpen={isOpen}
-    onClose={onClose}
-    children={<DrawerContents />}
-  />
+  <DrawerFrame isOpen={isOpen} onClose={onClose}>
+    <DrawerContents />
+  </DrawerFrame>
 );
