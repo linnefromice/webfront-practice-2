@@ -3,7 +3,9 @@ import { CssBaseline } from "@mui/material";
 import { ThemeProvider } from "@mui/material/styles";
 import type { AppProps } from "next/app";
 import Head from "next/head";
+import { RecoilRoot } from "recoil";
 import "../../styles/globals.css";
+import { Layout } from "../components/organisms/Layout";
 import { themeWithComponentStyles } from "../constants/theme";
 import createEmotionCache from "../libs/createEmotionCache";
 
@@ -24,7 +26,11 @@ function MyApp(props: MyAppProps) {
       <ThemeProvider theme={themeWithComponentStyles}>
         {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
         <CssBaseline />
-        <Component {...pageProps} />
+        <RecoilRoot>
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
+        </RecoilRoot>
       </ThemeProvider>
     </CacheProvider>
   );
