@@ -14,7 +14,16 @@ export const Layout: VFC<{ children: ReactNode }> = ({ children }) => {
       <Box height={StyleConst.APP_BAR_HEIGHT} width="100vw" />
       <Box sx={{ display: "flex" }}>
         <Drawer isOpen={isOpen} onClose={close} />
-        <Box component="main" sx={{ flexGrow: 1 }}>
+        <Box
+          component="main"
+          sx={{
+            flexGrow: 1,
+            marginLeft: 8,
+            marginRight: 8,
+            marginTop: 4,
+            marginBottom: 4,
+          }}
+        >
           {children}
         </Box>
       </Box>
