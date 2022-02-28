@@ -44,7 +44,10 @@ const Contents: VFC = () => {
         )}
       />
       <FormControl>
-        <FormLabel id="paid-member-mng-matter-form-contract-type-label">
+        <FormLabel
+          id="paid-member-mng-matter-form-contract-type-label"
+          sx={{ fontSize: 12 }}
+        >
           契約種別
         </FormLabel>
         {isMobile ? (
@@ -91,14 +94,14 @@ const Contents: VFC = () => {
       </FormControl>
       <TextField InputLabelProps={{ shrink: true }} label="契約獲得者" />
       <Typography variant="h5">データ共有</Typography>
-      <Typography>申込書PDFデータ</Typography>
+      <Typography sx={{ fontSize: 12 }}>申込書PDFデータ</Typography>
       <Dropzone onDrop={() => {}} accept={"*"} />
-      <Typography>名刺写真</Typography>
+      <Typography sx={{ fontSize: 12 }}>名刺写真</Typography>
       <Dropzone onDrop={() => {}} accept={"*"} />
-      <Typography>クロージング現場の音源</Typography>
+      <Typography sx={{ fontSize: 12 }}>クロージング現場の音源</Typography>
       <TextField InputLabelProps={{ shrink: true }} label="音源ラベル" />
       <TextField InputLabelProps={{ shrink: true }} label="音源URL" />
-      <Typography>クロージングで出した資料</Typography>
+      <Typography sx={{ fontSize: 12 }}>クロージングで出した資料</Typography>
       <Dropzone onDrop={() => {}} accept={"*"} />
       <TextField
         InputLabelProps={{ shrink: true }}
@@ -107,7 +110,7 @@ const Contents: VFC = () => {
           startAdornment: <InputAdornment position="start">¥</InputAdornment>,
         }}
       />
-      <Typography>初回請求額内訳</Typography>
+      <Typography sx={{ fontSize: 12 }}>初回請求額内訳</Typography>
       <TextField InputLabelProps={{ shrink: true }} label="ラベル" />
       <TextField
         InputLabelProps={{ shrink: true }}

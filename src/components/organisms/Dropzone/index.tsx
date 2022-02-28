@@ -1,3 +1,4 @@
+import FileUploadIcon from "@mui/icons-material/FileUpload";
 import { Stack } from "@mui/material";
 import { VFC } from "react";
 import { DropzoneOptions, useDropzone } from "react-dropzone";
@@ -9,7 +10,6 @@ export const Dropzone: VFC<DropzoneProps> = ({ onDrop, accept }) => {
     useDropzone({
       accept,
       onDrop,
-      noClick: true,
       maxFiles: 1,
     });
 
@@ -25,12 +25,13 @@ export const Dropzone: VFC<DropzoneProps> = ({ onDrop, accept }) => {
       justifyContent="center"
       alignItems="center"
       sx={{
-        minHeight: "300px",
+        minHeight: "150px",
         border: "dashed 2px",
         borderColor: dropZoneBorderColor,
       }}
     >
       <input {...getInputProps()} />
+      <FileUploadIcon />
     </Stack>
   );
 };
