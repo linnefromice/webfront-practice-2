@@ -14,15 +14,19 @@
     "prepare": "husky install"
   },
   "dependencies": {
+    "@date-io/dayjs": "^2.13.1",
     "@emotion/react": "^11.8.1",
     "@emotion/server": "^11.4.0",
     "@emotion/styled": "^11.8.1",
     "@mui/icons-material": "^5.4.2",
+    "@mui/lab": "^5.0.0-alpha.70",
     "@mui/material": "^5.4.2",
     "clsx": "^1.1.1",
+    "dayjs": "^1.10.7",
     "next": "12.1.0",
     "react": "17.0.2",
     "react-dom": "17.0.2",
+    "react-dropzone": "^12.0.4",
     "recoil": "^0.6.1"
   },
   "devDependencies": {
