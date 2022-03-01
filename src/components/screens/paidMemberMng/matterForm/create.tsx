@@ -21,13 +21,13 @@ import { TextField } from "../../../uiParts/TextField";
 
 const Dropzone: VFC<{ label: string } & DropzoneProps> = ({
   label,
-  onDrop,
+  formDataKey,
   accept,
 }) => {
   return (
     <>
       <Typography sx={{ fontSize: 12 }}>{label}</Typography>
-      <BaseDropzone onDrop={onDrop} accept={accept} />
+      <BaseDropzone formDataKey={formDataKey} accept={accept} />
     </>
   );
 };
@@ -37,8 +37,11 @@ type FormData = {
   contractDate: Date; // 契約日
   contractType: string; // 契約種別
   contractor: string; // 契約獲得者
+  applicationFormData: File[]; // 申込書PDFデータ
+  businessCardPic: File[]; // 名刺写真
   closingUrl: string; // クロージング現場の音源URL
   closingUrlDescription: string; // クロージング現場の音源説明
+  closingDocument: File[]; // クロージング資料
 };
 
 const Contents: VFC = () => {
@@ -87,15 +90,22 @@ const Contents: VFC = () => {
           />
           <TextField formDataKey="contractor" label="契約獲得者" />
           <Typography variant="h5">データ共有</Typography>
-          <Dropzone label="申込書PDFデータ" onDrop={() => {}} accept={"*"} />
-          <Dropzone label="名刺写真" onDrop={() => {}} accept={"*"} />
+          <Dropzone
+            formDataKey="applicationFormData"
+            label="申込書PDFデータ"
+            accept={["application/pdf"]}
+          />
+          <Dropzone
+            formDataKey="businessCardPic"
+            label="名刺写真"
+            accept={["image/jpeg", "image/png"]}
+          />
           <Typography sx={{ fontSize: 12 }}>クロージング現場の音源</Typography>
           <TextField formDataKey="closingUrl" label="音源ラベル" />
           <TextField formDataKey="closingUrlDescription" label="音源URL" />
           <Dropzone
+            formDataKey="closingDocument"
             label="クロージングで出した資料"
-            onDrop={() => {}}
-            accept={"*"}
           />
           <MuiTextField
             InputLabelProps={{ shrink: true }}

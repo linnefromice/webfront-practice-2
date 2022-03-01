@@ -1,12 +1,15 @@
 import FileUploadIcon from "@mui/icons-material/FileUpload";
 import { Stack, Typography } from "@mui/material";
-import { VFC } from "react";
+import { useCallback, useEffect, VFC } from "react";
 import { DropzoneOptions, useDropzone } from "react-dropzone";
+import { useFormContext } from "react-hook-form";
 
-export type DropzoneProps = Pick<DropzoneOptions, "onDrop" | "accept">;
+export type RawDropzoneProps = Pick<DropzoneOptions, "onDrop"> & {
+  accept?: string | string[];
+};
 
-export const Dropzone: VFC<DropzoneProps> = ({ onDrop, accept }) => {
-  const { getRootProps, getInputProps, isDragActive, isDragAccept, open } =
+export const RawDropzone: VFC<RawDropzoneProps> = ({ onDrop, accept }) => {
+  const { getRootProps, getInputProps, isDragActive, isDragAccept } =
     useDropzone({
       accept,
       onDrop,
@@ -41,4 +44,29 @@ export const Dropzone: VFC<DropzoneProps> = ({ onDrop, accept }) => {
       </Stack>
     </Stack>
   );
+};
+
+export type DropzoneProps = Omit<RawDropzoneProps, "onDrop"> & {
+  formDataKey: string;
+};
+
+export const Dropzone: VFC<DropzoneProps> = ({ formDataKey, ...props }) => {
+  const { register, unregister, setValue, watch } = useFormContext();
+  const files = watch(formDataKey);
+
+  const onDrop = useCallback(
+    (droppedFiles) => {
+      const newFiles =
+        (!!files?.length && [...files].concat(droppedFiles)) || droppedFiles;
+      setValue(formDataKey, newFiles, { shouldValidate: true });
+    },
+    [setValue, formDataKey]
+  );
+
+  useEffect(() => {
+    register(formDataKey);
+    return () => unregister(formDataKey);
+  }, [register, unregister, formDataKey]);
+
+  return <RawDropzone {...props} onDrop={onDrop} />;
 };
