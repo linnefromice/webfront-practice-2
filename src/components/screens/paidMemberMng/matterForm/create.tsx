@@ -1,12 +1,8 @@
 import { DatePicker } from "@mui/lab";
 import {
   Button,
-  FormControl,
-  FormControlLabel,
-  FormLabel,
   InputAdornment,
   Radio,
-  RadioGroup as MuiRadioGroup,
   Stack,
   TextField as MuiTextField,
   Theme,
@@ -19,67 +15,8 @@ import {
   Dropzone as BaseDropzone,
   DropzoneProps,
 } from "../../../organisms/Dropzone";
-
-const TextField: VFC<{ label: string; helperText?: string }> = ({
-  label,
-  helperText,
-}) => {
-  return (
-    <MuiTextField
-      InputLabelProps={{ shrink: true }}
-      label={label}
-      helperText={helperText}
-    />
-  );
-};
-
-type RadioGroupType = {
-  label: string;
-  id: string;
-  choices: { label: string; value: string }[];
-  component: JSX.Element;
-  direction: "column" | "row";
-};
-const RadioGroup: VFC<RadioGroupType> = ({
-  label,
-  id,
-  choices,
-  component,
-  direction,
-}) => {
-  return (
-    <FormControl>
-      <FormLabel id={id} sx={{ fontSize: 12 }}>
-        {label}
-      </FormLabel>
-      {direction === "column" ? (
-        <MuiRadioGroup aria-labelledby={id}>
-          {choices.map((v) => (
-            <FormControlLabel
-              key={`${id}.${v.label}`}
-              label={v.label}
-              value={v.label}
-              control={component}
-            />
-          ))}
-        </MuiRadioGroup>
-      ) : (
-        <MuiRadioGroup aria-labelledby={id}>
-          <Stack direction="row" justifyContent="flex-start">
-            {choices.map((v) => (
-              <FormControlLabel
-                key={`${id}.${v.label}`}
-                label={v.label}
-                value={v.label}
-                control={component}
-              />
-            ))}
-          </Stack>
-        </MuiRadioGroup>
-      )}
-    </FormControl>
-  );
-};
+import { RadioGroup } from "../../../uiParts/RadioGroup";
+import { TextField } from "../../../uiParts/TextField";
 
 const Dropzone: VFC<{ label: string } & DropzoneProps> = ({
   label,
