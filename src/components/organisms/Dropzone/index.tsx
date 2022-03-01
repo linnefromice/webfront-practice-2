@@ -1,5 +1,5 @@
 import FileUploadIcon from "@mui/icons-material/FileUpload";
-import { Stack } from "@mui/material";
+import { Stack, Typography } from "@mui/material";
 import { VFC } from "react";
 import { DropzoneOptions, useDropzone } from "react-dropzone";
 
@@ -31,7 +31,14 @@ export const Dropzone: VFC<DropzoneProps> = ({ onDrop, accept }) => {
       }}
     >
       <input {...getInputProps()} />
-      <FileUploadIcon />
+      <Stack alignItems="center">
+        <FileUploadIcon />
+        <Typography sx={{ fontSize: 12 }}>
+          作成したファイルをここにドロップ
+        </Typography>
+        <Typography sx={{ fontSize: 12 }}>or</Typography>
+        <Typography sx={{ fontSize: 12 }}>ファイルを選択</Typography>
+      </Stack>
     </Stack>
   );
 };
