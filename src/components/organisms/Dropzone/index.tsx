@@ -3,7 +3,7 @@ import { Stack, Typography } from "@mui/material";
 import { VFC } from "react";
 import { DropzoneOptions, useDropzone } from "react-dropzone";
 
-type DropzoneProps = Pick<DropzoneOptions, "onDrop" | "accept">;
+export type DropzoneProps = Pick<DropzoneOptions, "onDrop" | "accept">;
 
 export const Dropzone: VFC<DropzoneProps> = ({ onDrop, accept }) => {
   const { getRootProps, getInputProps, isDragActive, isDragAccept, open } =
