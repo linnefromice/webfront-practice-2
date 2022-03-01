@@ -6,8 +6,11 @@ import {
   Stack,
 } from "@mui/material";
 import { VFC } from "react";
+import { Controller, useFormContext } from "react-hook-form";
 
-type RadioGroupType = {
+type RawRadioGroupType = {
+  value: string;
+  onChange: (event: React.ChangeEvent<HTMLInputElement>, value: string) => void;
   label: string;
   id: string;
   choices: { label: string; value: string }[];
@@ -15,7 +18,9 @@ type RadioGroupType = {
   direction: "column" | "row";
 };
 
-export const RadioGroup: VFC<RadioGroupType> = ({
+const RawRadioGroup: VFC<RawRadioGroupType> = ({
+  value,
+  onChange,
   label,
   id,
   choices,
@@ -28,24 +33,24 @@ export const RadioGroup: VFC<RadioGroupType> = ({
         {label}
       </FormLabel>
       {direction === "column" ? (
-        <MuiRadioGroup aria-labelledby={id}>
+        <MuiRadioGroup aria-labelledby={id} value={value} onChange={onChange}>
           {choices.map((v) => (
             <FormControlLabel
               key={`${id}.${v.label}`}
               label={v.label}
-              value={v.label}
+              value={v.value}
               control={component}
             />
           ))}
         </MuiRadioGroup>
       ) : (
-        <MuiRadioGroup aria-labelledby={id}>
+        <MuiRadioGroup aria-labelledby={id} value={value} onChange={onChange}>
           <Stack direction="row" justifyContent="flex-start">
             {choices.map((v) => (
               <FormControlLabel
                 key={`${id}.${v.label}`}
                 label={v.label}
-                value={v.label}
+                value={v.value}
                 control={component}
               />
             ))}
@@ -53,5 +58,22 @@ export const RadioGroup: VFC<RadioGroupType> = ({
         </MuiRadioGroup>
       )}
     </FormControl>
+  );
+};
+
+type RadioGroupProps = Omit<RawRadioGroupType, "value" | "onChange"> & {
+  formDataKey: string;
+};
+export const RadioGroup: VFC<RadioGroupProps> = ({ formDataKey, ...props }) => {
+  const { control } = useFormContext();
+
+  return (
+    <Controller
+      control={control}
+      name={formDataKey}
+      render={({ field: { value, onChange } }) => (
+        <RawRadioGroup {...props} value={value} onChange={onChange} />
+      )}
+    />
   );
 };
