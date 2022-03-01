@@ -5,8 +5,9 @@ import { useController, useFormContext } from "react-hook-form";
 export const TextField: VFC<{
   formDataKey: string;
   label: string;
+  placeholder?: string;
   helperText?: string;
-}> = ({ formDataKey, label, helperText }) => {
+}> = ({ formDataKey, label, placeholder, helperText }) => {
   const { control } = useFormContext();
   const {
     field: { ref, ...rest },
@@ -18,6 +19,7 @@ export const TextField: VFC<{
       {...rest}
       InputLabelProps={{ shrink: true }}
       label={label}
+      placeholder={placeholder}
       helperText={helperText}
     />
   );

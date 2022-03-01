@@ -1,4 +1,3 @@
-import { DatePicker } from "@mui/lab";
 import {
   Button,
   InputAdornment,
@@ -10,7 +9,7 @@ import {
   useMediaQuery,
 } from "@mui/material";
 import Head from "next/head";
-import { useState, VFC } from "react";
+import { VFC } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import {
   Dropzone as BaseDropzone,
@@ -34,7 +33,7 @@ const Dropzone: VFC<{ label: string } & DropzoneProps> = ({
 
 type FormData = {
   introducer: string; // 受注企業を紹介した企業
-  contractDate: Date; // 契約日
+  contractDate: string; // 契約日
   contractType: string; // 契約種別
   contractor: string; // 契約獲得者
   applicationFormData: File[]; // 申込書PDFデータ
@@ -51,7 +50,6 @@ const Contents: VFC = () => {
     theme.breakpoints.down("sm")
   );
   const onSubmit = (data: any) => console.log(data);
-  const [date, setDate] = useState<Date | null>(null);
 
   return (
     <FormProvider {...methods}>
@@ -62,18 +60,11 @@ const Contents: VFC = () => {
             label="今回受注企業を紹介くださった企業"
             helperText="※ 既存チラCEOユーザーのご紹介の新規契約の場合"
           />
-          <DatePicker
+          <TextField
+            formDataKey="contractDate"
             label="契約日"
-            inputFormat="yyyy/MM/dd"
-            value={date}
-            onChange={(value) => setDate(value)}
-            renderInput={(params) => (
-              <MuiTextField
-                InputLabelProps={{ shrink: true }}
-                helperText="申込書の日付を書くようお願いします"
-                {...params}
-              />
-            )}
+            placeholder="yyyyMMdd"
+            helperText="申込書の日付を書くようお願いします"
           />
           <RadioGroup
             formDataKey="contractType"
