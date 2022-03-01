@@ -16,7 +16,7 @@ import {
   DropzoneProps,
 } from "../../../organisms/Dropzone";
 import { RadioGroup } from "../../../uiParts/RadioGroup";
-import { TextField } from "../../../uiParts/TextField";
+import { AmountField, TextField } from "../../../uiParts/TextField";
 
 const Dropzone: VFC<{ label: string } & DropzoneProps> = ({
   label,
@@ -41,6 +41,8 @@ type FormData = {
   closingUrl: string; // クロージング現場の音源URL
   closingUrlDescription: string; // クロージング現場の音源説明
   closingDocument: File[]; // クロージング資料
+  initialBillingAmount: string; // 初回請求額
+  initialBillingBreakdown: any; // 初回請求内訳
 };
 
 const Contents: VFC = () => {
@@ -98,15 +100,7 @@ const Contents: VFC = () => {
             formDataKey="closingDocument"
             label="クロージングで出した資料"
           />
-          <MuiTextField
-            InputLabelProps={{ shrink: true }}
-            label="初回請求額"
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">¥</InputAdornment>
-              ),
-            }}
-          />
+          <AmountField formDataKey="initialBillingAmount" label="初回請求額" />
           <Typography sx={{ fontSize: 12 }}>初回請求額内訳</Typography>
           <MuiTextField InputLabelProps={{ shrink: true }} label="ラベル" />
           <MuiTextField
