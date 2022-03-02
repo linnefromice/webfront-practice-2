@@ -54,7 +54,12 @@ const InitialBillingBreakdowns: VFC = () => {
 
   return (
     <>
-      <Typography sx={{ fontSize: 12 }}>初回請求額内訳</Typography>
+      <Stack direction="row" alignItems="center" spacing={2}>
+        <Typography sx={{ fontSize: 12 }}>初回請求額内訳</Typography>
+        <Button variant="contained" sx={{ height: "50%" }}>
+          行追加
+        </Button>
+      </Stack>
       <Grid container spacing={2}>
         {array.map((_, i) => (
           <Fragment key={`initialBillingBreakdowns.${i}`}>
