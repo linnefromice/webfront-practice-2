@@ -11,21 +11,29 @@ import {
   useFormContext,
 } from "react-hook-form";
 
-export const RawTextField: VFC<MuiTextFieldProps & { amount?: boolean }> = ({
-  amount,
-  ...props
-}) => (
-  <MuiTextField
-    InputLabelProps={{ shrink: true }}
-    InputProps={
-      amount
-        ? {
-            startAdornment: <InputAdornment position="start">¥</InputAdornment>,
-          }
-        : {}
-    }
-    {...props}
-  />
+export const RawTextField: VFC<
+  MuiTextFieldProps & { amount?: boolean; caption?: string }
+> = ({ amount, caption, ...props }) => (
+  <>
+    <MuiTextField
+      InputLabelProps={{ shrink: true }}
+      InputProps={
+        amount
+          ? {
+              startAdornment: (
+                <InputAdornment position="start">¥</InputAdornment>
+              ),
+            }
+          : {}
+      }
+      {...props}
+    />
+    {caption && (
+      <Typography color="gray" variant="caption" display="block">
+        {caption}
+      </Typography>
+    )}
+  </>
 );
 
 type TextFieldProps = {
@@ -41,7 +49,6 @@ type TextFieldProps = {
 export const TextField: VFC<TextFieldProps> = ({
   formDataKey,
   rules,
-  caption,
   ...props
 }) => {
   const { control } = useFormContext();
@@ -51,19 +58,12 @@ export const TextField: VFC<TextFieldProps> = ({
   } = useController({ name: formDataKey, control, rules });
 
   return (
-    <>
-      <RawTextField
-        inputRef={ref}
-        error={invalid}
-        helperText={error ? error.message : undefined}
-        {...rest}
-        {...props}
-      />
-      {caption && (
-        <Typography color="gray" variant="caption" display="block">
-          {caption}
-        </Typography>
-      )}
-    </>
+    <RawTextField
+      inputRef={ref}
+      error={invalid}
+      helperText={error ? error.message : undefined}
+      {...rest}
+      {...props}
+    />
   );
 };

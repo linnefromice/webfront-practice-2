@@ -13,7 +13,14 @@ const Template: ComponentStory<typeof TextFieldComponent> = (args) => (
 export const TextField = Template.bind({});
 TextField.args = {
   label: "Example label",
-  helperText: "Example helperText",
+  caption: "Example caption",
+};
+
+export const TextFieldWithError = Template.bind({});
+TextFieldWithError.args = {
+  ...TextField.args,
+  error: true,
+  helperText: "Example error",
 };
 
 export const TextFieldForAmount = Template.bind({});
