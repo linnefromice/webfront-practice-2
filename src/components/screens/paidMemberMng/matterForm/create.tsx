@@ -109,13 +109,20 @@ const Contents: VFC = () => {
           <TextField
             formDataKey="introducer"
             label="今回受注企業を紹介くださった企業"
-            helperText="※ 既存チラCEOユーザーのご紹介の新規契約の場合"
+            caption="※ 既存チラCEOユーザーのご紹介の新規契約の場合"
           />
           <TextField
             formDataKey="contractDate"
+            rules={{
+              required: "入力必須パラメータです",
+              pattern: {
+                value: /[0-9]{8}/,
+                message: "yyyyMMdd の形式で日付を入力してください",
+              },
+            }}
             label="契約日"
             placeholder="yyyyMMdd"
-            helperText="申込書の日付を書くようお願いします"
+            caption="申込書の日付を書くようお願いします"
           />
           <RadioGroup
             formDataKey="contractType"
@@ -130,7 +137,11 @@ const Contents: VFC = () => {
             component={<Radio />}
             direction={isMobile ? "column" : "row"}
           />
-          <TextField formDataKey="contractor" label="契約獲得者" />
+          <TextField
+            formDataKey="contractor"
+            rules={{ required: "入力必須パラメータです" }}
+            label="契約獲得者"
+          />
           <Typography variant="h5">データ共有</Typography>
           <Dropzone
             formDataKey="applicationFormData"
@@ -151,6 +162,7 @@ const Contents: VFC = () => {
           />
           <TextField
             formDataKey="initialBillingAmount"
+            rules={{ required: "入力必須パラメータです" }}
             amount
             label="初回請求額"
           />
