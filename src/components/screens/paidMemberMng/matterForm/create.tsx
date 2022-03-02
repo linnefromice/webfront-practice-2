@@ -8,7 +8,7 @@ import {
   useMediaQuery,
 } from "@mui/material";
 import Head from "next/head";
-import { VFC } from "react";
+import { Fragment, VFC } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import {
   Dropzone as BaseDropzone,
@@ -57,7 +57,7 @@ const InitialBillingBreakdowns: VFC = () => {
       <Typography sx={{ fontSize: 12 }}>初回請求額内訳</Typography>
       <Grid container spacing={2}>
         {array.map((_, i) => (
-          <>
+          <Fragment key={`initialBillingBreakdowns.${i}`}>
             <Grid item sm={12} md={3}>
               <TextField
                 formDataKey={`initialBillingBreakdowns.${i}.description`}
@@ -81,7 +81,7 @@ const InitialBillingBreakdowns: VFC = () => {
                 行削除
               </Button>
             </Grid>
-          </>
+          </Fragment>
         ))}
       </Grid>
     </>
