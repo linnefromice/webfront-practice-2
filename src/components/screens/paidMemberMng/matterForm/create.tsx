@@ -1,9 +1,8 @@
 import {
   Button,
-  InputAdornment,
+  Grid,
   Radio,
   Stack,
-  TextField as MuiTextField,
   Theme,
   Typography,
   useMediaQuery,
@@ -18,17 +17,9 @@ import {
 import { RadioGroup } from "../../../uiParts/RadioGroup";
 import { AmountField, TextField } from "../../../uiParts/TextField";
 
-const Dropzone: VFC<{ label: string } & DropzoneProps> = ({
-  label,
-  formDataKey,
-  accept,
-}) => {
-  return (
-    <>
-      <Typography sx={{ fontSize: 12 }}>{label}</Typography>
-      <BaseDropzone formDataKey={formDataKey} accept={accept} />
-    </>
-  );
+type InitialBillingBreakdownData = {
+  amount: number;
+  description: string;
 };
 
 type FormData = {
@@ -42,7 +33,59 @@ type FormData = {
   closingUrlDescription: string; // クロージング現場の音源説明
   closingDocument: File[]; // クロージング資料
   initialBillingAmount: string; // 初回請求額
-  initialBillingBreakdown: any; // 初回請求内訳
+  initialBillingBreakdowns: InitialBillingBreakdownData[]; // 初回請求内訳
+};
+
+const Dropzone: VFC<{ label: string } & DropzoneProps> = ({
+  label,
+  formDataKey,
+  accept,
+}) => {
+  return (
+    <>
+      <Typography sx={{ fontSize: 12 }}>{label}</Typography>
+      <BaseDropzone formDataKey={formDataKey} accept={accept} />
+    </>
+  );
+};
+
+const InitialBillingBreakdowns: VFC = () => {
+  const array = [...new Array(3)]; // dummy
+
+  return (
+    <>
+      <Typography sx={{ fontSize: 12 }}>初回請求額内訳</Typography>
+      <Grid container spacing={2}>
+        {array.map((_, i) => (
+          <>
+            <Grid item sm={12} md={3}>
+              <TextField
+                formDataKey={`initialBillingBreakdowns.${i}.description`}
+                label="ラベル"
+                fullWidth
+              />
+            </Grid>
+            <Grid item sm={12} md={6}>
+              <AmountField
+                formDataKey={`initialBillingBreakdowns.${i}.amount`}
+                label="金額"
+                fullWidth
+              />
+            </Grid>
+            <Grid item sm={12} md={3}>
+              <Button
+                variant="contained"
+                color="warning"
+                sx={{ height: "100%" }}
+              >
+                行削除
+              </Button>
+            </Grid>
+          </>
+        ))}
+      </Grid>
+    </>
+  );
 };
 
 const Contents: VFC = () => {
@@ -101,27 +144,7 @@ const Contents: VFC = () => {
             label="クロージングで出した資料"
           />
           <AmountField formDataKey="initialBillingAmount" label="初回請求額" />
-          <Typography sx={{ fontSize: 12 }}>初回請求額内訳</Typography>
-          <MuiTextField InputLabelProps={{ shrink: true }} label="ラベル" />
-          <MuiTextField
-            InputLabelProps={{ shrink: true }}
-            label="金額"
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">¥</InputAdornment>
-              ),
-            }}
-          />
-          <MuiTextField InputLabelProps={{ shrink: true }} label="ラベル" />
-          <MuiTextField
-            InputLabelProps={{ shrink: true }}
-            label="金額"
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">¥</InputAdornment>
-              ),
-            }}
-          />
+          <InitialBillingBreakdowns />
           <Button type="submit" variant="contained">
             次ページに遷移
           </Button>

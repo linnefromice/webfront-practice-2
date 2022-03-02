@@ -23,6 +23,7 @@ type TextFieldProps = {
   label: string;
   placeholder?: string;
   helperText?: string;
+  fullWidth?: boolean;
 };
 
 export const TextField: VFC<TextFieldProps> = (props) => (
