@@ -18,7 +18,7 @@ type RawRadioGroupType = {
   direction: "column" | "row";
 };
 
-const RawRadioGroup: VFC<RawRadioGroupType> = ({
+export const RawRadioGroup: VFC<RawRadioGroupType> = ({
   value,
   onChange,
   label,
