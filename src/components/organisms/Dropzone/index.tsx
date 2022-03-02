@@ -23,36 +23,85 @@ export const RawDropzone: VFC<RawDropzoneProps> = ({ onDrop, accept }) => {
     : "grey.500";
 
   return (
-    <Stack
-      {...getRootProps()}
-      justifyContent="center"
-      alignItems="center"
-      sx={{
-        minHeight: "150px",
-        border: "dashed 2px",
-        borderColor: dropZoneBorderColor,
-      }}
-    >
-      <input {...getInputProps()} />
-      <Stack alignItems="center">
-        <FileUploadIcon />
-        <Typography sx={{ fontSize: 12 }}>
-          作成したファイルをここにドロップ
-        </Typography>
-        <Typography sx={{ fontSize: 12 }}>or</Typography>
-        <Typography sx={{ fontSize: 12 }}>ファイルを選択</Typography>
+    <>
+      <Stack
+        {...getRootProps()}
+        justifyContent="center"
+        alignItems="center"
+        sx={{
+          minHeight: "150px",
+          border: "dashed 2px",
+          borderColor: dropZoneBorderColor,
+        }}
+      >
+        <input {...getInputProps()} />
+        <Stack alignItems="center">
+          <FileUploadIcon />
+          <Typography sx={{ fontSize: 12 }}>
+            作成したファイルをここにドロップ
+          </Typography>
+          <Typography sx={{ fontSize: 12 }}>or</Typography>
+          <Typography sx={{ fontSize: 12 }}>ファイルを選択</Typography>
+        </Stack>
       </Stack>
-    </Stack>
+    </>
   );
 };
 
-export type DropzoneProps = Omit<RawDropzoneProps, "onDrop"> & {
-  formDataKey: string;
+export type WrappedRawDropzoneProps = Pick<
+  RawDropzoneProps,
+  "onDrop" | "accept"
+> & {
+  label?: string;
+  errorMessage?: string;
+  caption?: string;
 };
 
-export const Dropzone: VFC<DropzoneProps> = ({ formDataKey, ...props }) => {
-  const { register, unregister, setValue, watch } = useFormContext();
+export const WrappedRawDropzone: VFC<WrappedRawDropzoneProps> = ({
+  label,
+  errorMessage,
+  caption,
+  ...props
+}) => {
+  return (
+    <>
+      {label && (
+        <Typography
+          color={errorMessage ? "error" : "default"}
+          sx={{ fontSize: 12 }}
+        >
+          {label}
+        </Typography>
+      )}
+      <RawDropzone {...props} />
+      {errorMessage && (
+        <Typography color="error" variant="caption" display="block">
+          {errorMessage}
+        </Typography>
+      )}
+      {caption && (
+        <Typography color="gray" variant="caption" display="block">
+          {caption}
+        </Typography>
+      )}
+    </>
+  );
+};
+
+export type DropzoneProps = WrappedRawDropzoneProps & {
+  formDataKey: string;
+  required?: string; // TODO: implement (judge to count 1 or more?, in some cases use FieldArray)
+};
+
+export const Dropzone: VFC<DropzoneProps> = ({
+  formDataKey,
+  required,
+  ...props
+}) => {
+  const { register, unregister, setValue, getFieldState, watch } =
+    useFormContext();
   const files = watch(formDataKey);
+  const { error } = getFieldState(formDataKey);
 
   const onDrop = useCallback(
     (droppedFiles) => {
@@ -68,5 +117,11 @@ export const Dropzone: VFC<DropzoneProps> = ({ formDataKey, ...props }) => {
     return () => unregister(formDataKey);
   }, [register, unregister, formDataKey]);
 
-  return <RawDropzone {...props} onDrop={onDrop} />;
+  return (
+    <WrappedRawDropzone
+      {...props}
+      onDrop={onDrop}
+      errorMessage={error ? error.message : undefined}
+    />
+  );
 };
