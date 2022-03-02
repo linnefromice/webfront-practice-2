@@ -15,7 +15,7 @@ import {
   DropzoneProps,
 } from "../../../organisms/Dropzone";
 import { RadioGroup } from "../../../uiParts/RadioGroup";
-import { AmountField, TextField } from "../../../uiParts/TextField";
+import { TextField } from "../../../uiParts/TextField";
 
 type InitialBillingBreakdownData = {
   amount: number;
@@ -71,9 +71,10 @@ const InitialBillingBreakdowns: VFC = () => {
               />
             </Grid>
             <Grid item sm={12} md={6}>
-              <AmountField
+              <TextField
                 formDataKey={`initialBillingBreakdowns.${i}.amount`}
                 label="金額"
+                amount
                 fullWidth
               />
             </Grid>
@@ -148,7 +149,11 @@ const Contents: VFC = () => {
             formDataKey="closingDocument"
             label="クロージングで出した資料"
           />
-          <AmountField formDataKey="initialBillingAmount" label="初回請求額" />
+          <TextField
+            formDataKey="initialBillingAmount"
+            amount
+            label="初回請求額"
+          />
           <InitialBillingBreakdowns />
           <Button type="submit" variant="contained">
             次ページに遷移

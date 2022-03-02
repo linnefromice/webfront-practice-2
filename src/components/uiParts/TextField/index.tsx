@@ -6,36 +6,37 @@ import {
 import { VFC } from "react";
 import { useController, useFormContext } from "react-hook-form";
 
-const FormedTextField: VFC<MuiTextFieldProps & { formDataKey: string }> = ({
-  formDataKey,
+export const RawTextField: VFC<MuiTextFieldProps & { amount?: boolean }> = ({
+  amount,
   ...props
-}) => {
-  const { control } = useFormContext();
-  const {
-    field: { ref, ...rest },
-  } = useController({ name: formDataKey, control });
-
-  return <MuiTextField inputRef={ref} {...rest} {...props} />;
-};
+}) => (
+  <MuiTextField
+    InputLabelProps={{ shrink: true }}
+    InputProps={
+      amount
+        ? {
+            startAdornment: <InputAdornment position="start">¥</InputAdornment>,
+          }
+        : {}
+    }
+    {...props}
+  />
+);
 
 type TextFieldProps = {
   formDataKey: string;
   label: string;
+  amount?: boolean;
   placeholder?: string;
   helperText?: string;
   fullWidth?: boolean;
 };
 
-export const TextField: VFC<TextFieldProps> = (props) => (
-  <FormedTextField InputLabelProps={{ shrink: true }} {...props} />
-);
+export const TextField: VFC<TextFieldProps> = ({ formDataKey, ...props }) => {
+  const { control } = useFormContext();
+  const {
+    field: { ref, ...rest },
+  } = useController({ name: formDataKey, control });
 
-export const AmountField: VFC<TextFieldProps> = (props) => (
-  <FormedTextField
-    InputLabelProps={{ shrink: true }}
-    InputProps={{
-      startAdornment: <InputAdornment position="start">¥</InputAdornment>,
-    }}
-    {...props}
-  />
-);
+  return <RawTextField inputRef={ref} {...rest} {...props} />;
+};
