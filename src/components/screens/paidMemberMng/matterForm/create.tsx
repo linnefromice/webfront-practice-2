@@ -170,6 +170,17 @@ const Contents: VFC = () => {
           <Button type="submit" variant="contained">
             次ページに遷移
           </Button>
+          {process.env.NODE_ENV === "development" &&
+            methods.formState.isSubmitted && (
+              <div>
+                <h3>FOR DEBUG: RESULT</h3>
+                <p>{`isValid: ${methods.formState.isValid}`}</p>
+                <h6>values</h6>
+                <p>{JSON.stringify(methods.getValues())}</p>
+                <h6>errors</h6>
+                <p>{JSON.stringify(methods.formState.errors)}</p>
+              </div>
+            )}
         </Stack>
       </form>
     </FormProvider>
