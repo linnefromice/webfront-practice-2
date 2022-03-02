@@ -10,10 +10,7 @@ import {
 import Head from "next/head";
 import { Fragment, VFC } from "react";
 import { FormProvider, useForm } from "react-hook-form";
-import {
-  Dropzone as BaseDropzone,
-  DropzoneProps,
-} from "../../../organisms/Dropzone";
+import { Dropzone } from "../../../organisms/Dropzone";
 import { RadioGroup } from "../../../uiParts/RadioGroup";
 import { TextField } from "../../../uiParts/TextField";
 
@@ -34,19 +31,6 @@ type FormData = {
   closingDocument: File[]; // クロージング資料
   initialBillingAmount: string; // 初回請求額
   initialBillingBreakdowns: InitialBillingBreakdownData[]; // 初回請求内訳
-};
-
-const Dropzone: VFC<{ label: string } & DropzoneProps> = ({
-  label,
-  formDataKey,
-  accept,
-}) => {
-  return (
-    <>
-      <Typography sx={{ fontSize: 12 }}>{label}</Typography>
-      <BaseDropzone formDataKey={formDataKey} accept={accept} />
-    </>
-  );
 };
 
 const InitialBillingBreakdowns: VFC = () => {
