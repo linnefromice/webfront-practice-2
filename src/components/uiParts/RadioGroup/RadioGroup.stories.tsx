@@ -33,4 +33,12 @@ RadioGroup.args = {
   ],
   component: <Radio />,
   direction: "row",
+  caption: "Example caption",
+};
+
+export const RadioGroupWithError = Template.bind({});
+RadioGroupWithError.args = {
+  ...RadioGroup.args,
+  error: true,
+  errorMessage: "Example errorMessage",
 };

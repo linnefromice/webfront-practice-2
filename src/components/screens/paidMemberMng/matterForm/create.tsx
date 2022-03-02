@@ -126,6 +126,7 @@ const Contents: VFC = () => {
           />
           <RadioGroup
             formDataKey="contractType"
+            rules={{ required: "入力必須パラメータです" }}
             label="契約種別"
             id="paid-member-mng-matter-form-contract-type-label"
             choices={[

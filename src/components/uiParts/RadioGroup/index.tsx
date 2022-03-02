@@ -1,34 +1,41 @@
 import {
   FormControl,
   FormControlLabel,
+  FormHelperText,
   FormLabel,
   RadioGroup as MuiRadioGroup,
   Stack,
 } from "@mui/material";
 import { VFC } from "react";
-import { Controller, useFormContext } from "react-hook-form";
+import { Controller, RegisterOptions, useFormContext } from "react-hook-form";
 
 type RawRadioGroupType = {
   value: string;
   onChange: (event: React.ChangeEvent<HTMLInputElement>, value: string) => void;
-  label: string;
   id: string;
+  label: string;
   choices: { label: string; value: string }[];
   component: JSX.Element;
   direction: "column" | "row";
+  caption?: string;
+  error?: boolean;
+  errorMessage?: string;
 };
 
 export const RawRadioGroup: VFC<RawRadioGroupType> = ({
   value,
   onChange,
-  label,
   id,
+  label,
   choices,
   component,
   direction,
+  caption,
+  error,
+  errorMessage,
 }) => {
   return (
-    <FormControl>
+    <FormControl error={error}>
       <FormLabel id={id} sx={{ fontSize: 12 }}>
         {label}
       </FormLabel>
@@ -57,22 +64,39 @@ export const RawRadioGroup: VFC<RawRadioGroupType> = ({
           </Stack>
         </MuiRadioGroup>
       )}
+      {error && errorMessage && <FormHelperText>{errorMessage}</FormHelperText>}
+      {caption && <FormHelperText error={false}>{caption}</FormHelperText>}
     </FormControl>
   );
 };
 
 type RadioGroupProps = Omit<RawRadioGroupType, "value" | "onChange"> & {
   formDataKey: string;
+  rules?: RegisterOptions;
 };
-export const RadioGroup: VFC<RadioGroupProps> = ({ formDataKey, ...props }) => {
+export const RadioGroup: VFC<RadioGroupProps> = ({
+  formDataKey,
+  rules,
+  ...props
+}) => {
   const { control } = useFormContext();
 
   return (
     <Controller
       control={control}
       name={formDataKey}
-      render={({ field: { value, onChange } }) => (
-        <RawRadioGroup {...props} value={value} onChange={onChange} />
+      rules={rules}
+      render={({
+        field: { value, onChange },
+        fieldState: { invalid, error },
+      }) => (
+        <RawRadioGroup
+          {...props}
+          error={invalid}
+          errorMessage={error ? error.message : undefined}
+          value={value}
+          onChange={onChange}
+        />
       )}
     />
   );
