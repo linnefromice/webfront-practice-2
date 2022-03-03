@@ -9,15 +9,6 @@ describe("src/components/screens/paidMemberMng/matterForm/create/FirstForm", () 
   const { FirstForm: FirstFormStory } = composeStories(stories);
 
   describe("display elements", () => {
-    // test("has heading", async () => {
-    //   const screen = render(<FirstFormStory />);
-    //   expect(
-    //     await screen.getByRole("heading", {
-    //       name: "案件情報フォーム",
-    //     })
-    //   ).toBeInTheDocument();
-    // });
-
     test("has items", async () => {
       const screen = render(<FirstFormStory />);
       expect(
