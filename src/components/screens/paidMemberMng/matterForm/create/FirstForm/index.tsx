@@ -178,11 +178,9 @@ export const Contents: VFC<ContentsType> = ({ onSubmit, onError }) => {
   );
 };
 
-export const FirstForm: VFC = () => {
-  const onSubmit = (data: FormData) => {
-    console.log(`execute: onSubmit`);
-    console.log(data);
-  };
+export const FirstForm: VFC<{ onSubmit: (data: FormData) => void }> = ({
+  onSubmit,
+}) => {
   const onError = (errors: any) => {
     console.log(`execute: onError`);
     console.log(errors);
