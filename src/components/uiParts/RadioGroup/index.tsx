@@ -17,6 +17,7 @@ type RawRadioGroupType = {
   choices: { label: string; value: string }[];
   component: JSX.Element;
   direction: "column" | "row";
+  required?: boolean;
   caption?: string;
   error?: boolean;
   errorMessage?: string;
@@ -30,13 +31,14 @@ export const RawRadioGroup: VFC<RawRadioGroupType> = ({
   choices,
   component,
   direction,
+  required,
   caption,
   error,
   errorMessage,
 }) => {
   return (
     <FormControl error={error}>
-      <FormLabel id={id} sx={{ fontSize: 12 }}>
+      <FormLabel id={id} sx={{ fontSize: 12 }} required={required}>
         {label}
       </FormLabel>
       {direction === "column" ? (
@@ -70,7 +72,10 @@ export const RawRadioGroup: VFC<RawRadioGroupType> = ({
   );
 };
 
-type RadioGroupProps = Omit<RawRadioGroupType, "value" | "onChange"> & {
+type RadioGroupProps = Omit<
+  RawRadioGroupType,
+  "value" | "onChange" | "required"
+> & {
   formDataKey: string;
   rules?: RegisterOptions;
 };
@@ -92,6 +97,7 @@ export const RadioGroup: VFC<RadioGroupProps> = ({
       }) => (
         <RawRadioGroup
           {...props}
+          required={rules?.required ? true : false}
           error={invalid}
           errorMessage={error ? error.message : undefined}
           value={value}

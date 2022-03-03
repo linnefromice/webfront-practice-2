@@ -53,12 +53,14 @@ export type WrappedRawDropzoneProps = Pick<
   "onDrop" | "accept"
 > & {
   label?: string;
+  required?: boolean; // TODO: implement (judge to count 1 or more?, in some cases use FieldArray)
   errorMessage?: string;
   caption?: string;
 };
 
 export const WrappedRawDropzone: VFC<WrappedRawDropzoneProps> = ({
   label,
+  required,
   errorMessage,
   caption,
   ...props
@@ -66,12 +68,22 @@ export const WrappedRawDropzone: VFC<WrappedRawDropzoneProps> = ({
   return (
     <>
       {label && (
-        <Typography
-          color={errorMessage ? "error" : "default"}
-          sx={{ fontSize: 12 }}
-        >
-          {label}
-        </Typography>
+        <>
+          <Typography
+            color={errorMessage ? "error" : "default"}
+            sx={{ fontSize: 12, display: "inline" }}
+          >
+            {label}
+            {required && (
+              <Typography
+                color="error"
+                sx={{ fontSize: 12, display: "inline" }}
+              >
+                *
+              </Typography>
+            )}
+          </Typography>
+        </>
       )}
       <RawDropzone {...props} />
       {errorMessage && (
@@ -90,14 +102,9 @@ export const WrappedRawDropzone: VFC<WrappedRawDropzoneProps> = ({
 
 export type DropzoneProps = WrappedRawDropzoneProps & {
   formDataKey: string;
-  required?: string; // TODO: implement (judge to count 1 or more?, in some cases use FieldArray)
 };
 
-export const Dropzone: VFC<DropzoneProps> = ({
-  formDataKey,
-  required,
-  ...props
-}) => {
+export const Dropzone: VFC<DropzoneProps> = ({ formDataKey, ...props }) => {
   const { register, unregister, setValue, getFieldState, watch } =
     useFormContext();
   const files = watch(formDataKey);

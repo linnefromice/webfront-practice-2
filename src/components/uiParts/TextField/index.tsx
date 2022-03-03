@@ -62,6 +62,7 @@ export const TextField: VFC<TextFieldProps> = ({
       inputRef={ref}
       error={invalid}
       helperText={error ? error.message : undefined}
+      required={rules?.required ? true : false}
       {...rest}
       {...props}
     />
