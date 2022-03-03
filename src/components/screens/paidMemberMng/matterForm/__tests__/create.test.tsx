@@ -79,50 +79,50 @@ describe("src/components/screens/paidMemberMng/matterForm/create", () => {
   });
 
   describe("form function", () => {
-    test("success", async () => {
-      const onSubmit = jest.fn();
-      const onError = jest.fn();
-      const screen = render(
-        <ThemeProvider theme={createTheme()}>
-          <Screen onSubmit={onSubmit} onError={onError} />
-        </ThemeProvider>
-      ); // TODO: remove ThemeProvider
+    describe("submit", () => {
+      test("success", async () => {
+        const onSubmit = jest.fn();
+        const onError = jest.fn();
+        const screen = render(
+          <ThemeProvider theme={createTheme()}>
+            <Screen onSubmit={onSubmit} onError={onError} />
+          </ThemeProvider>
+        ); // TODO: remove ThemeProvider
 
-      const get = screen.getByRole;
-      await userEvent.type(
-        get("textbox", {
-          name: /契約日/i,
-        }),
-        "20000101"
-      );
-      await userEvent.click(
-        get("radio", {
-          name: /新規/i,
-        })
-      );
-      await userEvent.type(
-        get("textbox", {
-          name: /契約獲得者/i,
-        }),
-        "Test User"
-      );
-      await userEvent.type(
-        get("textbox", {
-          name: /初回請求額/i,
-        }),
-        "200000"
-      );
-      await userEvent.click(
-        get("button", {
-          name: "次ページに遷移",
-        })
-      );
-      await waitFor(() => expect(onSubmit).toHaveBeenCalledTimes(1));
-      await waitFor(() => expect(onError).not.toHaveBeenCalled());
-    });
+        const get = screen.getByRole;
+        await userEvent.type(
+          get("textbox", {
+            name: /契約日/i,
+          }),
+          "20000101"
+        );
+        await userEvent.click(
+          get("radio", {
+            name: /新規/i,
+          })
+        );
+        await userEvent.type(
+          get("textbox", {
+            name: /契約獲得者/i,
+          }),
+          "Test User"
+        );
+        await userEvent.type(
+          get("textbox", {
+            name: /初回請求額/i,
+          }),
+          "200000"
+        );
+        await userEvent.click(
+          get("button", {
+            name: "次ページに遷移",
+          })
+        );
+        await waitFor(() => expect(onSubmit).toHaveBeenCalledTimes(1));
+        await waitFor(() => expect(onError).not.toHaveBeenCalled());
+      });
 
-    describe("fail", () => {
-      test("no input", async () => {
+      test("failure", async () => {
         const onSubmit = jest.fn();
         const onError = jest.fn();
         const screen = render(
@@ -141,14 +141,16 @@ describe("src/components/screens/paidMemberMng/matterForm/create", () => {
         await waitFor(() => expect(onSubmit).not.toHaveBeenCalled());
         await waitFor(() => expect(onError).toHaveBeenCalledTimes(1));
       });
+    });
 
-      describe("validate 契約日", () => {
+    describe("validations", () => {
+      describe("契約日", () => {
         test.todo("required");
         test.todo("format");
       });
-      test.todo("validate 契約種別 - required");
-      test.todo("validate 契約獲得者 - required");
-      describe("validate 初回請求額", () => {
+      test.todo("契約種別 - required");
+      test.todo("契約獲得者 - required");
+      describe("初回請求額", () => {
         test.todo("required");
         test.todo("amount > 0");
       });
