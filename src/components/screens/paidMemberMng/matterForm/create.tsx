@@ -80,15 +80,23 @@ const InitialBillingBreakdowns: VFC = () => {
 
 const Contents: VFC = () => {
   const methods = useForm<FormData>();
+  const { formState } = methods;
 
   const isMobile = useMediaQuery<Theme>((theme) =>
     theme.breakpoints.down("sm")
   );
-  const onSubmit = (data: any) => console.log(data);
+  const onSubmit = (data: FormData) => {
+    console.log(`execute: onSubmit`);
+    console.log(data);
+  };
+  const onError = (errors: any) => {
+    console.log(`execute: onError`);
+    console.log(errors);
+  };
 
   return (
     <FormProvider {...methods}>
-      <form onSubmit={methods.handleSubmit(onSubmit)}>
+      <form onSubmit={methods.handleSubmit(onSubmit, onError)}>
         <Stack spacing={2}>
           <TextField
             formDataKey="introducer"
@@ -152,20 +160,23 @@ const Contents: VFC = () => {
             label="初回請求額"
           />
           <InitialBillingBreakdowns />
-          <Button type="submit" variant="contained">
+          <Button
+            type="submit"
+            variant="contained"
+            disabled={!formState.isValid && formState.submitCount > 0}
+          >
             次ページに遷移
           </Button>
-          {process.env.NODE_ENV === "development" &&
-            methods.formState.isSubmitted && (
-              <div>
-                <h3>FOR DEBUG: RESULT</h3>
-                <p>{`isValid: ${methods.formState.isValid}`}</p>
-                <h6>values</h6>
-                <p>{JSON.stringify(methods.getValues())}</p>
-                <h6>errors</h6>
-                <p>{JSON.stringify(methods.formState.errors)}</p>
-              </div>
-            )}
+          {process.env.NODE_ENV === "development" && formState.isSubmitted && (
+            <div>
+              <h3>FOR DEBUG: RESULT</h3>
+              <p>{`isValid: ${formState.isValid}`}</p>
+              <h6>values</h6>
+              <p>{JSON.stringify(methods.getValues())}</p>
+              <h6>errors</h6>
+              <p>{JSON.stringify(formState.errors)}</p>
+            </div>
+          )}
         </Stack>
       </form>
     </FormProvider>
