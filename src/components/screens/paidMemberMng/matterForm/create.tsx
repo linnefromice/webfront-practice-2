@@ -78,21 +78,17 @@ const InitialBillingBreakdowns: VFC = () => {
   );
 };
 
-const Contents: VFC = () => {
+type ContentsType = {
+  onSubmit: (data: FormData) => void;
+  onError?: (errors: any) => void;
+};
+const Contents: VFC<ContentsType> = ({ onSubmit, onError }) => {
   const methods = useForm<FormData>();
   const { formState } = methods;
 
   const isMobile = useMediaQuery<Theme>((theme) =>
     theme.breakpoints.down("sm")
   );
-  const onSubmit = (data: FormData) => {
-    console.log(`execute: onSubmit`);
-    console.log(data);
-  };
-  const onError = (errors: any) => {
-    console.log(`execute: onError`);
-    console.log(errors);
-  };
 
   return (
     <FormProvider {...methods}>
@@ -183,7 +179,7 @@ const Contents: VFC = () => {
   );
 };
 
-export const CreateScreen: VFC = () => {
+export const Screen: VFC<ContentsType> = ({ onSubmit, onError }) => {
   return (
     <>
       <Head>
@@ -192,7 +188,20 @@ export const CreateScreen: VFC = () => {
       <Typography variant="h4" sx={{ marginBottom: 2 }}>
         案件情報フォーム
       </Typography>
-      <Contents />
+      <Contents onSubmit={onSubmit} onError={onError} />
     </>
   );
+};
+
+export const CreateScreen: VFC = () => {
+  const onSubmit = (data: FormData) => {
+    console.log(`execute: onSubmit`);
+    console.log(data);
+  };
+  const onError = (errors: any) => {
+    console.log(`execute: onError`);
+    console.log(errors);
+  };
+
+  return <Screen onSubmit={onSubmit} onError={onError} />;
 };

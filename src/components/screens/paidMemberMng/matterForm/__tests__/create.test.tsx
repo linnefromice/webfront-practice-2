@@ -1,13 +1,16 @@
+import { createTheme, ThemeProvider } from "@mui/material";
 import { composeStories } from "@storybook/testing-react";
-import { render } from "@testing-library/react";
+import { render, waitFor } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
+import { Screen } from "../create";
 import * as stories from "../create.stories";
 
 describe("src/components/screens/paidMemberMng/matterForm/create", () => {
-  const { CreateScreen } = composeStories(stories);
+  const { CreateScreen: CreateScreenStory } = composeStories(stories);
 
   describe("display elements", () => {
     test("has heading", async () => {
-      const screen = render(<CreateScreen />);
+      const screen = render(<CreateScreenStory />);
       expect(
         await screen.getByRole("heading", {
           name: "案件情報フォーム",
@@ -16,7 +19,7 @@ describe("src/components/screens/paidMemberMng/matterForm/create", () => {
     });
 
     test("has items", async () => {
-      const screen = render(<CreateScreen />);
+      const screen = render(<CreateScreenStory />);
       expect(
         screen.getByRole("textbox", {
           name: /今回受注企業を紹介くださった企業/i,
@@ -57,6 +60,7 @@ describe("src/components/screens/paidMemberMng/matterForm/create", () => {
           name: /初回請求額/i,
         })
       ).toBeInTheDocument();
+
       // check dropzones
       // - 申込書PDFデータ
       // - 名刺写真
@@ -65,6 +69,78 @@ describe("src/components/screens/paidMemberMng/matterForm/create", () => {
         name: "作成したファイルをここにドロップ or ファイルを選択",
       });
       expect(dropzones.length).toBe(3);
+
+      expect(
+        screen.getByRole("button", {
+          name: "次ページに遷移",
+        })
+      ).toBeInTheDocument();
+    });
+  });
+
+  describe("form function", () => {
+    test("success", async () => {
+      const onSubmit = jest.fn();
+      const onError = jest.fn();
+      const screen = render(
+        <ThemeProvider theme={createTheme()}>
+          <Screen onSubmit={onSubmit} onError={onError} />
+        </ThemeProvider>
+      ); // TODO: remove ThemeProvider
+
+      const get = screen.getByRole;
+      await userEvent.type(
+        get("textbox", {
+          name: /契約日/i,
+        }),
+        "20000101"
+      );
+      await userEvent.click(
+        get("radio", {
+          name: /新規/i,
+        })
+      );
+      await userEvent.type(
+        get("textbox", {
+          name: /契約獲得者/i,
+        }),
+        "Test User"
+      );
+      await userEvent.type(
+        get("textbox", {
+          name: /初回請求額/i,
+        }),
+        "200000"
+      );
+      await userEvent.click(
+        get("button", {
+          name: "次ページに遷移",
+        })
+      );
+      await waitFor(() => expect(onSubmit).toHaveBeenCalledTimes(1));
+      await waitFor(() => expect(onError).not.toHaveBeenCalled());
+    });
+
+    describe("fail", () => {
+      test("no input", async () => {
+        const onSubmit = jest.fn();
+        const onError = jest.fn();
+        const screen = render(
+          <ThemeProvider theme={createTheme()}>
+            <Screen onSubmit={onSubmit} onError={onError} />
+          </ThemeProvider>
+        ); // TODO: remove ThemeProvider
+        const submitButton = screen.getByRole("button", {
+          name: "次ページに遷移",
+        });
+        await userEvent.click(
+          screen.getByRole("button", {
+            name: "次ページに遷移",
+          })
+        );
+        await waitFor(() => expect(onSubmit).not.toHaveBeenCalled());
+        await waitFor(() => expect(onError).toHaveBeenCalledTimes(1));
+      });
     });
   });
 });

@@ -1,5 +1,5 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
-import { CreateScreen as CreateScreenComponent } from "./create";
+import { Screen as CreateScreenComponent } from "./create";
 
 export default {
   title: "screens/paidMemberMng/matterForm/create",
@@ -7,4 +7,4 @@ export default {
 } as ComponentMeta<typeof CreateScreenComponent>;
 
 export const CreateScreen: ComponentStory<typeof CreateScreenComponent> =
-  () => <CreateScreenComponent />;
+  () => <CreateScreenComponent onSubmit={console.log} />;
