@@ -7,12 +7,11 @@ import {
   Typography,
   useMediaQuery,
 } from "@mui/material";
-import Head from "next/head";
 import { Fragment, VFC } from "react";
 import { FormProvider, useForm } from "react-hook-form";
-import { Dropzone } from "../../../organisms/Dropzone";
-import { RadioGroup } from "../../../uiParts/RadioGroup";
-import { TextField } from "../../../uiParts/TextField";
+import { Dropzone } from "../../../../../organisms/Dropzone";
+import { RadioGroup } from "../../../../../uiParts/RadioGroup";
+import { TextField } from "../../../../../uiParts/TextField";
 
 type InitialBillingBreakdownData = {
   amount: number;
@@ -82,7 +81,7 @@ type ContentsType = {
   onSubmit: (data: FormData) => void;
   onError?: (errors: any) => void;
 };
-const Contents: VFC<ContentsType> = ({ onSubmit, onError }) => {
+export const Contents: VFC<ContentsType> = ({ onSubmit, onError }) => {
   const methods = useForm<FormData>();
   const { formState } = methods;
 
@@ -179,21 +178,7 @@ const Contents: VFC<ContentsType> = ({ onSubmit, onError }) => {
   );
 };
 
-export const Screen: VFC<ContentsType> = ({ onSubmit, onError }) => {
-  return (
-    <>
-      <Head>
-        <title>案件情報フォーム</title>
-      </Head>
-      <Typography variant="h4" sx={{ marginBottom: 2 }}>
-        案件情報フォーム
-      </Typography>
-      <Contents onSubmit={onSubmit} onError={onError} />
-    </>
-  );
-};
-
-export const CreateScreen: VFC = () => {
+export const FirstForm: VFC = () => {
   const onSubmit = (data: FormData) => {
     console.log(`execute: onSubmit`);
     console.log(data);
@@ -203,5 +188,5 @@ export const CreateScreen: VFC = () => {
     console.log(errors);
   };
 
-  return <Screen onSubmit={onSubmit} onError={onError} />;
+  return <Contents onSubmit={onSubmit} onError={onError} />;
 };

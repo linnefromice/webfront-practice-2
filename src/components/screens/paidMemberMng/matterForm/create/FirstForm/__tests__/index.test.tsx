@@ -2,24 +2,24 @@ import { createTheme, ThemeProvider } from "@mui/material";
 import { composeStories } from "@storybook/testing-react";
 import { render, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { Screen } from "../create";
-import * as stories from "../create.stories";
+import { Contents } from "..";
+import * as stories from "../FirstForm.stories";
 
-describe("src/components/screens/paidMemberMng/matterForm/create", () => {
-  const { CreateScreen: CreateScreenStory } = composeStories(stories);
+describe("src/components/screens/paidMemberMng/matterForm/create/FirstForm", () => {
+  const { FirstForm: FirstFormStory } = composeStories(stories);
 
   describe("display elements", () => {
-    test("has heading", async () => {
-      const screen = render(<CreateScreenStory />);
-      expect(
-        await screen.getByRole("heading", {
-          name: "案件情報フォーム",
-        })
-      ).toBeInTheDocument();
-    });
+    // test("has heading", async () => {
+    //   const screen = render(<FirstFormStory />);
+    //   expect(
+    //     await screen.getByRole("heading", {
+    //       name: "案件情報フォーム",
+    //     })
+    //   ).toBeInTheDocument();
+    // });
 
     test("has items", async () => {
-      const screen = render(<CreateScreenStory />);
+      const screen = render(<FirstFormStory />);
       expect(
         screen.getByRole("textbox", {
           name: /今回受注企業を紹介くださった企業/i,
@@ -85,7 +85,7 @@ describe("src/components/screens/paidMemberMng/matterForm/create", () => {
         const onError = jest.fn();
         const screen = render(
           <ThemeProvider theme={createTheme()}>
-            <Screen onSubmit={onSubmit} onError={onError} />
+            <Contents onSubmit={onSubmit} onError={onError} />
           </ThemeProvider>
         ); // TODO: remove ThemeProvider
 
@@ -127,7 +127,7 @@ describe("src/components/screens/paidMemberMng/matterForm/create", () => {
         const onError = jest.fn();
         const screen = render(
           <ThemeProvider theme={createTheme()}>
-            <Screen onSubmit={onSubmit} onError={onError} />
+            <Contents onSubmit={onSubmit} onError={onError} />
           </ThemeProvider>
         ); // TODO: remove ThemeProvider
         const submitButton = screen.getByRole("button", {
