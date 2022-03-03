@@ -141,6 +141,17 @@ describe("src/components/screens/paidMemberMng/matterForm/create", () => {
         await waitFor(() => expect(onSubmit).not.toHaveBeenCalled());
         await waitFor(() => expect(onError).toHaveBeenCalledTimes(1));
       });
+
+      describe("validate 契約日", () => {
+        test.todo("required");
+        test.todo("format");
+      });
+      test.todo("validate 契約種別 - required");
+      test.todo("validate 契約獲得者 - required");
+      describe("validate 初回請求額", () => {
+        test.todo("required");
+        test.todo("amount > 0");
+      });
     });
   });
 });
