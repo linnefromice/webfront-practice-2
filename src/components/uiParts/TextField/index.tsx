@@ -49,6 +49,7 @@ type TextFieldProps = {
 export const TextField: VFC<TextFieldProps> = ({
   formDataKey,
   rules,
+  label,
   ...props
 }) => {
   const { control } = useFormContext();
@@ -62,7 +63,19 @@ export const TextField: VFC<TextFieldProps> = ({
       inputRef={ref}
       error={invalid}
       helperText={error ? error.message : undefined}
-      required={rules?.required ? true : false}
+      label={
+        rules?.required ? (
+          <>
+            {`${label} `}
+            <Typography color="error" sx={{ display: "inline" }}>
+              *
+            </Typography>
+          </>
+        ) : (
+          label
+        )
+      }
+      // required={rules?.required ? true : false} // TODO: not use mui required validation
       {...rest}
       {...props}
     />
