@@ -8,7 +8,7 @@ type ContentsType = {
   onSubmit: (data: FormData) => void;
   onError?: (errors: any) => void;
 };
-const Contents: VFC<ContentsType> = ({ onSubmit, onError }) => {
+export const Contents: VFC<ContentsType> = ({ onSubmit, onError }) => {
   const methods = useForm<FormData>();
   const { formState } = methods;
 
