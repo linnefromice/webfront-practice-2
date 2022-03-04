@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { FormData as FirstFormData } from "./FirstForm/types";
 
 export type Page =
   | "FIRST"
@@ -7,17 +8,48 @@ export type Page =
   | "PAYMENT_METHOD"
   | "ONBOARDING";
 
-export const useForm = () => {
-  const [page, setPage] = useState<Page>("FIRST");
+type FormInfo = {
+  currentPage: Page;
+  firstFormData?: FirstFormData;
+  // XxxFormData: ...
+};
 
-  const navigateSelectContractType = () => setPage("SELECT_CONTRACT_TYPE");
-  const navigateContractType = () => setPage("CONTRACT_TYPE");
-  const navigatePaymentMethod = () => setPage("PAYMENT_METHOD");
-  const navigateOnboarding = () => setPage("ONBOARDING");
+export const useForm = () => {
+  const [formInfo, setFormInfo] = useState<FormInfo>({
+    currentPage: "FIRST",
+  });
+
+  const closingFirstForm = (v: FirstFormData) => {
+    setFormInfo({
+      ...formInfo,
+      currentPage: "SELECT_CONTRACT_TYPE",
+      firstFormData: v,
+    });
+  };
+
+  const navigateContractType = () => {
+    setFormInfo({
+      ...formInfo,
+      currentPage: "CONTRACT_TYPE",
+    });
+  };
+  const navigatePaymentMethod = () => {
+    setFormInfo({
+      ...formInfo,
+      currentPage: "PAYMENT_METHOD",
+    });
+  };
+
+  const navigateOnboarding = () => {
+    setFormInfo({
+      ...formInfo,
+      currentPage: "ONBOARDING",
+    });
+  };
 
   return {
-    page,
-    navigateSelectContractType,
+    formInfo,
+    closingFirstForm,
     navigateContractType,
     navigatePaymentMethod,
     navigateOnboarding,

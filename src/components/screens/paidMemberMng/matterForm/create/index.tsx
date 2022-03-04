@@ -6,13 +6,13 @@ import { Page, useForm } from "./hooks";
 
 const getPage = ({
   page,
-  navigateSelectContractType,
+  closingFirstForm,
   navigateContractType,
   navigatePaymentMethod,
   navigateOnboarding,
 }: {
   page: Page;
-  navigateSelectContractType: () => void;
+  closingFirstForm: Function;
   navigateContractType: () => void;
   navigatePaymentMethod: () => void;
   navigateOnboarding: () => void;
@@ -21,8 +21,7 @@ const getPage = ({
     return (
       <FirstForm
         onSubmit={(data) => {
-          console.log(data);
-          navigateSelectContractType();
+          closingFirstForm(data);
         }}
       />
     );
@@ -57,13 +56,7 @@ const getPage = ({
 };
 
 export const CreateScreen: VFC = () => {
-  const {
-    page,
-    navigateSelectContractType,
-    navigateContractType,
-    navigatePaymentMethod,
-    navigateOnboarding,
-  } = useForm();
+  const { formInfo, ...navigateMethods } = useForm();
 
   return (
     <>
@@ -74,11 +67,8 @@ export const CreateScreen: VFC = () => {
         案件情報フォーム
       </Typography>
       {getPage({
-        page,
-        navigateSelectContractType,
-        navigateContractType,
-        navigatePaymentMethod,
-        navigateOnboarding,
+        ...navigateMethods,
+        page: formInfo.currentPage,
       })}
     </>
   );
