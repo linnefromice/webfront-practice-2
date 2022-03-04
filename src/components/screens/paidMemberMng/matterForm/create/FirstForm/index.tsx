@@ -132,7 +132,6 @@ export const Contents: VFC<ContentsType> = ({ onSubmit, onError }) => {
           />
           <TextField
             formDataKey="initialBillingAmount"
-            rules={{ required: "入力必須パラメータです" }}
             amount
             label="初回請求額"
           />
