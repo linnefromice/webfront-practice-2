@@ -39,9 +39,13 @@ describe("useMatterForm", () => {
     expect(result.current.formInfo.currentPage).toBe("CONTRACT_TYPE");
   });
 
-  test(".navigatePaymentMethod", () => {
+  test(".closingContractType", () => {
     const { result } = renderHook(() => useMatterForm());
-    act(() => result.current.navigatePaymentMethod());
+    act(() =>
+      result.current.closingContractType({
+        paymentMethod: "CreditCard",
+      })
+    );
     expect(result.current.formInfo.currentPage).toBe("PAYMENT_METHOD");
   });
 

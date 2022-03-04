@@ -1,6 +1,7 @@
 import { Button, Typography } from "@mui/material";
 import Head from "next/head";
 import { ReactNode, VFC } from "react";
+import { ContractTypeForm } from "./ContractTypeForm";
 import { FirstForm } from "./FirstForm";
 import { Page, useMatterForm } from "./hooks";
 import { SelectContractTypeForm } from "./SelectContractTypeForm";
@@ -9,13 +10,13 @@ const getPage = ({
   page,
   closingFirstForm,
   closingSelectContractType,
-  navigatePaymentMethod,
+  closingContractType,
   navigateOnboarding,
 }: {
   page: Page;
   closingFirstForm: Function;
   closingSelectContractType: Function;
-  navigatePaymentMethod: () => void;
+  closingContractType: Function;
   navigateOnboarding: () => void;
 }): ReactNode => {
   if (page === "FIRST")
@@ -36,10 +37,11 @@ const getPage = ({
     );
   if (page === "CONTRACT_TYPE")
     return (
-      <>
-        <Typography variant="h1">CONTRACT_TYPE</Typography>
-        <Button onClick={navigatePaymentMethod}>SUBMIT</Button>
-      </>
+      <ContractTypeForm
+        onSubmit={(data) => {
+          closingContractType(data);
+        }}
+      />
     );
   if (page === "PAYMENT_METHOD")
     return (
