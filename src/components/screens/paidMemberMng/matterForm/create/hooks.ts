@@ -8,14 +8,14 @@ export type Page =
   | "PAYMENT_METHOD"
   | "ONBOARDING";
 
-type FormInfo = {
+type MatterFormInfo = {
   currentPage: Page;
   firstFormData?: FirstFormData;
   // XxxFormData: ...
 };
 
-export const useForm = () => {
-  const [formInfo, setFormInfo] = useState<FormInfo>({
+export const useMatterForm = () => {
+  const [formInfo, setFormInfo] = useState<MatterFormInfo>({
     currentPage: "FIRST",
   });
 
@@ -33,6 +33,7 @@ export const useForm = () => {
       currentPage: "CONTRACT_TYPE",
     });
   };
+
   const navigatePaymentMethod = () => {
     setFormInfo({
       ...formInfo,

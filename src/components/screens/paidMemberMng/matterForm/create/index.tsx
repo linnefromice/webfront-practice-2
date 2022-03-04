@@ -2,7 +2,7 @@ import { Button, Typography } from "@mui/material";
 import Head from "next/head";
 import { ReactNode, VFC } from "react";
 import { FirstForm } from "./FirstForm";
-import { Page, useForm } from "./hooks";
+import { Page, useMatterForm } from "./hooks";
 
 const getPage = ({
   page,
@@ -56,7 +56,7 @@ const getPage = ({
 };
 
 export const CreateScreen: VFC = () => {
-  const { formInfo, ...navigateMethods } = useForm();
+  const { formInfo, ...navigateMethods } = useMatterForm();
 
   return (
     <>
