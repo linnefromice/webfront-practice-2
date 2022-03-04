@@ -8,13 +8,13 @@ import { SelectContractTypeForm } from "./SelectContractTypeForm";
 const getPage = ({
   page,
   closingFirstForm,
-  navigateContractType,
+  closingSelectContractType,
   navigatePaymentMethod,
   navigateOnboarding,
 }: {
   page: Page;
   closingFirstForm: Function;
-  navigateContractType: () => void;
+  closingSelectContractType: Function;
   navigatePaymentMethod: () => void;
   navigateOnboarding: () => void;
 }): ReactNode => {
@@ -27,7 +27,13 @@ const getPage = ({
       />
     );
   if (page === "SELECT_CONTRACT_TYPE")
-    return <SelectContractTypeForm onSubmit={navigateContractType} />;
+    return (
+      <SelectContractTypeForm
+        onSubmit={(data) => {
+          closingSelectContractType(data);
+        }}
+      />
+    );
   if (page === "CONTRACT_TYPE")
     return (
       <>

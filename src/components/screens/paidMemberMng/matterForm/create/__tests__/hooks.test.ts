@@ -29,9 +29,13 @@ describe("useMatterForm", () => {
     expect(result.current.formInfo.currentPage).toBe("SELECT_CONTRACT_TYPE");
   });
 
-  test(".navigateContractType", () => {
+  test(".closingSelectContractType", () => {
     const { result } = renderHook(() => useMatterForm());
-    act(() => result.current.navigateContractType());
+    act(() =>
+      result.current.closingSelectContractType({
+        selectContractType: "ChiraCeo",
+      })
+    );
     expect(result.current.formInfo.currentPage).toBe("CONTRACT_TYPE");
   });
 
