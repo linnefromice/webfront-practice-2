@@ -3,6 +3,7 @@ import Head from "next/head";
 import { ReactNode, VFC } from "react";
 import { FirstForm } from "./FirstForm";
 import { Page, useMatterForm } from "./hooks";
+import { SelectContractTypeForm } from "./SelectContractTypeForm";
 
 const getPage = ({
   page,
@@ -26,12 +27,7 @@ const getPage = ({
       />
     );
   if (page === "SELECT_CONTRACT_TYPE")
-    return (
-      <>
-        <Typography variant="h1">SELECT_CONTRACT_TYPE</Typography>
-        <Button onClick={navigateContractType}>SUBMIT</Button>
-      </>
-    );
+    return <SelectContractTypeForm onSubmit={navigateContractType} />;
   if (page === "CONTRACT_TYPE")
     return (
       <>
