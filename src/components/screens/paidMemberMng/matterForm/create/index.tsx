@@ -16,6 +16,7 @@ const getPage = ({
   closingContractType,
   closingPaymentMethod,
   closingOnboarding,
+  backPage,
   getContractType,
 }: {
   page: Page;
@@ -24,6 +25,7 @@ const getPage = ({
   closingContractType: Function;
   closingPaymentMethod: Function;
   closingOnboarding: Function;
+  backPage: () => void;
   getContractType: () => SelectContractKeyType | undefined;
 }): ReactNode => {
   if (page === "FIRST")

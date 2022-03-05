@@ -66,6 +66,29 @@ export const useMatterForm = () => {
     });
   };
 
+  const backPage = () => {
+    if (formInfo.currentPage === "SELECT_CONTRACT_TYPE")
+      setFormInfo({
+        ...formInfo,
+        currentPage: "FIRST",
+      });
+    if (formInfo.currentPage === "CONTRACT_TYPE")
+      setFormInfo({
+        ...formInfo,
+        currentPage: "SELECT_CONTRACT_TYPE",
+      });
+    if (formInfo.currentPage === "PAYMENT_METHOD")
+      setFormInfo({
+        ...formInfo,
+        currentPage: "CONTRACT_TYPE",
+      });
+    if (formInfo.currentPage === "ONBOARDING")
+      setFormInfo({
+        ...formInfo,
+        currentPage: "PAYMENT_METHOD",
+      });
+  };
+
   const getContractType = (): SelectContractKeyType | undefined =>
     formInfo.selectContractTypeFormData?.selectContractType;
 
@@ -77,5 +100,6 @@ export const useMatterForm = () => {
     closingPaymentMethod,
     closingOnboarding,
     getContractType,
+    backPage,
   };
 };
