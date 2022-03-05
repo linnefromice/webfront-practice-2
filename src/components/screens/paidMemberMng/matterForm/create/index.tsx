@@ -7,6 +7,7 @@ import { Page, useMatterForm } from "./hooks";
 import { OnboardingForm } from "./OnboardingForm";
 import { PaymentMethodForm } from "./PaymentMethodForm";
 import { SelectContractTypeForm } from "./SelectContractTypeForm";
+import { SelectContractKeyType } from "./types";
 
 const getPage = ({
   page,
@@ -15,6 +16,7 @@ const getPage = ({
   closingContractType,
   closingPaymentMethod,
   closingOnboarding,
+  getContractType,
 }: {
   page: Page;
   closingFirstForm: Function;
@@ -22,6 +24,7 @@ const getPage = ({
   closingContractType: Function;
   closingPaymentMethod: Function;
   closingOnboarding: Function;
+  getContractType: () => SelectContractKeyType | undefined;
 }): ReactNode => {
   if (page === "FIRST")
     return (
@@ -39,14 +42,19 @@ const getPage = ({
         }}
       />
     );
-  if (page === "CONTRACT_TYPE")
-    return (
-      <ContractTypeForm
-        onSubmit={(data) => {
-          closingContractType(data);
-        }}
-      />
-    );
+  if (page === "CONTRACT_TYPE") {
+    const contractType = getContractType();
+    if (contractType !== undefined) {
+      return (
+        <ContractTypeForm
+          contractType={contractType}
+          onSubmit={(data) => {
+            closingContractType(data);
+          }}
+        />
+      );
+    }
+  }
   if (page === "PAYMENT_METHOD")
     return (
       <PaymentMethodForm

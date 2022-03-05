@@ -8,4 +8,6 @@ export default {
 
 export const ContractTypeForm: ComponentStory<
   typeof ContractTypeFormComponent
-> = () => <ContractTypeFormComponent onSubmit={console.log} />;
+> = () => (
+  <ContractTypeFormComponent onSubmit={console.log} contractType={"ChiraCeo"} />
+);
