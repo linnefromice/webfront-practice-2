@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { FormData as ContractTypeFormData } from "./ContractTypeForm/types";
 import { FormData as FirstFormData } from "./FirstForm/types";
+import { FormData as OnBoardingFormData } from "./OnboardingForm/types";
 import { FormData as PaymentMethodFormData } from "./PaymentMethodForm/types";
 import { FormData as SelectContractTypeFormData } from "./SelectContractTypeForm/types";
 
@@ -17,7 +18,7 @@ type MatterFormInfo = {
   selectContractTypeFormData?: SelectContractTypeFormData;
   contractTypeFormData?: ContractTypeFormData;
   paymentMethodFormData?: PaymentMethodFormData;
-  // XxxFormData: ...
+  onBoardingFormData?: OnBoardingFormData;
 };
 
 export const useMatterForm = () => {
@@ -57,11 +58,19 @@ export const useMatterForm = () => {
     });
   };
 
+  const closingOnboarding = (v: OnBoardingFormData) => {
+    setFormInfo({
+      ...formInfo,
+      onBoardingFormData: v,
+    });
+  };
+
   return {
     formInfo,
     closingFirstForm,
     closingSelectContractType,
     closingContractType,
     closingPaymentMethod,
+    closingOnboarding,
   };
 };

@@ -15,7 +15,7 @@ export const Contents: VFC<ContentsType> = ({ onSubmit, onError }) => {
     <FormProvider {...methods}>
       <form onSubmit={methods.handleSubmit(onSubmit, onError)}>
         <Stack spacing={2}>
-          <Typography>支払方法入力フォーム</Typography>
+          <Typography>オンボーディング情報</Typography>
           <Button
             type="submit"
             variant="contained"
@@ -29,7 +29,7 @@ export const Contents: VFC<ContentsType> = ({ onSubmit, onError }) => {
   );
 };
 
-export const PaymentMethodForm: VFC<{
+export const OnboardingForm: VFC<{
   onSubmit: (data: FormData) => void;
 }> = ({ onSubmit }) => {
   const onError = (errors: any) => {

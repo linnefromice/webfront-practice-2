@@ -4,6 +4,7 @@ import { ReactNode, VFC } from "react";
 import { ContractTypeForm } from "./ContractTypeForm";
 import { FirstForm } from "./FirstForm";
 import { Page, useMatterForm } from "./hooks";
+import { OnboardingForm } from "./OnboardingForm";
 import { PaymentMethodForm } from "./PaymentMethodForm";
 import { SelectContractTypeForm } from "./SelectContractTypeForm";
 
@@ -13,12 +14,14 @@ const getPage = ({
   closingSelectContractType,
   closingContractType,
   closingPaymentMethod,
+  closingOnboarding,
 }: {
   page: Page;
   closingFirstForm: Function;
   closingSelectContractType: Function;
   closingContractType: Function;
   closingPaymentMethod: Function;
+  closingOnboarding: Function;
 }): ReactNode => {
   if (page === "FIRST")
     return (
@@ -54,9 +57,11 @@ const getPage = ({
     );
   if (page === "ONBOARDING")
     return (
-      <>
-        <Typography variant="h1">ONBOARDING</Typography>
-      </>
+      <OnboardingForm
+        onSubmit={(data) => {
+          closingOnboarding;
+        }}
+      />
     );
   return <></>;
 };
