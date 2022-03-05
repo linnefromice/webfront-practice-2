@@ -3,11 +3,11 @@ import Head from "next/head";
 import { ReactNode, VFC } from "react";
 import { ContractTypeForm } from "./ContractTypeForm";
 import { FirstForm } from "./FirstForm";
-import { Page, useMatterForm } from "./hooks";
+import { useMatterForm } from "./hooks";
 import { OnboardingForm } from "./OnboardingForm";
 import { PaymentMethodForm } from "./PaymentMethodForm";
 import { SelectContractTypeForm } from "./SelectContractTypeForm";
-import { SelectContractKeyType } from "./types";
+import { Page, UseMatterFormReturn } from "./types";
 
 const getPage = ({
   page,
@@ -18,15 +18,8 @@ const getPage = ({
   closingOnboarding,
   backPage,
   getContractType,
-}: {
+}: Omit<UseMatterFormReturn, "formInfo"> & {
   page: Page;
-  closingFirstForm: Function;
-  closingSelectContractType: Function;
-  closingContractType: Function;
-  closingPaymentMethod: Function;
-  closingOnboarding: Function;
-  backPage: () => void;
-  getContractType: () => SelectContractKeyType | undefined;
 }): ReactNode => {
   if (page === "FIRST")
     return (

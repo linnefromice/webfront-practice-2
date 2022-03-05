@@ -75,10 +75,7 @@ export const Contents: VFC<ContentsType> = ({ contractType, ...rest }) => {
   );
 };
 
-export const ContractTypeForm: VFC<{
-  onSubmit: (data: FormData) => void;
-  contractType: SelectContractKeyType;
-}> = (props) => {
+export const ContractTypeForm: VFC<Omit<ContentsType, "onError">> = (props) => {
   const onError = (errors: any) => {
     console.log(`execute: onError`);
     console.log(errors);

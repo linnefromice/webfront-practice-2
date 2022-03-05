@@ -4,25 +4,13 @@ import { FormData as FirstFormData } from "./FirstForm/types";
 import { FormData as OnBoardingFormData } from "./OnboardingForm/types";
 import { FormData as PaymentMethodFormData } from "./PaymentMethodForm/types";
 import { FormData as SelectContractTypeFormData } from "./SelectContractTypeForm/types";
-import { SelectContractKeyType } from "./types";
+import {
+  MatterFormInfo,
+  SelectContractKeyType,
+  UseMatterFormReturn,
+} from "./types";
 
-export type Page =
-  | "FIRST"
-  | "SELECT_CONTRACT_TYPE"
-  | "CONTRACT_TYPE"
-  | "PAYMENT_METHOD"
-  | "ONBOARDING";
-
-type MatterFormInfo = {
-  currentPage: Page;
-  firstFormData?: FirstFormData;
-  selectContractTypeFormData?: SelectContractTypeFormData;
-  contractTypeFormData?: ContractTypeFormData;
-  paymentMethodFormData?: PaymentMethodFormData;
-  onBoardingFormData?: OnBoardingFormData;
-};
-
-export const useMatterForm = () => {
+export const useMatterForm = (): UseMatterFormReturn => {
   const [formInfo, setFormInfo] = useState<MatterFormInfo>({
     currentPage: "FIRST",
   });
