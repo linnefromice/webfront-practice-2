@@ -11,6 +11,13 @@ describe("src/components/screens/paidMemberMng/matterForm/create/OnboardingForm"
   describe("display elements", () => {
     test("has items", async () => {
       const screen = render(<OnboardingFormStory />);
+
+      expect(
+        screen.getByRole("button", {
+          name: "前ページに戻る",
+        })
+      ).toBeInTheDocument();
+
       expect(
         screen.getByRole("button", {
           name: "次ページに遷移",
@@ -25,7 +32,7 @@ describe("src/components/screens/paidMemberMng/matterForm/create/OnboardingForm"
       const onError = jest.fn();
       const screen = render(
         <ThemeProvider theme={createTheme()}>
-          <Contents onSubmit={onSubmit} onError={onError} />
+          <Contents onSubmit={onSubmit} onError={onError} backPage={() => {}} />
         </ThemeProvider>
       ); // TODO: remove ThemeProvider
 

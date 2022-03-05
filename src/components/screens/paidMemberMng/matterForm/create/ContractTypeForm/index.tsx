@@ -13,6 +13,7 @@ import { FormData, PaymentMethodKeyType, PaymentMethodType } from "./types";
 type ContentsType = {
   onSubmit: (data: FormData) => void;
   onError?: (errors: any) => void;
+  backPage: () => void;
   contractType: SelectContractKeyType;
 };
 
@@ -21,7 +22,7 @@ const Wrapper: VFC<
     methods: UseFormReturn<FormData, any>;
     children: ReactNode;
   } & Omit<ContentsType, "contractType">
-> = ({ methods, children, onSubmit, onError }) => {
+> = ({ methods, children, onSubmit, onError, backPage }) => {
   const { formState } = methods;
   return (
     <FormProvider {...methods}>
@@ -43,13 +44,24 @@ const Wrapper: VFC<
             formDataKey="otherPaymentMethod"
             label="※ 支払方法がその他の場合は入力"
           />
-          <Button
-            type="submit"
-            variant="contained"
-            disabled={!formState.isValid && formState.submitCount > 0}
-          >
-            次ページに遷移
-          </Button>
+          <Stack direction="row" columnGap={2}>
+            <Button
+              variant="contained"
+              color="secondary"
+              fullWidth
+              onClick={backPage}
+            >
+              前ページに戻る
+            </Button>
+            <Button
+              type="submit"
+              variant="contained"
+              fullWidth
+              disabled={!formState.isValid && formState.submitCount > 0}
+            >
+              次ページに遷移
+            </Button>
+          </Stack>
         </Stack>
       </form>
     </FormProvider>

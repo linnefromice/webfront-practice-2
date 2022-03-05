@@ -35,6 +35,7 @@ const getPage = ({
         onSubmit={(data) => {
           closingSelectContractType(data);
         }}
+        backPage={backPage}
       />
     );
   if (page === "CONTRACT_TYPE") {
@@ -46,6 +47,7 @@ const getPage = ({
           onSubmit={(data) => {
             closingContractType(data);
           }}
+          backPage={backPage}
         />
       );
     }
@@ -56,6 +58,7 @@ const getPage = ({
         onSubmit={(data) => {
           closingPaymentMethod(data);
         }}
+        backPage={backPage}
       />
     );
   if (page === "ONBOARDING")
@@ -64,6 +67,7 @@ const getPage = ({
         onSubmit={(data) => {
           closingOnboarding(data);
         }}
+        backPage={backPage}
       />
     );
   return <></>;

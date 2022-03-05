@@ -9,5 +9,9 @@ export default {
 export const ContractTypeForm: ComponentStory<
   typeof ContractTypeFormComponent
 > = () => (
-  <ContractTypeFormComponent onSubmit={console.log} contractType={"ChiraCeo"} />
+  <ContractTypeFormComponent
+    onSubmit={console.log}
+    contractType={"ChiraCeo"}
+    backPage={() => {}}
+  />
 );

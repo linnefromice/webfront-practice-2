@@ -8,4 +8,6 @@ export default {
 
 export const SelectContractTypeForm: ComponentStory<
   typeof SelectContractTypeFormComponent
-> = () => <SelectContractTypeFormComponent onSubmit={console.log} />;
+> = () => (
+  <SelectContractTypeFormComponent onSubmit={console.log} backPage={() => {}} />
+);

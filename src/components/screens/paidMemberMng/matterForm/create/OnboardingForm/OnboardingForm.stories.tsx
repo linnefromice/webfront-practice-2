@@ -7,4 +7,4 @@ export default {
 } as ComponentMeta<typeof OnboardingFormComponent>;
 
 export const OnboardingForm: ComponentStory<typeof OnboardingFormComponent> =
-  () => <OnboardingFormComponent onSubmit={console.log} />;
+  () => <OnboardingFormComponent onSubmit={console.log} backPage={() => {}} />;

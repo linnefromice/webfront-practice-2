@@ -8,4 +8,6 @@ export default {
 
 export const PaymentMethodForm: ComponentStory<
   typeof PaymentMethodFormComponent
-> = () => <PaymentMethodFormComponent onSubmit={console.log} />;
+> = () => (
+  <PaymentMethodFormComponent onSubmit={console.log} backPage={() => {}} />
+);

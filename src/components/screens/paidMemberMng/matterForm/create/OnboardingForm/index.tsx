@@ -6,8 +6,13 @@ import { FormData } from "./types";
 type ContentsType = {
   onSubmit: (date: FormData) => void;
   onError?: (errors: any) => void;
+  backPage: () => void;
 };
-export const Contents: VFC<ContentsType> = ({ onSubmit, onError }) => {
+export const Contents: VFC<ContentsType> = ({
+  onSubmit,
+  onError,
+  backPage,
+}) => {
   const methods = useForm<FormData>();
   const { formState } = methods;
 
@@ -16,26 +21,35 @@ export const Contents: VFC<ContentsType> = ({ onSubmit, onError }) => {
       <form onSubmit={methods.handleSubmit(onSubmit, onError)}>
         <Stack spacing={2}>
           <Typography>オンボーディング情報</Typography>
-          <Button
-            type="submit"
-            variant="contained"
-            disabled={!formState.isValid && formState.submitCount > 0}
-          >
-            次ページに遷移
-          </Button>
+          <Stack direction="row" columnGap={2}>
+            <Button
+              variant="contained"
+              color="secondary"
+              fullWidth
+              onClick={backPage}
+            >
+              前ページに戻る
+            </Button>
+            <Button
+              type="submit"
+              variant="contained"
+              fullWidth
+              disabled={!formState.isValid && formState.submitCount > 0}
+            >
+              次ページに遷移
+            </Button>
+          </Stack>
         </Stack>
       </form>
     </FormProvider>
   );
 };
 
-export const OnboardingForm: VFC<Omit<ContentsType, "onError">> = ({
-  onSubmit,
-}) => {
+export const OnboardingForm: VFC<Omit<ContentsType, "onError">> = (props) => {
   const onError = (errors: any) => {
     console.log(`execute: onError`);
     console.log(errors);
   };
 
-  return <Contents onSubmit={onSubmit} onError={onError} />;
+  return <Contents onError={onError} {...props} />;
 };
