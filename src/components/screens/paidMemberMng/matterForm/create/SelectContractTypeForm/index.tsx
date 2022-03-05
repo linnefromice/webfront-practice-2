@@ -2,7 +2,8 @@ import { Button, Radio, Stack, Theme, useMediaQuery } from "@mui/material";
 import { VFC } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { RadioGroup } from "../../../../../uiParts/RadioGroup";
-import { FormData, SelectContractKeyType, SelectContractType } from "./types";
+import { SelectContractKeyType, SelectContractType } from "./../types";
+import { FormData } from "./types";
 
 type ContentsType = {
   onSubmit: (data: FormData) => void;

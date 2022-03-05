@@ -59,7 +59,7 @@ const getPage = ({
     return (
       <OnboardingForm
         onSubmit={(data) => {
-          closingOnboarding;
+          closingOnboarding(data);
         }}
       />
     );

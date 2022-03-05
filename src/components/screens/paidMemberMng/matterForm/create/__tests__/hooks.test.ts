@@ -54,4 +54,22 @@ describe("useMatterForm", () => {
     act(() => result.current.closingPaymentMethod({}));
     expect(result.current.formInfo.currentPage).toBe("ONBOARDING");
   });
+
+  describe(".getContractType", () => {
+    test("When save contractType, get this type", () => {
+      const selectContractType = "ChiraCeo";
+      const { result } = renderHook(() => useMatterForm());
+      act(() =>
+        result.current.closingSelectContractType({
+          selectContractType,
+        })
+      );
+      expect(result.current.getContractType()).toBe(selectContractType);
+    });
+
+    test("When do not save contractType, get undefined", () => {
+      const { result } = renderHook(() => useMatterForm());
+      expect(result.current.getContractType()).toBe(undefined);
+    });
+  });
 });

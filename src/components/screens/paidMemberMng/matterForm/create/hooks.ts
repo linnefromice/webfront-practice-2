@@ -4,6 +4,7 @@ import { FormData as FirstFormData } from "./FirstForm/types";
 import { FormData as OnBoardingFormData } from "./OnboardingForm/types";
 import { FormData as PaymentMethodFormData } from "./PaymentMethodForm/types";
 import { FormData as SelectContractTypeFormData } from "./SelectContractTypeForm/types";
+import { SelectContractKeyType } from "./types";
 
 export type Page =
   | "FIRST"
@@ -65,6 +66,9 @@ export const useMatterForm = () => {
     });
   };
 
+  const getContractType = (): SelectContractKeyType | undefined =>
+    formInfo.selectContractTypeFormData?.selectContractType;
+
   return {
     formInfo,
     closingFirstForm,
@@ -72,5 +76,6 @@ export const useMatterForm = () => {
     closingContractType,
     closingPaymentMethod,
     closingOnboarding,
+    getContractType,
   };
 };
