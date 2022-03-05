@@ -49,9 +49,9 @@ describe("useMatterForm", () => {
     expect(result.current.formInfo.currentPage).toBe("PAYMENT_METHOD");
   });
 
-  test(".navigateOnboarding", () => {
+  test(".closingPaymentMethod", () => {
     const { result } = renderHook(() => useMatterForm());
-    act(() => result.current.navigateOnboarding());
+    act(() => result.current.closingPaymentMethod({}));
     expect(result.current.formInfo.currentPage).toBe("ONBOARDING");
   });
 });
