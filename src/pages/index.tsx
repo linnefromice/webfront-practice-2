@@ -1,17 +1,15 @@
-import { Theme, useMediaQuery } from "@mui/material";
 import { NextPage } from "next";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
 
 const IndexPage: NextPage = () => {
-  const isMobile = useMediaQuery<Theme>((theme) =>
-    theme.breakpoints.down("sm")
-  );
+  const router = useRouter();
 
-  return (
-    <>
-      {isMobile ? <h1>MOBILE</h1> : <h1>WEB</h1>}
-      <h1>Contents Area</h1>
-    </>
-  );
+  useEffect(() => {
+    router.replace("/paidMemberMng/matterForm/create");
+  }, []);
+
+  return <></>;
 };
 
 export default IndexPage;

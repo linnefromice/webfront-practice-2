@@ -82,5 +82,15 @@ export const themeWithComponentStyles = {
         },
       },
     },
+    MuiFormLabel: {
+      styleOverrides: {
+        asterisk: {
+          color: baseTheme.palette.error.main,
+          "&$error": {
+            color: baseTheme.palette.error.main,
+          },
+        },
+      },
+    },
   },
 };
