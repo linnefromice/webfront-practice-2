@@ -26,14 +26,14 @@ export const EmployeeSize = {
   Between151And300: "151 ~ 300名",
   MoreThan300: "301以上",
 };
-type EmployeeSizeKeyType = keyof typeof EmployeeSize;
+export type EmployeeSizeKeyType = keyof typeof EmployeeSize;
 export const ContractPlan = {
   Light: "ライトプラン",
   Basic: "ベーシックプラン",
   Premium: "プレミアムプラン",
   MajorDevelopment: "大手開拓プラン",
 } as const;
-type ContractPlanKeyType = keyof typeof ContractPlan;
+export type ContractPlanKeyType = keyof typeof ContractPlan;
 export type ChiraCeoFormData = CommonFormData & {
   companyName: string; // 企業名
   url: string; // URL
