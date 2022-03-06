@@ -1,7 +1,26 @@
 import { Button, Stack, Typography } from "@mui/material";
 import { VFC } from "react";
 import { FormProvider, useForm } from "react-hook-form";
+import { TextField } from "../../../../../uiParts/TextField";
 import { FormData } from "./types";
+
+const formItems: { formDataKey: keyof FormData; label: string }[] = [
+  { formDataKey: "firstConsultationStartTime", label: "初回コンサル開始時刻" },
+  { formDataKey: "firstConsultantMain", label: "初回コンサル担当(メイン)" },
+  { formDataKey: "firstConsultantSub", label: "初回コンサル担当(サブ)" },
+  { formDataKey: "kickoffLocation", label: "キックオフ実施場所" },
+  { formDataKey: "specialMattersColumn", label: "特別事項欄" },
+  { formDataKey: "howToUseIntrinsicValue", label: "本質的価値の利用方法" },
+  { formDataKey: "intrinsicValueKpi", label: "本質的価値のAPI" },
+  { formDataKey: "howToUseCurrentValue", label: "現在的価値の利用方法" },
+  { formDataKey: "currentValueKpi", label: "現在的価値のAPI" },
+  { formDataKey: "serviceContents", label: "サービス内容" },
+  { formDataKey: "serviceMaterials", label: "サービス資料" },
+  {
+    formDataKey: "otherSharedMattersForKickoffStaff",
+    label: "その他キックオフ担当向け共有事項",
+  },
+];
 
 type ContentsType = {
   onSubmit: (date: FormData) => void;
@@ -20,7 +39,16 @@ export const Contents: VFC<ContentsType> = ({
     <FormProvider {...methods}>
       <form onSubmit={methods.handleSubmit(onSubmit, onError)}>
         <Stack spacing={2}>
-          <Typography>オンボーディング情報</Typography>
+          <Typography variant="h5" sx={{ marginBottom: 2 }}>
+            オンボーディング情報
+          </Typography>
+          {formItems.map((v) => (
+            <TextField
+              key={`OnboardingForm.${v.formDataKey}`}
+              formDataKey={v.formDataKey}
+              label={v.label}
+            />
+          ))}
           <Stack direction="row" columnGap={2}>
             <Button
               variant="contained"

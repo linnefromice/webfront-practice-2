@@ -9,8 +9,38 @@ describe("src/components/screens/paidMemberMng/matterForm/create/OnboardingForm"
   const { OnboardingForm: OnboardingFormStory } = composeStories(stories);
 
   describe("display elements", () => {
+    test("has title", async () => {
+      const screen = render(<OnboardingFormStory />);
+
+      expect(
+        screen.getByRole("heading", {
+          name: "オンボーディング情報",
+        })
+      ).toBeInTheDocument();
+    });
+
     test("has items", async () => {
       const screen = render(<OnboardingFormStory />);
+
+      [
+        "初回コンサル開始時刻",
+        "初回コンサル担当(メイン)",
+        "初回コンサル担当(サブ)",
+        "キックオフ実施場所",
+        "特別事項欄",
+        "本質的価値の利用方法",
+        "本質的価値のAPI",
+        "現在的価値の利用方法",
+        "現在的価値のAPI",
+        "サービス内容",
+        "サービス資料",
+      ].forEach((label) =>
+        expect(
+          screen.getByRole("textbox", {
+            name: label,
+          })
+        ).toBeInTheDocument()
+      );
 
       expect(
         screen.getByRole("button", {
