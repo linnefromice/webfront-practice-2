@@ -43,7 +43,11 @@ const checkToSubmitFailed = async (paymentMethod: PaymentMethodKeyType) => {
 };
 
 describe("src/components/screens/paidMemberMng/matterForm/create/PaymentMethodForm", () => {
-  const { CreditCardForm: CreditCardFormStory } = composeStories(stories);
+  const {
+    CreditCardForm: CreditCardFormStory,
+    InvoiceOnetimePaymentForm: InvoiceOnetimePaymentFormStory,
+    InvoiceDividedPaymentForm: InvoiceDividedPaymentFormStory,
+  } = composeStories(stories);
 
   describe("When CreditCard,", () => {
     describe("display elements", () => {
@@ -57,6 +61,28 @@ describe("src/components/screens/paidMemberMng/matterForm/create/PaymentMethodFo
       });
       test("has items", async () => {
         const screen = render(<CreditCardFormStory />);
+
+        expect(
+          screen.getByRole("textbox", {
+            name: /^初回引き落とし日/i,
+          })
+        ).toBeInTheDocument();
+        expect(
+          screen.getByRole("radiogroup", {
+            name: /^支払いのサイクル/i,
+          })
+        ).toBeInTheDocument();
+        expect(
+          screen.getByRole("textbox", {
+            name: /^その他\(支払いのサイクル\)/i,
+          })
+        ).toBeInTheDocument();
+        expect(
+          screen.getByRole("textbox", {
+            name: /^その他経理チーム向け共有事項/i,
+          })
+        ).toBeInTheDocument();
+
         checkCommonItems(screen);
       });
     });
@@ -94,6 +120,50 @@ describe("src/components/screens/paidMemberMng/matterForm/create/PaymentMethodFo
       });
 
       test("failure", async () => await checkToSubmitFailed("CreditCard"));
+    });
+  });
+
+  describe("When InvoiceOnetimePayment,", () => {
+    describe("display elements", () => {
+      test("has title", async () => {
+        const screen = render(<InvoiceOnetimePaymentFormStory />);
+        expect(
+          screen.getByRole("heading", {
+            name: "一括支払い(請求書発行)",
+          })
+        ).toBeInTheDocument;
+      });
+      test("has items", async () => {
+        const screen = render(<InvoiceOnetimePaymentFormStory />);
+        checkCommonItems(screen);
+      });
+    });
+
+    describe("form function", () => {
+      test.todo("success");
+      test.todo("failure");
+    });
+  });
+
+  describe("When InvoiceDividedPayment,", () => {
+    describe("display elements", () => {
+      test("has title", async () => {
+        const screen = render(<InvoiceDividedPaymentFormStory />);
+        expect(
+          screen.getByRole("heading", {
+            name: "分割支払い(請求書発行)",
+          })
+        ).toBeInTheDocument;
+      });
+      test("has items", async () => {
+        const screen = render(<InvoiceDividedPaymentFormStory />);
+        checkCommonItems(screen);
+      });
+    });
+
+    describe("form function", () => {
+      test.todo("success");
+      test.todo("failure");
     });
   });
 });
