@@ -62,7 +62,7 @@ describe("src/components/screens/paidMemberMng/matterForm/create/PaymentMethodFo
     });
 
     describe("form function", () => {
-      test.skip("success", async () => {
+      test("success", async () => {
         const onSubmit = jest.fn();
         const onError = jest.fn();
         const screen = render(
@@ -75,6 +75,14 @@ describe("src/components/screens/paidMemberMng/matterForm/create/PaymentMethodFo
             />
           </ThemeProvider>
         ); // TODO: remove ThemeProvider
+
+        const get = screen.getByRole;
+        await userEvent.type(
+          get("textbox", {
+            name: /^初回引き落とし日/i,
+          }),
+          "20000101"
+        );
 
         await userEvent.click(
           screen.getByRole("button", {
