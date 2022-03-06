@@ -18,6 +18,7 @@ const getPage = ({
   closingOnboarding,
   backPage,
   getContractType,
+  getPaymentMethod,
 }: Omit<UseMatterFormReturn, "formInfo"> & {
   page: Page;
 }): ReactNode => {
@@ -52,15 +53,20 @@ const getPage = ({
       );
     }
   }
-  if (page === "PAYMENT_METHOD")
-    return (
-      <PaymentMethodForm
-        onSubmit={(data) => {
-          closingPaymentMethod(data);
-        }}
-        backPage={backPage}
-      />
-    );
+  if (page === "PAYMENT_METHOD") {
+    const paymentMethod = getPaymentMethod();
+    if (paymentMethod !== undefined) {
+      return (
+        <PaymentMethodForm
+          paymentMethod={paymentMethod}
+          onSubmit={(data) => {
+            closingPaymentMethod(data);
+          }}
+          backPage={backPage}
+        />
+      );
+    }
+  }
   if (page === "ONBOARDING")
     return (
       <OnboardingForm

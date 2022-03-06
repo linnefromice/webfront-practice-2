@@ -4,11 +4,12 @@ import { FormProvider, useForm, UseFormReturn } from "react-hook-form";
 import { RadioGroup } from "../../../../../uiParts/RadioGroup";
 import { TextField } from "../../../../../uiParts/TextField";
 import { SelectContractKeyType } from "../types";
+import { PaymentMethodKeyType, PaymentMethodType } from "./../types";
 import { ChiraCeoForm } from "./forms/ChiraCeoForm";
 import { JoiningAgencyForm } from "./forms/JoiningAgencyForm";
 import { LetterGetForm } from "./forms/LetterGetForm";
 import { LetterMeasuresAndChiraCeoForm } from "./forms/LetterMeasuresAndChiraCeoForm";
-import { FormData, PaymentMethodKeyType, PaymentMethodType } from "./types";
+import { FormData } from "./types";
 
 type ContentsType = {
   onSubmit: (data: FormData) => void;
@@ -30,7 +31,7 @@ const Wrapper: VFC<
         <Stack spacing={2}>
           {children}
           <RadioGroup
-            formDataKey="selectContractType"
+            formDataKey="paymentMethod"
             rules={{ required: "入力必須パラメータです" }}
             label="支払方法"
             id="paid-member-mng-matter-form-select-payment-method"

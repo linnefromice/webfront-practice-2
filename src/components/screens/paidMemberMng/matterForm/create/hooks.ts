@@ -6,6 +6,7 @@ import { FormData as PaymentMethodFormData } from "./PaymentMethodForm/types";
 import { FormData as SelectContractTypeFormData } from "./SelectContractTypeForm/types";
 import {
   MatterFormInfo,
+  PaymentMethodKeyType,
   SelectContractKeyType,
   UseMatterFormReturn,
 } from "./types";
@@ -80,6 +81,9 @@ export const useMatterForm = (): UseMatterFormReturn => {
   const getContractType = (): SelectContractKeyType | undefined =>
     formInfo.selectContractTypeFormData?.selectContractType;
 
+  const getPaymentMethod = (): PaymentMethodKeyType | undefined =>
+    formInfo.contractTypeFormData?.paymentMethod;
+
   return {
     formInfo,
     closingFirstForm,
@@ -88,6 +92,7 @@ export const useMatterForm = (): UseMatterFormReturn => {
     closingPaymentMethod,
     closingOnboarding,
     getContractType,
+    getPaymentMethod,
     backPage,
   };
 };
