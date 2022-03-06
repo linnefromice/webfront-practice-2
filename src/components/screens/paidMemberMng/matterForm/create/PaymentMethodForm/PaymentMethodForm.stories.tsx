@@ -4,10 +4,27 @@ import { PaymentMethodForm as PaymentMethodFormComponent } from ".";
 export default {
   title: "screens/paidMemberMng/matterForm/create/PaymentMethodForm",
   component: PaymentMethodFormComponent,
+  args: {
+    onSubmit: console.log,
+    backPage: () => {},
+  },
 } as ComponentMeta<typeof PaymentMethodFormComponent>;
 
-export const PaymentMethodForm: ComponentStory<
-  typeof PaymentMethodFormComponent
-> = () => (
-  <PaymentMethodFormComponent onSubmit={console.log} backPage={() => {}} />
+const Template: ComponentStory<typeof PaymentMethodFormComponent> = (args) => (
+  <PaymentMethodFormComponent {...args} />
 );
+
+export const CreditCardForm = Template.bind({});
+CreditCardForm.args = {
+  paymentMethod: "CreditCard",
+};
+
+export const InvoiceOnetimePaymentForm = Template.bind({});
+InvoiceOnetimePaymentForm.args = {
+  paymentMethod: "InvoiceOnetimePayment",
+};
+
+export const InvoiceDividedPaymentForm = Template.bind({});
+InvoiceDividedPaymentForm.args = {
+  paymentMethod: "InvoiceDividedPayment",
+};

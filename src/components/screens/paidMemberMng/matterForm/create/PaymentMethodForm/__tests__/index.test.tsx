@@ -6,11 +6,11 @@ import { Contents } from "..";
 import * as stories from "../PaymentMethodForm.stories";
 
 describe("src/components/screens/paidMemberMng/matterForm/create/PaymentMethodForm", () => {
-  const { PaymentMethodForm: PaymentMethodFormStory } = composeStories(stories);
+  const { CreditCardForm: CreditCardFormStory } = composeStories(stories);
 
   describe("display elements", () => {
     test("has items", async () => {
-      const screen = render(<PaymentMethodFormStory />);
+      const screen = render(<CreditCardFormStory />);
 
       expect(
         screen.getByRole("button", {
@@ -32,7 +32,12 @@ describe("src/components/screens/paidMemberMng/matterForm/create/PaymentMethodFo
       const onError = jest.fn();
       const screen = render(
         <ThemeProvider theme={createTheme()}>
-          <Contents onSubmit={onSubmit} onError={onError} backPage={() => {}} />
+          <Contents
+            onSubmit={onSubmit}
+            onError={onError}
+            backPage={() => {}}
+            paymentMethod={"CreditCard"}
+          />
         </ThemeProvider>
       ); // TODO: remove ThemeProvider
 
