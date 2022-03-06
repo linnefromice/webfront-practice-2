@@ -175,6 +175,7 @@ describe("src/components/screens/paidMemberMng/matterForm/create/ContractTypeFor
       });
 
       test("failure", async () => await checkToSubmitFailed("ChiraCeo"));
+      test.todo("validations");
     });
   });
 
@@ -196,7 +197,9 @@ describe("src/components/screens/paidMemberMng/matterForm/create/ContractTypeFor
     });
 
     describe("form function", () => {
+      test.todo("success");
       test("failure", async () => await checkToSubmitFailed("JoiningAgency"));
+      test.todo("validations");
     });
   });
 
@@ -218,8 +221,10 @@ describe("src/components/screens/paidMemberMng/matterForm/create/ContractTypeFor
     });
 
     describe("form function", () => {
+      test.todo("success");
       test("failure", async () =>
         await checkToSubmitFailed("LetterMeasuresAndChiraCeo"));
+      test.todo("validations");
     });
   });
 
@@ -241,7 +246,9 @@ describe("src/components/screens/paidMemberMng/matterForm/create/ContractTypeFor
     });
 
     describe("form function", () => {
+      test.todo("success");
       test("failure", async () => await checkToSubmitFailed("LetterGet"));
+      test.todo("validations");
     });
   });
 });

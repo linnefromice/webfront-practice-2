@@ -120,6 +120,7 @@ describe("src/components/screens/paidMemberMng/matterForm/create/PaymentMethodFo
       });
 
       test("failure", async () => await checkToSubmitFailed("CreditCard"));
+      test.todo("validations");
     });
   });
 
@@ -142,6 +143,7 @@ describe("src/components/screens/paidMemberMng/matterForm/create/PaymentMethodFo
     describe("form function", () => {
       test.todo("success");
       test.todo("failure");
+      test.todo("validations");
     });
   });
 
@@ -164,6 +166,7 @@ describe("src/components/screens/paidMemberMng/matterForm/create/PaymentMethodFo
     describe("form function", () => {
       test.todo("success");
       test.todo("failure");
+      test.todo("validations");
     });
   });
 });
