@@ -94,6 +94,21 @@ export const CreateScreen: VFC = () => {
         ...navigateMethods,
         page: formInfo.currentPage,
       })}
+      {/** Debug code */}
+      {formInfo.currentPage === "CONFIRMATION" && (
+        <>
+          <h6>firstFormData</h6>
+          <div>{JSON.stringify(formInfo.firstFormData)}</div>
+          <h6>selectContractTypeFormData</h6>
+          <div>{JSON.stringify(formInfo.selectContractTypeFormData)}</div>
+          <h6>contractTypeFormData</h6>
+          <div>{JSON.stringify(formInfo.contractTypeFormData)}</div>
+          <h6>paymentMethodFormData</h6>
+          <div>{JSON.stringify(formInfo.paymentMethodFormData)}</div>
+          <h6>onBoardingFormData</h6>
+          <div>{JSON.stringify(formInfo.onBoardingFormData)}</div>
+        </>
+      )}
     </>
   );
 };

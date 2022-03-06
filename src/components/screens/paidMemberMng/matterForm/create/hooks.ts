@@ -51,6 +51,7 @@ export const useMatterForm = (): UseMatterFormReturn => {
   const closingOnboarding = (v: OnBoardingFormData) => {
     setFormInfo({
       ...formInfo,
+      currentPage: "CONFIRMATION",
       onBoardingFormData: v,
     });
   };

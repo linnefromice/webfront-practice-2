@@ -9,7 +9,8 @@ export type Page =
   | "SELECT_CONTRACT_TYPE"
   | "CONTRACT_TYPE"
   | "PAYMENT_METHOD"
-  | "ONBOARDING";
+  | "ONBOARDING"
+  | "CONFIRMATION";
 
 export type MatterFormInfo = {
   currentPage: Page;
