@@ -24,7 +24,7 @@ export const EmployeeSize = {
   Between81And100: "81 ~ 100名",
   Between101And150: "101 ~ 150名",
   Between151And300: "151 ~ 300名",
-  MoreThan300: "301以上",
+  MoreThan300: "301名以上",
 };
 export type EmployeeSizeKeyType = keyof typeof EmployeeSize;
 export const ContractPlan = {
