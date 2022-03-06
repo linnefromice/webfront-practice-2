@@ -46,9 +46,15 @@ export type ChiraCeoFormData = CommonFormData & {
   contractStartDate: string; // 契約開始日
   contractEndDate: string; // 契約終了日
 };
-export type JoiningAgencyFormData = CommonFormData & {};
-export type LetterMeasuresAndChiraCeoFormData = CommonFormData & {};
-export type LetterGetFormData = CommonFormData & {};
+export type JoiningAgencyFormData = CommonFormData & {
+  dummyKey: string;
+};
+export type LetterMeasuresAndChiraCeoFormData = CommonFormData & {
+  dummyKey: string;
+};
+export type LetterGetFormData = CommonFormData & {
+  dummyKey: string;
+};
 
 export type FormData =
   | ChiraCeoFormData

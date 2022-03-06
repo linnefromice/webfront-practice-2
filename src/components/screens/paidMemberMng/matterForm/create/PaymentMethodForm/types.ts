@@ -10,8 +10,12 @@ type CreditCardFormData = {
   otherPaymentCycle?: string; // その他(支払いのサイクル)
   otherSharedMatters: string; // その他経理チーム向け共有事項
 };
-type InvoiceOnetimePaymentFormData = {};
-type InvoiceDividedPaymentFormData = {};
+type InvoiceOnetimePaymentFormData = {
+  dummyKey: string;
+};
+type InvoiceDividedPaymentFormData = {
+  dummyKey: string;
+};
 
 export type FormData =
   | CreditCardFormData
