@@ -3,6 +3,7 @@ import { composeStories } from "@storybook/testing-react";
 import { render, RenderResult, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { Contents } from "..";
+import { SelectContractKeyType } from "../../types";
 import * as stories from "../ContractTypeForm.stories";
 
 const checkCommonItems = (screen: RenderResult) => {
@@ -28,6 +29,28 @@ const checkCommonItems = (screen: RenderResult) => {
       name: "次ページに遷移",
     })
   ).toBeInTheDocument();
+};
+
+const checkToSubmitFailed = async (contractType: SelectContractKeyType) => {
+  const onSubmit = jest.fn();
+  const onError = jest.fn();
+  const screen = render(
+    <ThemeProvider theme={createTheme()}>
+      <Contents
+        onSubmit={onSubmit}
+        onError={onError}
+        backPage={() => {}}
+        contractType={contractType}
+      />
+    </ThemeProvider>
+  ); // TODO: remove ThemeProvider
+  await userEvent.click(
+    screen.getByRole("button", {
+      name: "次ページに遷移",
+    })
+  );
+  await waitFor(() => expect(onSubmit).not.toHaveBeenCalled());
+  await waitFor(() => expect(onError).toHaveBeenCalledTimes(1));
 };
 
 describe("src/components/screens/paidMemberMng/matterForm/create/ContractTypeForm", () => {
@@ -84,27 +107,7 @@ describe("src/components/screens/paidMemberMng/matterForm/create/ContractTypeFor
         await waitFor(() => expect(onError).not.toHaveBeenCalled());
       });
 
-      test("failure", async () => {
-        const onSubmit = jest.fn();
-        const onError = jest.fn();
-        const screen = render(
-          <ThemeProvider theme={createTheme()}>
-            <Contents
-              onSubmit={onSubmit}
-              onError={onError}
-              backPage={() => {}}
-              contractType={"ChiraCeo"}
-            />
-          </ThemeProvider>
-        ); // TODO: remove ThemeProvider
-        await userEvent.click(
-          screen.getByRole("button", {
-            name: "次ページに遷移",
-          })
-        );
-        await waitFor(() => expect(onSubmit).not.toHaveBeenCalled());
-        await waitFor(() => expect(onError).toHaveBeenCalledTimes(1));
-      });
+      test("failure", async () => await checkToSubmitFailed("ChiraCeo"));
     });
   });
 
@@ -124,6 +127,10 @@ describe("src/components/screens/paidMemberMng/matterForm/create/ContractTypeFor
         checkCommonItems(screen);
       });
     });
+
+    describe("form function", () => {
+      test("failure", async () => await checkToSubmitFailed("JoiningAgency"));
+    });
   });
 
   describe("When LetterMeasuresAndChiraCeoForm,", () => {
@@ -142,6 +149,11 @@ describe("src/components/screens/paidMemberMng/matterForm/create/ContractTypeFor
         checkCommonItems(screen);
       });
     });
+
+    describe("form function", () => {
+      test("failure", async () =>
+        await checkToSubmitFailed("LetterMeasuresAndChiraCeo"));
+    });
   });
 
   describe("When LetterGetForm,", () => {
@@ -159,6 +171,10 @@ describe("src/components/screens/paidMemberMng/matterForm/create/ContractTypeFor
         const screen = render(<LetterGetFormStory />);
         checkCommonItems(screen);
       });
+    });
+
+    describe("form function", () => {
+      test("failure", async () => await checkToSubmitFailed("LetterGet"));
     });
   });
 });
