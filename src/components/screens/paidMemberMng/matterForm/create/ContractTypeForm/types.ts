@@ -13,6 +13,20 @@ type CommonFormData = {
   otherPaymentMethod?: string;
 };
 
+export const EmployeeSize = {
+  LessThan6: "5名以下",
+  Between6And10: "6 ~ 10名",
+  Between11And20: "11 ~ 20名",
+  Between21And30: "21 ~ 30名",
+  Between31And40: "31 ~ 40名",
+  Between41And50: "41 ~ 50名",
+  Between51And80: "51 ~ 80名",
+  Between81And100: "81 ~ 100名",
+  Between101And150: "101 ~ 150名",
+  Between151And300: "151 ~ 300名",
+  MoreThan300: "301以上",
+};
+type EmployeeSizeKeyType = keyof typeof EmployeeSize;
 export const ContractPlan = {
   Light: "ライトプラン",
   Basic: "ベーシックプラン",
@@ -23,7 +37,7 @@ type ContractPlanKeyType = keyof typeof ContractPlan;
 export type ChiraCeoFormData = CommonFormData & {
   companyName: string; // 企業名
   url: string; // URL
-  employeeSize: string; // 従業員規模
+  employeeSize: EmployeeSizeKeyType; // 従業員規模
   postCode: string; // 郵便番号
   address: string; // 住所
   telNumberCompany: string; // 電話番号(会社)
