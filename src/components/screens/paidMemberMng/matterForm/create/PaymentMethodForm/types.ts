@@ -3,7 +3,7 @@ export const PaymentCycleType = {
   Divided: "分割支払い",
   Other: "その他",
 };
-type PaymentCycleKeyType = keyof typeof PaymentCycleType;
+export type PaymentCycleKeyType = keyof typeof PaymentCycleType;
 type CreditCardFormData = {
   firstWithdrawalDate: string; // 初回引き落とし日
   paymentCycle: PaymentCycleKeyType; // 支払いのサイクル
