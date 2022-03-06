@@ -6,7 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint . --ext .js,.jsx,.ts,.tsx",
+    "lint": "next lint --dir src",
     "test": "jest",
     "test:ci": "jest --ci --runInBand",
     "storybook": "start-storybook -p 6006",
