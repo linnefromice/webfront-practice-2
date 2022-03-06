@@ -2,7 +2,7 @@ import { Radio, Theme, Typography, useMediaQuery } from "@mui/material";
 import { VFC } from "react";
 import { RadioGroup } from "../../../../../../uiParts/RadioGroup";
 import { TextField } from "../../../../../../uiParts/TextField";
-import { PaymentMethodKeyType, PaymentMethodType } from "../../types";
+import { PaymentCycleKeyType, PaymentCycleType } from "../types";
 
 export const CreditCardForm: VFC = () => {
   const isMobile = useMediaQuery<Theme>((theme) =>
@@ -21,9 +21,9 @@ export const CreditCardForm: VFC = () => {
         formDataKey="paymentCycle"
         label="支払いのサイクル"
         id="paid-member-mng-matter-form-payment-cycle"
-        choices={(Object.keys(PaymentMethodType) as PaymentMethodKeyType[]).map(
+        choices={(Object.keys(PaymentCycleType) as PaymentCycleKeyType[]).map(
           (key) => ({
-            label: PaymentMethodType[key],
+            label: PaymentCycleType[key],
             value: key,
           })
         )}
