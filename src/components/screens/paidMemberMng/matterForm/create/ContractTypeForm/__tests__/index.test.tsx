@@ -79,7 +79,7 @@ describe("src/components/screens/paidMemberMng/matterForm/create/ContractTypeFor
     });
 
     describe("form function", () => {
-      test.skip("success", async () => {
+      test("success", async () => {
         const onSubmit = jest.fn();
         const onError = jest.fn();
         const screen = render(
@@ -93,9 +93,76 @@ describe("src/components/screens/paidMemberMng/matterForm/create/ContractTypeFor
           </ThemeProvider>
         ); // TODO: remove ThemeProvider
 
+        const get = screen.getByRole;
+        await userEvent.type(
+          get("textbox", {
+            name: /^企業名/i,
+          }),
+          "Sample Company"
+        );
+        await userEvent.type(
+          get("textbox", {
+            name: /^URL/i,
+          }),
+          "https://example.com/"
+        );
+        await userEvent.click(
+          get("radio", {
+            name: /^5名以下/i,
+          })
+        );
+        await userEvent.type(
+          get("textbox", {
+            name: /^住所/i,
+          }),
+          "000 AVENUE OF THE AMERICAS, NEW YORK NY 00000-0000, USA"
+        );
+        await userEvent.type(
+          get("textbox", {
+            name: /^電話番号\(会社\)/i,
+          }),
+          "0000000000"
+        );
+        await userEvent.type(
+          get("textbox", {
+            name: /^担当者名/i,
+          }),
+          "Sample ManagerName"
+        );
+        await userEvent.type(
+          get("textbox", {
+            name: /^担当者メールアドレス/i,
+          }),
+          "example@example.com"
+        );
+        await userEvent.type(
+          get("textbox", {
+            name: /^先方経理担当者名/i,
+          }),
+          "Example AccountingRoleName"
+        );
+        await userEvent.type(
+          get("textbox", {
+            name: /^請求書送付先メールアドレス/i,
+          }),
+          "example-invoice@example.com"
+        );
+        await userEvent.type(
+          get("textbox", {
+            name: /^初期費用\(税抜\)/i,
+          }),
+          "120000"
+        );
+        await userEvent.type(
+          get("textbox", {
+            name: /^月額\(税抜\)/i,
+          }),
+          "10000"
+        );
+
         await userEvent.click(
           screen.getByRole("radio", {
-            name: /クレジットカード/i,
+            name: /^クレジットカード/i,
           })
         );
         await userEvent.click(
