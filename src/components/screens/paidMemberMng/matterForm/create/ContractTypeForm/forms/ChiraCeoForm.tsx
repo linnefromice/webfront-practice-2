@@ -1,13 +1,13 @@
 import { Typography } from "@mui/material";
-import { VFC } from "react";
+import { RadioGroup } from "components/uiParts/RadioGroup";
+import { TextField } from "components/uiParts/TextField";
 import {
   MAIL_ADDRESS_PATTERN,
   ONLY_NUMBER_PATTERN,
   TEL_NUMBER_PATTERN,
   useCommonHooks,
-} from "../../../../../../../libs/utils";
-import { RadioGroup } from "../../../../../../uiParts/RadioGroup";
-import { TextField } from "../../../../../../uiParts/TextField";
+} from "libs/utils";
+import { VFC } from "react";
 import {
   ContractPlan,
   ContractPlanKeyType,

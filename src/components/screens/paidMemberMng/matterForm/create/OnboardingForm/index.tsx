@@ -1,8 +1,8 @@
 import { Button, Stack, Typography } from "@mui/material";
+import { TextField } from "components/uiParts/TextField";
+import { ONLY_NUMBER_PATTERN } from "libs/utils";
 import { VFC } from "react";
 import { FormProvider, RegisterOptions, useForm } from "react-hook-form";
-import { ONLY_NUMBER_PATTERN } from "../../../../../../libs/utils";
-import { TextField } from "../../../../../uiParts/TextField";
 import { FormData } from "./types";
 
 const formItems: {

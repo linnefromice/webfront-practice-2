@@ -1,8 +1,8 @@
 import { Button, Stack } from "@mui/material";
+import { RadioGroup } from "components/uiParts/RadioGroup";
+import { useCommonHooks } from "libs/utils";
 import { VFC } from "react";
 import { FormProvider, useForm } from "react-hook-form";
-import { useCommonHooks } from "../../../../../../libs/utils";
-import { RadioGroup } from "../../../../../uiParts/RadioGroup";
 import { SelectContractKeyType, SelectContractType } from "./../types";
 import { FormData } from "./types";
 

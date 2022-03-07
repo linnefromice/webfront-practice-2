@@ -1,10 +1,10 @@
 import { Button, Grid, Stack, Typography } from "@mui/material";
+import { Dropzone } from "components/organisms/Dropzone";
+import { RadioGroup } from "components/uiParts/RadioGroup";
+import { TextField } from "components/uiParts/TextField";
+import { DATE_PATTERN, useCommonHooks } from "libs/utils";
 import { Fragment, VFC } from "react";
 import { FormProvider, useForm } from "react-hook-form";
-import { DATE_PATTERN, useCommonHooks } from "../../../../../../libs/utils";
-import { Dropzone } from "../../../../../organisms/Dropzone";
-import { RadioGroup } from "../../../../../uiParts/RadioGroup";
-import { TextField } from "../../../../../uiParts/TextField";
 import { FormData } from "./types";
 
 const InitialBillingBreakdowns: VFC = () => {

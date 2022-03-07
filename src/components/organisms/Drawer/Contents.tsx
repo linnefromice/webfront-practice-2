@@ -9,8 +9,8 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
+import Link from "components/uiParts/Link";
 import { ReactNode, VFC } from "react";
-import Link from "../../uiParts/Link";
 
 const items: { icon: ReactNode; url?: string; label: string }[] = [
   {

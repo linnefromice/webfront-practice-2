@@ -7,9 +7,9 @@ import {
   Toolbar,
   Tooltip,
 } from "@mui/material";
+import { StyleConst } from "constants/styleConstants";
+import { useCommonHooks } from "libs/utils";
 import { ReactNode, VFC } from "react";
-import { StyleConst } from "../../../constants/styleConstants";
-import { useCommonHooks } from "../../../libs/utils";
 
 const AppBarFrame: VFC<{ children: ReactNode }> = ({ children }) => {
   const { isMobile } = useCommonHooks();

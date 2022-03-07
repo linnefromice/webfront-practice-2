@@ -1,8 +1,8 @@
 import { Button, Stack } from "@mui/material";
+import { RadioGroup } from "components/uiParts/RadioGroup";
+import { TextField } from "components/uiParts/TextField";
 import { ReactNode, VFC } from "react";
 import { FormProvider, useForm, UseFormReturn } from "react-hook-form";
-import { RadioGroup } from "../../../../../uiParts/RadioGroup";
-import { TextField } from "../../../../../uiParts/TextField";
 import { SelectContractKeyType } from "../types";
 import { PaymentMethodKeyType, PaymentMethodType } from "./../types";
 import { ChiraCeoForm } from "./forms/ChiraCeoForm";
