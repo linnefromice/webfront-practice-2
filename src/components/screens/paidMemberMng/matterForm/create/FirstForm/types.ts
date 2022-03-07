@@ -24,7 +24,7 @@ export type FormData = {
   initialBillingBreakdowns: InitialBillingBreakdownData[]; // 初回請求内訳
 };
 
-export const FormDataLabels: { [key in keyof FormData]: string } = {
+export const FormDataLabels: { [key in keyof Required<FormData>]: string } = {
   introducer: "今回受注企業を紹介くださった企業",
   contractDate: "契約日",
   contractType: "契約種別",
@@ -36,4 +36,4 @@ export const FormDataLabels: { [key in keyof FormData]: string } = {
   closingDocument: "クロージング資料",
   initialBillingAmount: "初回請求額",
   initialBillingBreakdowns: "初回請求内訳",
-};
+} as const;

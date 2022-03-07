@@ -17,7 +17,7 @@ export const EmployeeSize = {
   Between101And150: "101 ~ 150名",
   Between151And300: "151 ~ 300名",
   MoreThan300: "301名以上",
-};
+} as const;
 export type EmployeeSizeKeyType = keyof typeof EmployeeSize;
 export const ContractPlan = {
   Light: "ライトプラン",
@@ -69,7 +69,7 @@ export const ChiraCeoFormDataLabels: {
   firstConsultingDay: "初回コンサル日",
   contractStartDate: "契約開始日",
   contractEndDate: "契約終了日",
-};
+} as const;
 
 export type JoiningAgencyFormData = CommonFormData & {
   dummyKey: string;

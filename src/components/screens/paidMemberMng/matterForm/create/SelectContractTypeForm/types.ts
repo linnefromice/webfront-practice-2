@@ -4,6 +4,6 @@ export type FormData = {
   selectContractType: SelectContractKeyType;
 };
 
-export const FormDataLabels: { [key in keyof FormData]: string } = {
+export const FormDataLabels: { [key in keyof Required<FormData>]: string } = {
   selectContractType: "新規案件種別",
-};
+} as const;

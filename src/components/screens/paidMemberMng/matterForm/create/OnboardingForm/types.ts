@@ -13,7 +13,7 @@ export type FormData = {
   otherSharedMattersForKickoffStaff: string; // その他キックオフ担当向け共有事項
 };
 
-export const FormDataLabels: { [key in keyof FormData]: string } = {
+export const FormDataLabels: { [key in keyof Required<FormData>]: string } = {
   firstConsultationStartTime: "初回コンサル開始時刻",
   firstConsultantMain: "初回コンサル担当(メイン)",
   firstConsultantSub: "初回コンサル担当(サブ)",
@@ -26,4 +26,4 @@ export const FormDataLabels: { [key in keyof FormData]: string } = {
   serviceContents: "サービス内容",
   serviceMaterials: "サービス資料",
   otherSharedMattersForKickoffStaff: "その他キックオフ担当向け共有事項",
-};
+} as const;
