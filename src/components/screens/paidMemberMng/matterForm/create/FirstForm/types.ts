@@ -16,3 +16,17 @@ export type FormData = {
   initialBillingAmount: string; // 初回請求額
   initialBillingBreakdowns: InitialBillingBreakdownData[]; // 初回請求内訳
 };
+
+export const FormDataLabels: { [key in keyof FormData]: string } = {
+  introducer: "今回受注企業を紹介くださった企業",
+  contractDate: "契約日",
+  contractType: "契約種別",
+  contractor: "契約獲得者",
+  applicationFormData: "申込書PDFデータ",
+  businessCardPic: "名刺写真",
+  closingUrl: "音源ラベル",
+  closingUrlDescription: "音源URL",
+  closingDocument: "クロージング資料",
+  initialBillingAmount: "初回請求額",
+  initialBillingBreakdowns: "初回請求内訳",
+};
