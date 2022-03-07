@@ -3,4 +3,10 @@ import "@testing-library/jest-dom/extend-expect"; // ref: https://nextjs.org/doc
 // Storybook's preview file location
 import * as globalStorybookConfig from "./.storybook/preview";
 
+jest.mock("next/router", () => ({
+  useRouter: () => ({
+    pathname: "mock",
+  }),
+}));
+
 setGlobalConfig(globalStorybookConfig);
