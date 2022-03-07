@@ -1,6 +1,7 @@
 import { Button, Stack, Typography } from "@mui/material";
 import { VFC } from "react";
 import { FormProvider, RegisterOptions, useForm } from "react-hook-form";
+import { ONLY_NUMBER_PATTERN } from "../../../../../../libs/utils";
 import { TextField } from "../../../../../uiParts/TextField";
 import { FormData } from "./types";
 
@@ -11,12 +12,7 @@ const formItems: {
 }[] = [
   {
     formDataKey: "firstConsultationStartTime",
-    rules: {
-      pattern: {
-        value: /\d/,
-        message: "数値のみで入力してください",
-      },
-    },
+    rules: { pattern: ONLY_NUMBER_PATTERN },
     label: "初回コンサル開始時刻",
   },
   { formDataKey: "firstConsultantMain", label: "初回コンサル担当(メイン)" },

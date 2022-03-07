@@ -1,6 +1,11 @@
 import { Radio, Typography } from "@mui/material";
 import { VFC } from "react";
-import { useCommonHooks } from "../../../../../../../libs/utils";
+import {
+  MAIL_ADDRESS_PATTERN,
+  ONLY_NUMBER_PATTERN,
+  TEL_NUMBER_PATTERN,
+  useCommonHooks,
+} from "../../../../../../../libs/utils";
 import { RadioGroup } from "../../../../../../uiParts/RadioGroup";
 import { TextField } from "../../../../../../uiParts/TextField";
 import {
@@ -52,20 +57,14 @@ export const ChiraCeoForm: VFC = () => {
         formDataKey="telNumberCompany"
         rules={{
           required: "入力必須パラメータです",
-          pattern: {
-            value: /(\d{2,3}-\d{4}-\d{4})/,
-            message: "ハイフンありの形式で入力してください(NN-NNNN-NNNN)",
-          },
+          pattern: TEL_NUMBER_PATTERN,
         }}
         label="電話番号(会社)"
       />
       <TextField
         formDataKey="telNumberManagerPhone"
         rules={{
-          pattern: {
-            value: /(\d{2,3}-\d{4}-\d{4})/,
-            message: "ハイフンありの形式で入力してください(NN-NNNN-NNNN)",
-          },
+          pattern: TEL_NUMBER_PATTERN,
         }}
         label="電話番号(担当者携帯)"
       />
@@ -95,10 +94,7 @@ export const ChiraCeoForm: VFC = () => {
         formDataKey="invoiceShippingMailAddress"
         rules={{
           required: "入力必須パラメータです",
-          pattern: {
-            value: /.*@.*/,
-            message: "正しい形式で入力してください",
-          },
+          pattern: MAIL_ADDRESS_PATTERN,
         }}
         label="請求書送付先メールアドレス"
       />
@@ -119,10 +115,7 @@ export const ChiraCeoForm: VFC = () => {
         formDataKey="initialCost"
         rules={{
           required: "入力必須パラメータです",
-          pattern: {
-            value: /\d/,
-            message: "数値のみで入力してください",
-          },
+          pattern: ONLY_NUMBER_PATTERN,
         }}
         amount
         label="初期費用(税抜)"
@@ -131,10 +124,7 @@ export const ChiraCeoForm: VFC = () => {
         formDataKey="monthlyAmount"
         rules={{
           required: "入力必須パラメータです",
-          pattern: {
-            value: /\d/,
-            message: "数値のみで入力してください",
-          },
+          pattern: ONLY_NUMBER_PATTERN,
         }}
         amount
         label="月額(税抜)"

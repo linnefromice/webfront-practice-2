@@ -1,6 +1,6 @@
 import { Radio, Typography } from "@mui/material";
 import { VFC } from "react";
-import { useCommonHooks } from "../../../../../../../libs/utils";
+import { DATE_PATTERN, useCommonHooks } from "../../../../../../../libs/utils";
 import { RadioGroup } from "../../../../../../uiParts/RadioGroup";
 import { TextField } from "../../../../../../uiParts/TextField";
 import { PaymentCycleKeyType, PaymentCycleType } from "../types";
@@ -14,10 +14,7 @@ export const CreditCardForm: VFC = () => {
         formDataKey="firstWithdrawalDate"
         rules={{
           required: "入力必須パラメータです",
-          pattern: {
-            value: /\d{8}/,
-            message: "yyyyMMdd の形式で日付を入力してください",
-          },
+          pattern: DATE_PATTERN,
         }}
         label="初回引き落とし日"
       />

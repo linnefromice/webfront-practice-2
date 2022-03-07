@@ -1,7 +1,7 @@
 import { Button, Grid, Radio, Stack, Typography } from "@mui/material";
 import { Fragment, VFC } from "react";
 import { FormProvider, useForm } from "react-hook-form";
-import { useCommonHooks } from "../../../../../../libs/utils";
+import { DATE_PATTERN, useCommonHooks } from "../../../../../../libs/utils";
 import { Dropzone } from "../../../../../organisms/Dropzone";
 import { RadioGroup } from "../../../../../uiParts/RadioGroup";
 import { TextField } from "../../../../../uiParts/TextField";
@@ -81,10 +81,7 @@ export const Contents: VFC<ContentsType> = ({
             formDataKey="contractDate"
             rules={{
               required: "入力必須パラメータです",
-              pattern: {
-                value: /[0-9]{8}/,
-                message: "yyyyMMdd の形式で日付を入力してください",
-              },
+              pattern: DATE_PATTERN,
             }}
             label="契約日"
             placeholder="yyyyMMdd"
