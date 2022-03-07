@@ -4,7 +4,12 @@ import { Button, RadioGroup, TextField } from "components/uiParts";
 import { DATE_PATTERN, useCommonHooks } from "libs/utils";
 import { Fragment, VFC } from "react";
 import { FormProvider, useForm } from "react-hook-form";
-import { FormData, FormDataLabels } from "./types";
+import {
+  ContractType,
+  ContractTypeKeyType,
+  FormData,
+  FormDataLabels,
+} from "./types";
 
 const InitialBillingBreakdowns: VFC = () => {
   const array = [...new Array(3)]; // dummy
@@ -89,12 +94,9 @@ export const Contents: VFC<ContentsType> = ({
             rules={{ required: "入力必須パラメータです" }}
             label={FormDataLabels["contractType"]}
             id="paid-member-mng-matter-form-contract-type-label"
-            choices={[
-              { label: "新規", value: "NEW" },
-              { label: "更新", value: "RENEWAL" },
-              { label: "内容更新", value: "CONTENT_RENEWAL" },
-              { label: "解約", value: "CANCELLATION" },
-            ]}
+            choices={(Object.keys(ContractType) as ContractTypeKeyType[]).map(
+              (v) => ({ label: ContractType[v], value: v })
+            )}
             direction={isMobile ? "column" : "row"}
           />
           <TextField
