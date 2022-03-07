@@ -60,11 +60,18 @@ const InitialBillingBreakdowns: VFC = () => {
 };
 
 type ContentsType = {
+  defaultValues?: FormData;
   onSubmit: (data: FormData) => void;
   onError?: (errors: any) => void;
 };
-export const Contents: VFC<ContentsType> = ({ onSubmit, onError }) => {
-  const methods = useForm<FormData>();
+export const Contents: VFC<ContentsType> = ({
+  defaultValues,
+  onSubmit,
+  onError,
+}) => {
+  const methods = useForm<FormData>({
+    defaultValues: defaultValues,
+  });
   const { formState } = methods;
 
   const isMobile = useMediaQuery<Theme>((theme) =>
@@ -159,11 +166,11 @@ export const Contents: VFC<ContentsType> = ({ onSubmit, onError }) => {
   );
 };
 
-export const FirstForm: VFC<Omit<ContentsType, "onError">> = ({ onSubmit }) => {
+export const FirstForm: VFC<Omit<ContentsType, "onError">> = (props) => {
   const onError = (errors: any) => {
     console.log(`execute: onError`);
     console.log(errors);
   };
 
-  return <Contents onSubmit={onSubmit} onError={onError} />;
+  return <Contents onError={onError} {...props} />;
 };

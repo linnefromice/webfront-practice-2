@@ -6,16 +6,20 @@ import { SelectContractKeyType, SelectContractType } from "./../types";
 import { FormData } from "./types";
 
 type ContentsType = {
+  defaultValues?: FormData;
   onSubmit: (data: FormData) => void;
   onError?: (errors: any) => void;
   backPage: () => void;
 };
 export const Contents: VFC<ContentsType> = ({
+  defaultValues,
   onSubmit,
   onError,
   backPage,
 }) => {
-  const methods = useForm<FormData>();
+  const methods = useForm<FormData>({
+    defaultValues: defaultValues,
+  });
   const { formState } = methods;
 
   const isMobile = useMediaQuery<Theme>((theme) =>

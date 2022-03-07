@@ -12,6 +12,7 @@ import { LetterMeasuresAndChiraCeoForm } from "./forms/LetterMeasuresAndChiraCeo
 import { FormData } from "./types";
 
 type ContentsType = {
+  defaultValues?: FormData;
   onSubmit: (data: FormData) => void;
   onError?: (errors: any) => void;
   backPage: () => void;
@@ -22,7 +23,7 @@ const Wrapper: VFC<
   {
     methods: UseFormReturn<FormData, any>;
     children: ReactNode;
-  } & Omit<ContentsType, "contractType">
+  } & Omit<ContentsType, "defaultValues" | "contractType">
 > = ({ methods, children, onSubmit, onError, backPage }) => {
   const { formState } = methods;
   return (
@@ -78,8 +79,14 @@ const getContents = (contractType: SelectContractKeyType): ReactNode => {
   return <></>;
 };
 
-export const Contents: VFC<ContentsType> = ({ contractType, ...rest }) => {
-  const methods = useForm<FormData>();
+export const Contents: VFC<ContentsType> = ({
+  defaultValues,
+  contractType,
+  ...rest
+}) => {
+  const methods = useForm<FormData>({
+    defaultValues: defaultValues,
+  });
 
   return (
     <Wrapper methods={methods} {...rest}>

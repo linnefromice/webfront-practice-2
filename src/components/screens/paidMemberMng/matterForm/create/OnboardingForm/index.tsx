@@ -23,16 +23,20 @@ const formItems: { formDataKey: keyof FormData; label: string }[] = [
 ];
 
 type ContentsType = {
+  defaultValues?: FormData;
   onSubmit: (date: FormData) => void;
   onError?: (errors: any) => void;
   backPage: () => void;
 };
 export const Contents: VFC<ContentsType> = ({
+  defaultValues,
   onSubmit,
   onError,
   backPage,
 }) => {
-  const methods = useForm<FormData>();
+  const methods = useForm<FormData>({
+    defaultValues: defaultValues,
+  });
   const { formState } = methods;
 
   return (
