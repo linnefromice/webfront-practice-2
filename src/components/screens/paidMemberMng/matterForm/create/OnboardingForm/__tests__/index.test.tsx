@@ -29,9 +29,9 @@ describe("src/components/screens/paidMemberMng/matterForm/create/OnboardingForm"
         "キックオフ実施場所",
         "特別事項欄",
         "本質的価値の利用方法",
-        "本質的価値のAPI",
+        "本質的価値のKPI",
         "現在的価値の利用方法",
-        "現在的価値のAPI",
+        "現在的価値のKPI",
         "サービス内容",
         "サービス資料",
       ].forEach((label) =>
