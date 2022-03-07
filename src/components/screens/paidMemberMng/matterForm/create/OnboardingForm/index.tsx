@@ -1,11 +1,24 @@
 import { Button, Stack, Typography } from "@mui/material";
 import { VFC } from "react";
-import { FormProvider, useForm } from "react-hook-form";
+import { FormProvider, RegisterOptions, useForm } from "react-hook-form";
 import { TextField } from "../../../../../uiParts/TextField";
 import { FormData } from "./types";
 
-const formItems: { formDataKey: keyof FormData; label: string }[] = [
-  { formDataKey: "firstConsultationStartTime", label: "初回コンサル開始時刻" },
+const formItems: {
+  formDataKey: keyof FormData;
+  rules?: RegisterOptions;
+  label: string;
+}[] = [
+  {
+    formDataKey: "firstConsultationStartTime",
+    rules: {
+      pattern: {
+        value: /\d/,
+        message: "数値のみで入力してください",
+      },
+    },
+    label: "初回コンサル開始時刻",
+  },
   { formDataKey: "firstConsultantMain", label: "初回コンサル担当(メイン)" },
   { formDataKey: "firstConsultantSub", label: "初回コンサル担当(サブ)" },
   { formDataKey: "kickoffLocation", label: "キックオフ実施場所" },
@@ -50,6 +63,7 @@ export const Contents: VFC<ContentsType> = ({
             <TextField
               key={`OnboardingForm.${v.formDataKey}`}
               formDataKey={v.formDataKey}
+              rules={v.rules}
               label={v.label}
             />
           ))}
