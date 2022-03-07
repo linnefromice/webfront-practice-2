@@ -1,6 +1,6 @@
 import { createTheme, ThemeProvider } from "@mui/material";
 import { composeStories } from "@storybook/testing-react";
-import { render, RenderResult, waitFor } from "@testing-library/react";
+import { render, RenderResult, waitFor, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { Contents } from "..";
 import { SelectContractKeyType } from "../../types";
@@ -107,7 +107,11 @@ describe("src/components/screens/paidMemberMng/matterForm/create/ContractTypeFor
           "https://example.com/"
         );
         await userEvent.click(
-          get("radio", {
+          within(
+            get("radiogroup", {
+              name: /^従業員規模/i,
+            })
+          ).getByRole("radio", {
             name: /^5名以下/i,
           })
         );
