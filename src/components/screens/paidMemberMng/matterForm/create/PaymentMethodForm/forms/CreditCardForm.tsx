@@ -2,7 +2,11 @@ import { Typography } from "@mui/material";
 import { RadioGroup, TextField } from "components/uiParts";
 import { DATE_PATTERN, useCommonHooks } from "libs/utils";
 import { VFC } from "react";
-import { PaymentCycleKeyType, PaymentCycleType } from "../types";
+import {
+  CreditCardFormDataLabels,
+  PaymentCycleKeyType,
+  PaymentCycleType,
+} from "../types";
 
 export const CreditCardForm: VFC = () => {
   const { isMobile } = useCommonHooks();
@@ -15,11 +19,11 @@ export const CreditCardForm: VFC = () => {
           required: "入力必須パラメータです",
           pattern: DATE_PATTERN,
         }}
-        label="初回引き落とし日"
+        label={CreditCardFormDataLabels["firstWithdrawalDate"]}
       />
       <RadioGroup
         formDataKey="paymentCycle"
-        label="支払いのサイクル"
+        label={CreditCardFormDataLabels["paymentCycle"]}
         id="paid-member-mng-matter-form-payment-cycle"
         choices={(Object.keys(PaymentCycleType) as PaymentCycleKeyType[]).map(
           (key) => ({
@@ -31,11 +35,11 @@ export const CreditCardForm: VFC = () => {
       />
       <TextField
         formDataKey="otherPaymentCycle"
-        label="その他(支払いのサイクル)"
+        label={CreditCardFormDataLabels["otherPaymentCycle"]}
       />
       <TextField
         formDataKey="otherSharedMatters"
-        label="その他経理チーム向け共有事項"
+        label={CreditCardFormDataLabels["otherSharedMatters"]}
       />
     </>
   );
