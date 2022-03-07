@@ -116,7 +116,7 @@ export const Dropzone: VFC<DropzoneProps> = ({ formDataKey, ...props }) => {
         (!!files?.length && [...files].concat(droppedFiles)) || droppedFiles;
       setValue(formDataKey, newFiles, { shouldValidate: true });
     },
-    [setValue, formDataKey]
+    [files, setValue, formDataKey]
   );
 
   useEffect(() => {

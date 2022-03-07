@@ -121,9 +121,6 @@ describe("src/components/screens/paidMemberMng/matterForm/create/FirstForm", () 
             <Contents onSubmit={onSubmit} onError={onError} />
           </ThemeProvider>
         ); // TODO: remove ThemeProvider
-        const submitButton = screen.getByRole("button", {
-          name: "次ページに遷移",
-        });
         await userEvent.click(
           screen.getByRole("button", {
             name: "次ページに遷移",

@@ -23,7 +23,7 @@ export const NextLinkComposed = React.forwardRef<
   const {
     to,
     linkAs,
-    href,
+    href, // eslint-disable-line @typescript-eslint/no-unused-vars
     replace,
     scroll,
     shallow,
@@ -69,7 +69,8 @@ const Link = React.forwardRef<HTMLAnchorElement, LinkProps>(function Link(
     className: classNameProps,
     href,
     noLinkStyle,
-    role, // Link don't have roles.
+    // Link don't have roles.
+    role, // eslint-disable-line @typescript-eslint/no-unused-vars
     ...other
   } = props;
 
