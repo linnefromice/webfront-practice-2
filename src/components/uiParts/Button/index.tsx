@@ -9,7 +9,7 @@ type ButtonProps = Omit<MuiButtonProps, "color"> & {
   color?: "primary" | "error" | "normal" | "text";
 };
 
-const NormalButton = styled(MuiButton)<MuiButtonProps>(({ theme }) => ({
+const NormalButton = styled(MuiButton)<MuiButtonProps>(({ _ }) => ({
   "&.MuiButton-contained": {
     backgroundColor: "#1e1e1e",
     color: "white",
@@ -41,7 +41,7 @@ const NormalButton = styled(MuiButton)<MuiButtonProps>(({ theme }) => ({
   },
 }));
 
-const TextButton = styled(MuiButton)<MuiButtonProps>(({ theme }) => ({
+const TextButton = styled(MuiButton)<MuiButtonProps>(({ _ }) => ({
   "&.MuiButton-contained": {
     backgroundColor: "	#777777",
     color: "white",

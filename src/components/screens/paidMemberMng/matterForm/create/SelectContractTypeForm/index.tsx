@@ -1,6 +1,5 @@
 import { Stack } from "@mui/material";
-import { Button } from "components/uiParts/Button";
-import { RadioGroup } from "components/uiParts/RadioGroup";
+import { Button, RadioGroup } from "components/uiParts";
 import { useCommonHooks } from "libs/utils";
 import { VFC } from "react";
 import { FormProvider, useForm } from "react-hook-form";

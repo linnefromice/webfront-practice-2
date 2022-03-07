@@ -1,6 +1,5 @@
 import { Typography } from "@mui/material";
-import { RadioGroup } from "components/uiParts/RadioGroup";
-import { TextField } from "components/uiParts/TextField";
+import { RadioGroup, TextField } from "components/uiParts";
 import {
   MAIL_ADDRESS_PATTERN,
   ONLY_NUMBER_PATTERN,

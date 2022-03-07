@@ -1,6 +1,5 @@
 import { Typography } from "@mui/material";
-import { RadioGroup } from "components/uiParts/RadioGroup";
-import { TextField } from "components/uiParts/TextField";
+import { RadioGroup, TextField } from "components/uiParts";
 import { DATE_PATTERN, useCommonHooks } from "libs/utils";
 import { VFC } from "react";
 import { PaymentCycleKeyType, PaymentCycleType } from "../types";

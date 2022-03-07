@@ -1,7 +1,5 @@
 import { Stack } from "@mui/material";
-import { Button } from "components/uiParts/Button";
-import { RadioGroup } from "components/uiParts/RadioGroup";
-import { TextField } from "components/uiParts/TextField";
+import { Button, RadioGroup, TextField } from "components/uiParts";
 import { ReactNode, VFC } from "react";
 import { FormProvider, useForm, UseFormReturn } from "react-hook-form";
 import { SelectContractKeyType } from "../types";

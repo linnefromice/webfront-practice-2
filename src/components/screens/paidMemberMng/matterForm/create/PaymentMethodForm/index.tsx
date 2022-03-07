@@ -1,5 +1,5 @@
 import { Stack, Typography } from "@mui/material";
-import { Button } from "components/uiParts/Button";
+import { Button } from "components/uiParts";
 import { ReactNode, VFC } from "react";
 import { FormProvider, useForm, UseFormReturn } from "react-hook-form";
 import { PaymentMethodKeyType } from "../types";

@@ -1,8 +1,6 @@
 import { Grid, Stack, Typography } from "@mui/material";
 import { Dropzone } from "components/organisms/Dropzone";
-import { Button } from "components/uiParts/Button";
-import { RadioGroup } from "components/uiParts/RadioGroup";
-import { TextField } from "components/uiParts/TextField";
+import { Button, RadioGroup, TextField } from "components/uiParts";
 import { DATE_PATTERN, useCommonHooks } from "libs/utils";
 import { Fragment, VFC } from "react";
 import { FormProvider, useForm } from "react-hook-form";
