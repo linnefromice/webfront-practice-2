@@ -1,4 +1,4 @@
-import { Button, Grid, Radio, Stack, Typography } from "@mui/material";
+import { Button, Grid, Stack, Typography } from "@mui/material";
 import { Fragment, VFC } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { DATE_PATTERN, useCommonHooks } from "../../../../../../libs/utils";
@@ -98,7 +98,6 @@ export const Contents: VFC<ContentsType> = ({
               { label: "内容更新", value: "CONTENT_RENEWAL" },
               { label: "解約", value: "CANCELLATION" },
             ]}
-            component={<Radio />}
             direction={isMobile ? "column" : "row"}
           />
           <TextField

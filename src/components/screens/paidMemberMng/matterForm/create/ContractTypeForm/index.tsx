@@ -1,4 +1,4 @@
-import { Button, Radio, Stack } from "@mui/material";
+import { Button, Stack } from "@mui/material";
 import { ReactNode, VFC } from "react";
 import { FormProvider, useForm, UseFormReturn } from "react-hook-form";
 import { RadioGroup } from "../../../../../uiParts/RadioGroup";
@@ -43,7 +43,6 @@ const Wrapper: VFC<
             choices={(
               Object.keys(PaymentMethodType) as PaymentMethodKeyType[]
             ).map((v) => ({ label: PaymentMethodType[v], value: v }))}
-            component={<Radio />}
             direction={"column"}
           />
           <Stack direction="row" columnGap={2}>

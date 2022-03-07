@@ -1,4 +1,4 @@
-import { Radio, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 import { VFC } from "react";
 import {
   MAIL_ADDRESS_PATTERN,
@@ -44,7 +44,6 @@ export const ChiraCeoForm: VFC = () => {
             value: key,
           })
         )}
-        component={<Radio />}
         direction={isMobile ? "column" : "row"}
       />
       <TextField formDataKey="postCode" label="郵便番号" />
@@ -108,7 +107,6 @@ export const ChiraCeoForm: VFC = () => {
             value: key,
           })
         )}
-        component={<Radio />}
         direction={isMobile ? "column" : "row"}
       />
       <TextField

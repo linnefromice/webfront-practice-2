@@ -3,6 +3,7 @@ import {
   FormControlLabel,
   FormHelperText,
   FormLabel,
+  Radio as MuiRadio,
   RadioGroup as MuiRadioGroup,
   Stack,
 } from "@mui/material";
@@ -74,14 +75,16 @@ export const RawRadioGroup: VFC<RawRadioGroupType> = ({
 
 type RadioGroupProps = Omit<
   RawRadioGroupType,
-  "value" | "onChange" | "required"
+  "component" | "value" | "onChange" | "required"
 > & {
   formDataKey: string;
   rules?: RegisterOptions;
+  component?: JSX.Element;
 };
 export const RadioGroup: VFC<RadioGroupProps> = ({
   formDataKey,
   rules,
+  component,
   ...props
 }) => {
   const { control } = useFormContext();
@@ -97,6 +100,7 @@ export const RadioGroup: VFC<RadioGroupProps> = ({
       }) => (
         <RawRadioGroup
           {...props}
+          component={component ? component : <MuiRadio />}
           required={rules?.required ? true : false}
           error={invalid}
           errorMessage={error ? error.message : undefined}

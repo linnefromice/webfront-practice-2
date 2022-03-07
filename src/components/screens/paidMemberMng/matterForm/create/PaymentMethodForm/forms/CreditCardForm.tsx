@@ -1,4 +1,4 @@
-import { Radio, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 import { VFC } from "react";
 import { DATE_PATTERN, useCommonHooks } from "../../../../../../../libs/utils";
 import { RadioGroup } from "../../../../../../uiParts/RadioGroup";
@@ -28,7 +28,6 @@ export const CreditCardForm: VFC = () => {
             value: key,
           })
         )}
-        component={<Radio />}
         direction={isMobile ? "column" : "row"}
       />
       <TextField

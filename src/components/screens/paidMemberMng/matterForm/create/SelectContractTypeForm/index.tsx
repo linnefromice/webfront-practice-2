@@ -1,4 +1,4 @@
-import { Button, Radio, Stack } from "@mui/material";
+import { Button, Stack } from "@mui/material";
 import { VFC } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { useCommonHooks } from "../../../../../../libs/utils";
@@ -39,7 +39,6 @@ export const Contents: VFC<ContentsType> = ({
               label: SelectContractType[key],
               value: key,
             }))}
-            component={<Radio />}
             direction={isMobile ? "column" : "row"}
           />
           <Stack direction="row" columnGap={2}>
