@@ -1,4 +1,5 @@
-import { Button, Stack } from "@mui/material";
+import { Stack } from "@mui/material";
+import { Button } from "components/uiParts/Button";
 import { RadioGroup } from "components/uiParts/RadioGroup";
 import { TextField } from "components/uiParts/TextField";
 import { ReactNode, VFC } from "react";
@@ -47,8 +48,8 @@ const Wrapper: VFC<
           />
           <Stack direction="row" columnGap={2}>
             <Button
-              variant="contained"
-              color="secondary"
+              variant="outlined"
+              color="text"
               fullWidth
               onClick={backPage}
             >

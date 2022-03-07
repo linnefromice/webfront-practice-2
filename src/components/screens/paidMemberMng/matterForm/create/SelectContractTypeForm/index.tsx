@@ -1,4 +1,5 @@
-import { Button, Stack } from "@mui/material";
+import { Stack } from "@mui/material";
+import { Button } from "components/uiParts/Button";
 import { RadioGroup } from "components/uiParts/RadioGroup";
 import { useCommonHooks } from "libs/utils";
 import { VFC } from "react";
@@ -43,8 +44,8 @@ export const Contents: VFC<ContentsType> = ({
           />
           <Stack direction="row" columnGap={2}>
             <Button
-              variant="contained"
-              color="secondary"
+              variant="outlined"
+              color="text"
               fullWidth
               onClick={backPage}
             >

@@ -1,5 +1,6 @@
-import { Button, Grid, Stack, Typography } from "@mui/material";
+import { Grid, Stack, Typography } from "@mui/material";
 import { Dropzone } from "components/organisms/Dropzone";
+import { Button } from "components/uiParts/Button";
 import { RadioGroup } from "components/uiParts/RadioGroup";
 import { TextField } from "components/uiParts/TextField";
 import { DATE_PATTERN, useCommonHooks } from "libs/utils";
@@ -14,7 +15,7 @@ const InitialBillingBreakdowns: VFC = () => {
     <>
       <Stack direction="row" alignItems="center" spacing={2}>
         <Typography sx={{ fontSize: 12 }}>初回請求額内訳</Typography>
-        <Button variant="contained" sx={{ height: "50%" }}>
+        <Button variant="contained" color="primary" sx={{ height: "50%" }}>
           行追加
         </Button>
       </Stack>
@@ -37,11 +38,7 @@ const InitialBillingBreakdowns: VFC = () => {
               />
             </Grid>
             <Grid item sm={12} md={3}>
-              <Button
-                variant="contained"
-                color="warning"
-                sx={{ height: "100%" }}
-              >
+              <Button variant="contained" color="text" sx={{ height: "100%" }}>
                 行削除
               </Button>
             </Grid>

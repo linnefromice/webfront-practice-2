@@ -1,4 +1,5 @@
-import { Button, Stack, Typography } from "@mui/material";
+import { Stack, Typography } from "@mui/material";
+import { Button } from "components/uiParts/Button";
 import { ReactNode, VFC } from "react";
 import { FormProvider, useForm, UseFormReturn } from "react-hook-form";
 import { PaymentMethodKeyType } from "../types";
@@ -52,8 +53,8 @@ const Wrapper: VFC<
           {children}
           <Stack direction="row" columnGap={2}>
             <Button
-              variant="contained"
-              color="secondary"
+              variant="outlined"
+              color="text"
               fullWidth
               onClick={backPage}
             >

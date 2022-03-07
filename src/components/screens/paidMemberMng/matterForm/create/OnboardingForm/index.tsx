@@ -1,4 +1,5 @@
-import { Button, Stack, Typography } from "@mui/material";
+import { Stack, Typography } from "@mui/material";
+import { Button } from "components/uiParts/Button";
 import { TextField } from "components/uiParts/TextField";
 import { ONLY_NUMBER_PATTERN } from "libs/utils";
 import { VFC } from "react";
@@ -65,8 +66,8 @@ export const Contents: VFC<ContentsType> = ({
           ))}
           <Stack direction="row" columnGap={2}>
             <Button
-              variant="contained"
-              color="secondary"
+              variant="outlined"
+              color="text"
               fullWidth
               onClick={backPage}
             >
