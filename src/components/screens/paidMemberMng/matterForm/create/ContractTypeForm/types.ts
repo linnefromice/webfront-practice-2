@@ -46,6 +46,31 @@ export type ChiraCeoFormData = CommonFormData & {
   contractStartDate: string; // 契約開始日
   contractEndDate: string; // 契約終了日
 };
+export const ChiraCeoFormDataLabels: {
+  [key in keyof Required<ChiraCeoFormData>]: string;
+} = {
+  paymentMethod: "支払方法",
+  otherPaymentMethod: "支払方法がその他の場合は入力",
+  companyName: "企業名",
+  url: "URL",
+  employeeSize: "従業員規模",
+  postCode: "郵便番号",
+  address: "住所",
+  telNumberCompany: "電話番号(会社)",
+  telNumberManagerPhone: "電話番号(担当者携帯)",
+  managerName: "担当者名",
+  managerRole: "担当者役職",
+  managerMailAddress: "担当者メールアドレス",
+  accountingRoleName: "先方経理担当者名",
+  invoiceShippingMailAddress: "請求書送付先メールアドレス",
+  contractPlan: "契約プラン",
+  initialCost: "初期費用(税抜)",
+  monthlyAmount: "月額(税抜)",
+  firstConsultingDay: "初回コンサル日",
+  contractStartDate: "契約開始日",
+  contractEndDate: "契約終了日",
+};
+
 export type JoiningAgencyFormData = CommonFormData & {
   dummyKey: string;
 };
