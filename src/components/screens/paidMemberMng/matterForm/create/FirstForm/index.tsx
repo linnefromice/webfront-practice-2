@@ -1,14 +1,7 @@
-import {
-  Button,
-  Grid,
-  Radio,
-  Stack,
-  Theme,
-  Typography,
-  useMediaQuery,
-} from "@mui/material";
+import { Button, Grid, Radio, Stack, Typography } from "@mui/material";
 import { Fragment, VFC } from "react";
 import { FormProvider, useForm } from "react-hook-form";
+import { useCommonHooks } from "../../../../../../libs/utils";
 import { Dropzone } from "../../../../../organisms/Dropzone";
 import { RadioGroup } from "../../../../../uiParts/RadioGroup";
 import { TextField } from "../../../../../uiParts/TextField";
@@ -69,14 +62,11 @@ export const Contents: VFC<ContentsType> = ({
   onSubmit,
   onError,
 }) => {
+  const { isMobile } = useCommonHooks();
   const methods = useForm<FormData>({
     defaultValues: defaultValues,
   });
   const { formState } = methods;
-
-  const isMobile = useMediaQuery<Theme>((theme) =>
-    theme.breakpoints.down("sm")
-  );
 
   return (
     <FormProvider {...methods}>

@@ -1,7 +1,8 @@
-import { Drawer as MuiDrawer, Theme, useMediaQuery } from "@mui/material";
+import { Drawer as MuiDrawer } from "@mui/material";
 import { DrawerProps as MuiDrawerProps } from "@mui/material/Drawer";
 import { ReactNode, VFC } from "react";
 import { StyleConst } from "../../../constants/styleConstants";
+import { useCommonHooks } from "../../../libs/utils";
 import { DrawerContents } from "./Contents";
 
 const BaseDrawer: VFC<MuiDrawerProps> = (props) => {
@@ -26,9 +27,7 @@ const DrawerFrame: VFC<{
   isOpen: boolean;
   onClose: MuiDrawerProps["onClose"];
 }> = ({ children, isOpen, onClose }) => {
-  const isMobile = useMediaQuery<Theme>((theme) =>
-    theme.breakpoints.down("sm")
-  );
+  const { isMobile } = useCommonHooks();
 
   return isMobile ? (
     <BaseDrawer variant="temporary" open={isOpen} onClose={onClose}>

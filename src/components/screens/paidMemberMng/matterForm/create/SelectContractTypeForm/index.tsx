@@ -1,6 +1,7 @@
-import { Button, Radio, Stack, Theme, useMediaQuery } from "@mui/material";
+import { Button, Radio, Stack } from "@mui/material";
 import { VFC } from "react";
 import { FormProvider, useForm } from "react-hook-form";
+import { useCommonHooks } from "../../../../../../libs/utils";
 import { RadioGroup } from "../../../../../uiParts/RadioGroup";
 import { SelectContractKeyType, SelectContractType } from "./../types";
 import { FormData } from "./types";
@@ -17,14 +18,11 @@ export const Contents: VFC<ContentsType> = ({
   onError,
   backPage,
 }) => {
+  const { isMobile } = useCommonHooks();
   const methods = useForm<FormData>({
     defaultValues: defaultValues,
   });
   const { formState } = methods;
-
-  const isMobile = useMediaQuery<Theme>((theme) =>
-    theme.breakpoints.down("sm")
-  );
 
   return (
     <FormProvider {...methods}>

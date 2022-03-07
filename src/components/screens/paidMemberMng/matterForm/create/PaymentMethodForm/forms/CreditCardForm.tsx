@@ -1,14 +1,12 @@
-import { Radio, Theme, Typography, useMediaQuery } from "@mui/material";
+import { Radio, Typography } from "@mui/material";
 import { VFC } from "react";
+import { useCommonHooks } from "../../../../../../../libs/utils";
 import { RadioGroup } from "../../../../../../uiParts/RadioGroup";
 import { TextField } from "../../../../../../uiParts/TextField";
 import { PaymentCycleKeyType, PaymentCycleType } from "../types";
 
 export const CreditCardForm: VFC = () => {
-  const isMobile = useMediaQuery<Theme>((theme) =>
-    theme.breakpoints.down("sm")
-  );
-
+  const { isMobile } = useCommonHooks();
   return (
     <>
       <Typography variant="h5">クレジットカード</Typography>
