@@ -6,6 +6,11 @@ import {
   Typography,
 } from "@mui/material";
 import { VFC } from "react";
+import { ChiraCeoFormDataLabels as ContractTypeFormDataLabels } from "../ContractTypeForm/types";
+import { FormDataLabels as FirstFormDataLabels } from "../FirstForm/types";
+import { FormDataLabels as OnboardingFormDataLabels } from "../OnboardingForm/types";
+import { CreditCardFormDataLabels as PaymentMethodFormDataLabels } from "../PaymentMethodForm/types";
+import { FormDataLabels as SelectContractTypeFormDataLabels } from "../SelectContractTypeForm/types";
 import { MatterFormInfo } from "../types";
 
 const ListItem: VFC<{ label: string; value: string }> = ({ label, value }) => (
@@ -22,14 +27,15 @@ const ListItem: VFC<{ label: string; value: string }> = ({ label, value }) => (
 const List: VFC<{
   keyPrefix: string;
   label: string;
-  value: { [key: string]: any };
-}> = ({ keyPrefix, label, value }) => (
+  formLabels: { [key: string]: string };
+  form: { [key: string]: any };
+}> = ({ keyPrefix, label, formLabels, form }) => (
   <MuiList subheader={label}>
-    {Object.keys(value).map((v) => (
+    {Object.keys(form).map((v) => (
       <ListItem
         key={`${keyPrefix}.${v}`}
-        label={v}
-        value={value[v] ? value[v]?.toString() : "-"}
+        label={formLabels[v]}
+        value={form[v] ? form[v]?.toString() : "-"}
       />
     ))}
   </MuiList>
@@ -46,31 +52,36 @@ const Contents: VFC<Props> = (props) => {
       <List
         keyPrefix="firstForm"
         label="ページ1"
-        value={props.firstFormData as { [key: string]: any }}
+        formLabels={FirstFormDataLabels}
+        form={props.firstFormData as { [key: string]: any }}
       />
       <Divider sx={{ marginTop: 1, marginBottom: 1 }} />
       <List
         keyPrefix="firstForm"
         label="案件種別選択(ページ2)"
-        value={props.selectContractTypeFormData as { [key: string]: any }}
+        formLabels={SelectContractTypeFormDataLabels}
+        form={props.selectContractTypeFormData as { [key: string]: any }}
       />
       <Divider sx={{ marginTop: 1, marginBottom: 1 }} />
       <List
         keyPrefix="selectContractTypeForm"
         label="案件種別毎入力項目(ページ3)"
-        value={props.contractTypeFormData as { [key: string]: any }}
+        formLabels={ContractTypeFormDataLabels}
+        form={props.contractTypeFormData as { [key: string]: any }}
       />
       <Divider sx={{ marginTop: 1, marginBottom: 1 }} />
       <List
         keyPrefix="paymentMethodForm"
         label="支払方法(ページ4)"
-        value={props.paymentMethodFormData as { [key: string]: any }}
+        formLabels={PaymentMethodFormDataLabels}
+        form={props.paymentMethodFormData as { [key: string]: any }}
       />
       <Divider sx={{ marginTop: 1, marginBottom: 1 }} />
       <List
         keyPrefix="onboardingForm"
         label="オンボーディング情報(ページ5)"
-        value={props.onBoardingFormData as { [key: string]: any }}
+        formLabels={OnboardingFormDataLabels}
+        form={props.onBoardingFormData as { [key: string]: any }}
       />
       <Divider sx={{ marginTop: 1, marginBottom: 1 }} />
       <Button variant="contained">フォーム送信</Button>
