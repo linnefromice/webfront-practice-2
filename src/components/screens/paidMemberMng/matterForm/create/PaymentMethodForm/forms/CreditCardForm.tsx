@@ -14,7 +14,13 @@ export const CreditCardForm: VFC = () => {
       <Typography variant="h5">クレジットカード</Typography>
       <TextField
         formDataKey="firstWithdrawalDate"
-        rules={{ required: "入力必須パラメータです" }}
+        rules={{
+          required: "入力必須パラメータです",
+          pattern: {
+            value: /\d{8}/,
+            message: "yyyyMMdd の形式で日付を入力してください",
+          },
+        }}
         label="初回引き落とし日"
       />
       <RadioGroup
