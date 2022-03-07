@@ -8,6 +8,7 @@ import {
 } from "libs/utils";
 import { VFC } from "react";
 import {
+  ChiraCeoFormDataLabels,
   ContractPlan,
   ContractPlanKeyType,
   EmployeeSize,
@@ -25,17 +26,17 @@ export const ChiraCeoForm: VFC = () => {
       <TextField
         formDataKey="companyName"
         rules={{ required: "入力必須パラメータです" }}
-        label="企業名"
+        label={ChiraCeoFormDataLabels["companyName"]}
       />
       <TextField
         formDataKey="url"
         rules={{ required: "入力必須パラメータです" }}
-        label="URL"
+        label={ChiraCeoFormDataLabels["url"]}
       />
       <RadioGroup
         formDataKey="employeeSize"
         rules={{ required: "入力必須パラメータです" }}
-        label="従業員規模"
+        label={ChiraCeoFormDataLabels["employeeSize"]}
         id="paid-member-mng-matter-form-employee-size"
         choices={(Object.keys(EmployeeSize) as EmployeeSizeKeyType[]).map(
           (key) => ({
@@ -45,11 +46,14 @@ export const ChiraCeoForm: VFC = () => {
         )}
         direction={isMobile ? "column" : "row"}
       />
-      <TextField formDataKey="postCode" label="郵便番号" />
+      <TextField
+        formDataKey="postCode"
+        label={ChiraCeoFormDataLabels["postCode"]}
+      />
       <TextField
         formDataKey="address"
         rules={{ required: "入力必須パラメータです" }}
-        label="住所"
+        label={ChiraCeoFormDataLabels["address"]}
       />
       <TextField
         formDataKey="telNumberCompany"
@@ -57,21 +61,24 @@ export const ChiraCeoForm: VFC = () => {
           required: "入力必須パラメータです",
           pattern: TEL_NUMBER_PATTERN,
         }}
-        label="電話番号(会社)"
+        label={ChiraCeoFormDataLabels["telNumberCompany"]}
       />
       <TextField
         formDataKey="telNumberManagerPhone"
         rules={{
           pattern: TEL_NUMBER_PATTERN,
         }}
-        label="電話番号(担当者携帯)"
+        label={ChiraCeoFormDataLabels["telNumberManagerPhone"]}
       />
       <TextField
         formDataKey="managerName"
         rules={{ required: "入力必須パラメータです" }}
-        label="担当者名"
+        label={ChiraCeoFormDataLabels["managerName"]}
       />
-      <TextField formDataKey="managerRole" label="担当者役職" />
+      <TextField
+        formDataKey="managerRole"
+        label={ChiraCeoFormDataLabels["managerRole"]}
+      />
       <TextField
         formDataKey="managerMailAddress"
         rules={{
@@ -81,12 +88,12 @@ export const ChiraCeoForm: VFC = () => {
             message: "正しい形式で入力してください",
           },
         }}
-        label="担当者メールアドレス"
+        label={ChiraCeoFormDataLabels["managerMailAddress"]}
       />
       <TextField
         formDataKey="accountingRoleName"
         rules={{ required: "入力必須パラメータです" }}
-        label="先方経理担当者名"
+        label={ChiraCeoFormDataLabels["accountingRoleName"]}
       />
       <TextField
         formDataKey="invoiceShippingMailAddress"
@@ -94,11 +101,11 @@ export const ChiraCeoForm: VFC = () => {
           required: "入力必須パラメータです",
           pattern: MAIL_ADDRESS_PATTERN,
         }}
-        label="請求書送付先メールアドレス"
+        label={ChiraCeoFormDataLabels["invoiceShippingMailAddress"]}
       />
       <RadioGroup
         formDataKey="contractPlan"
-        label="契約プラン"
+        label={ChiraCeoFormDataLabels["contractPlan"]}
         id="paid-member-mng-matter-form-contract-type"
         choices={(Object.keys(ContractPlan) as ContractPlanKeyType[]).map(
           (key) => ({
@@ -115,7 +122,7 @@ export const ChiraCeoForm: VFC = () => {
           pattern: ONLY_NUMBER_PATTERN,
         }}
         amount
-        label="初期費用(税抜)"
+        label={ChiraCeoFormDataLabels["initialCost"]}
       />
       <TextField
         formDataKey="monthlyAmount"
@@ -124,11 +131,20 @@ export const ChiraCeoForm: VFC = () => {
           pattern: ONLY_NUMBER_PATTERN,
         }}
         amount
-        label="月額(税抜)"
+        label={ChiraCeoFormDataLabels["monthlyAmount"]}
       />
-      <TextField formDataKey="firstConsultingDay" label="初回コンサル日" />
-      <TextField formDataKey="contractStartDate" label="契約開始日" />
-      <TextField formDataKey="contractEndDate" label="契約終了日" />
+      <TextField
+        formDataKey="firstConsultingDay"
+        label={ChiraCeoFormDataLabels["firstConsultingDay"]}
+      />
+      <TextField
+        formDataKey="contractStartDate"
+        label={ChiraCeoFormDataLabels["contractStartDate"]}
+      />
+      <TextField
+        formDataKey="contractEndDate"
+        label={ChiraCeoFormDataLabels["contractEndDate"]}
+      />
     </>
   );
 };
