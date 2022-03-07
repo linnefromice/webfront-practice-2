@@ -1,5 +1,5 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
-import { RawTextField as TextFieldComponent } from ".";
+import { NoFormTextField as TextFieldComponent } from ".";
 
 export default {
   title: "uiParts/TextField",

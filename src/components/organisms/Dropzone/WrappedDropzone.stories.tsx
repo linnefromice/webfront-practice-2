@@ -1,5 +1,5 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
-import { WrappedRawDropzone as DropzoneComponent } from ".";
+import { WrappedNoFormDropzone as DropzoneComponent } from ".";
 
 export default {
   title: "organisms/Dropzone/WrappedDropzone",
