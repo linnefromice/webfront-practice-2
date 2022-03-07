@@ -1,6 +1,7 @@
 import { Typography } from "@mui/material";
 import Head from "next/head";
 import { ReactNode, VFC } from "react";
+import { ConfirmationView } from "./Confirmation";
 import { ContractTypeForm } from "./ContractTypeForm";
 import { FirstForm } from "./FirstForm";
 import { useMatterForm } from "./hooks";
@@ -71,12 +72,13 @@ const getPage = (props: UseMatterFormReturn): ReactNode => {
         defaultValues={formInfo.onBoardingFormData}
       />
     );
+  if (formInfo.currentPage === "CONFIRMATION")
+    return <ConfirmationView {...formInfo} />;
   return <></>;
 };
 
 export const CreateScreen: VFC = () => {
   const methods = useMatterForm();
-  const { formInfo } = methods;
 
   return (
     <>
@@ -87,21 +89,6 @@ export const CreateScreen: VFC = () => {
         案件情報フォーム
       </Typography>
       {getPage(methods)}
-      {/** Debug code */}
-      {formInfo.currentPage === "CONFIRMATION" && (
-        <>
-          <h6>firstFormData</h6>
-          <div>{JSON.stringify(formInfo.firstFormData)}</div>
-          <h6>selectContractTypeFormData</h6>
-          <div>{JSON.stringify(formInfo.selectContractTypeFormData)}</div>
-          <h6>contractTypeFormData</h6>
-          <div>{JSON.stringify(formInfo.contractTypeFormData)}</div>
-          <h6>paymentMethodFormData</h6>
-          <div>{JSON.stringify(formInfo.paymentMethodFormData)}</div>
-          <h6>onBoardingFormData</h6>
-          <div>{JSON.stringify(formInfo.onBoardingFormData)}</div>
-        </>
-      )}
     </>
   );
 };
