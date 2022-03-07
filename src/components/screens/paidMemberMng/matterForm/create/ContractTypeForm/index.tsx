@@ -30,10 +30,6 @@ const Wrapper: VFC<
       <form onSubmit={methods.handleSubmit(onSubmit, onError)}>
         <Stack spacing={2}>
           {children}
-          <TextField
-            formDataKey="otherPaymentMethod"
-            label="支払方法がその他の場合は入力"
-          />
           <RadioGroup
             formDataKey="paymentMethod"
             rules={{ required: "入力必須パラメータです" }}
@@ -43,6 +39,10 @@ const Wrapper: VFC<
               Object.keys(PaymentMethodType) as PaymentMethodKeyType[]
             ).map((v) => ({ label: PaymentMethodType[v], value: v }))}
             direction={"column"}
+          />
+          <TextField
+            formDataKey="otherPaymentMethod"
+            label="支払方法がその他の場合は入力"
           />
           <Stack direction="row" columnGap={2}>
             <Button
