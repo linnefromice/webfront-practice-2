@@ -3,7 +3,7 @@ import { Button, TextField } from "components/uiParts";
 import { ONLY_NUMBER_PATTERN } from "libs/utils";
 import { VFC } from "react";
 import { FormProvider, RegisterOptions, useForm } from "react-hook-form";
-import { FormData } from "./types";
+import { FormData, FormDataLabels } from "./types";
 
 const formItems: {
   formDataKey: keyof FormData;
@@ -13,21 +13,42 @@ const formItems: {
   {
     formDataKey: "firstConsultationStartTime",
     rules: { pattern: ONLY_NUMBER_PATTERN },
-    label: "初回コンサル開始時刻",
+    label: FormDataLabels["firstConsultationStartTime"],
   },
-  { formDataKey: "firstConsultantMain", label: "初回コンサル担当(メイン)" },
-  { formDataKey: "firstConsultantSub", label: "初回コンサル担当(サブ)" },
-  { formDataKey: "kickoffLocation", label: "キックオフ実施場所" },
-  { formDataKey: "specialMattersColumn", label: "特別事項欄" },
-  { formDataKey: "howToUseIntrinsicValue", label: "本質的価値の利用方法" },
-  { formDataKey: "intrinsicValueKpi", label: "本質的価値のAPI" },
-  { formDataKey: "howToUseCurrentValue", label: "現在的価値の利用方法" },
-  { formDataKey: "currentValueKpi", label: "現在的価値のAPI" },
-  { formDataKey: "serviceContents", label: "サービス内容" },
-  { formDataKey: "serviceMaterials", label: "サービス資料" },
+  {
+    formDataKey: "firstConsultantMain",
+    label: FormDataLabels["firstConsultantMain"],
+  },
+  {
+    formDataKey: "firstConsultantSub",
+    label: FormDataLabels["firstConsultantSub"],
+  },
+  { formDataKey: "kickoffLocation", label: FormDataLabels["kickoffLocation"] },
+  {
+    formDataKey: "specialMattersColumn",
+    label: FormDataLabels["specialMattersColumn"],
+  },
+  {
+    formDataKey: "howToUseIntrinsicValue",
+    label: FormDataLabels["howToUseIntrinsicValue"],
+  },
+  {
+    formDataKey: "intrinsicValueKpi",
+    label: FormDataLabels["intrinsicValueKpi"],
+  },
+  {
+    formDataKey: "howToUseCurrentValue",
+    label: FormDataLabels["howToUseCurrentValue"],
+  },
+  { formDataKey: "currentValueKpi", label: FormDataLabels["currentValueKpi"] },
+  { formDataKey: "serviceContents", label: FormDataLabels["serviceContents"] },
+  {
+    formDataKey: "serviceMaterials",
+    label: FormDataLabels["serviceMaterials"],
+  },
   {
     formDataKey: "otherSharedMattersForKickoffStaff",
-    label: "その他キックオフ担当向け共有事項",
+    label: FormDataLabels["otherSharedMattersForKickoffStaff"],
   },
 ];
 

@@ -4,7 +4,12 @@ import { Button, RadioGroup, TextField } from "components/uiParts";
 import { DATE_PATTERN, useCommonHooks } from "libs/utils";
 import { Fragment, VFC } from "react";
 import { FormProvider, useForm } from "react-hook-form";
-import { FormData } from "./types";
+import {
+  ContractType,
+  ContractTypeKeyType,
+  FormData,
+  FormDataLabels,
+} from "./types";
 
 const InitialBillingBreakdowns: VFC = () => {
   const array = [...new Array(3)]; // dummy
@@ -12,7 +17,9 @@ const InitialBillingBreakdowns: VFC = () => {
   return (
     <>
       <Stack direction="row" alignItems="center" spacing={2}>
-        <Typography sx={{ fontSize: 12 }}>初回請求額内訳</Typography>
+        <Typography sx={{ fontSize: 12 }}>
+          {FormDataLabels["initialBillingBreakdowns"]}
+        </Typography>
         <Button variant="contained" color="primary" sx={{ height: "50%" }}>
           行追加
         </Button>
@@ -69,7 +76,7 @@ export const Contents: VFC<ContentsType> = ({
         <Stack spacing={2}>
           <TextField
             formDataKey="introducer"
-            label="今回受注企業を紹介くださった企業"
+            label={FormDataLabels["introducer"]}
             caption="※ 既存チラCEOユーザーのご紹介の新規契約の場合"
           />
           <TextField
@@ -78,50 +85,53 @@ export const Contents: VFC<ContentsType> = ({
               required: "入力必須パラメータです",
               pattern: DATE_PATTERN,
             }}
-            label="契約日"
+            label={FormDataLabels["contractDate"]}
             placeholder="yyyyMMdd"
             caption="申込書の日付を書くようお願いします"
           />
           <RadioGroup
             formDataKey="contractType"
             rules={{ required: "入力必須パラメータです" }}
-            label="契約種別"
+            label={FormDataLabels["contractType"]}
             id="paid-member-mng-matter-form-contract-type-label"
-            choices={[
-              { label: "新規", value: "NEW" },
-              { label: "更新", value: "RENEWAL" },
-              { label: "内容更新", value: "CONTENT_RENEWAL" },
-              { label: "解約", value: "CANCELLATION" },
-            ]}
+            choices={(Object.keys(ContractType) as ContractTypeKeyType[]).map(
+              (v) => ({ label: ContractType[v], value: v })
+            )}
             direction={isMobile ? "column" : "row"}
           />
           <TextField
             formDataKey="contractor"
             rules={{ required: "入力必須パラメータです" }}
-            label="契約獲得者"
+            label={FormDataLabels["contractor"]}
           />
           <Typography variant="h5">データ共有</Typography>
           <Dropzone
             formDataKey="applicationFormData"
-            label="申込書PDFデータ"
+            label={FormDataLabels["applicationFormData"]}
             accept={["application/pdf"]}
           />
           <Dropzone
             formDataKey="businessCardPic"
-            label="名刺写真"
+            label={FormDataLabels["businessCardPic"]}
             accept={["image/jpeg", "image/png"]}
           />
           <Typography sx={{ fontSize: 12 }}>クロージング現場の音源</Typography>
-          <TextField formDataKey="closingUrl" label="音源ラベル" />
-          <TextField formDataKey="closingUrlDescription" label="音源URL" />
+          <TextField
+            formDataKey="closingUrl"
+            label={FormDataLabels["closingUrl"]}
+          />
+          <TextField
+            formDataKey="closingUrlDescription"
+            label={FormDataLabels["closingUrlDescription"]}
+          />
           <Dropzone
             formDataKey="closingDocument"
-            label="クロージングで出した資料"
+            label={FormDataLabels["closingDocument"]}
           />
           <TextField
             formDataKey="initialBillingAmount"
             amount
-            label="初回請求額"
+            label={FormDataLabels["initialBillingAmount"]}
           />
           <InitialBillingBreakdowns />
           <Button
