@@ -51,11 +51,23 @@ export const ChiraCeoForm: VFC = () => {
       />
       <TextField
         formDataKey="telNumberCompany"
-        rules={{ required: "入力必須パラメータです" }}
+        rules={{
+          required: "入力必須パラメータです",
+          pattern: {
+            value: /(\d{2,3}-\d{4}-\d{4})/,
+            message: "ハイフンありの形式で入力してください(NN-NNNN-NNNN)",
+          },
+        }}
         label="電話番号(会社)"
       />
       <TextField
         formDataKey="telNumberManagerPhone"
+        rules={{
+          pattern: {
+            value: /(\d{2,3}-\d{4}-\d{4})/,
+            message: "ハイフンありの形式で入力してください(NN-NNNN-NNNN)",
+          },
+        }}
         label="電話番号(担当者携帯)"
       />
       <TextField
@@ -66,7 +78,13 @@ export const ChiraCeoForm: VFC = () => {
       <TextField formDataKey="managerRole" label="担当者役職" />
       <TextField
         formDataKey="managerMailAddress"
-        rules={{ required: "入力必須パラメータです" }}
+        rules={{
+          required: "入力必須パラメータです",
+          pattern: {
+            value: /.*@.*/,
+            message: "正しい形式で入力してください",
+          },
+        }}
         label="担当者メールアドレス"
       />
       <TextField
@@ -76,7 +94,13 @@ export const ChiraCeoForm: VFC = () => {
       />
       <TextField
         formDataKey="invoiceShippingMailAddress"
-        rules={{ required: "入力必須パラメータです" }}
+        rules={{
+          required: "入力必須パラメータです",
+          pattern: {
+            value: /.*@.*/,
+            message: "正しい形式で入力してください",
+          },
+        }}
         label="請求書送付先メールアドレス"
       />
       <RadioGroup
@@ -94,12 +118,26 @@ export const ChiraCeoForm: VFC = () => {
       />
       <TextField
         formDataKey="initialCost"
-        rules={{ required: "入力必須パラメータです" }}
+        rules={{
+          required: "入力必須パラメータです",
+          pattern: {
+            value: /\d/,
+            message: "数値のみで入力してください",
+          },
+        }}
+        amount
         label="初期費用(税抜)"
       />
       <TextField
         formDataKey="monthlyAmount"
-        rules={{ required: "入力必須パラメータです" }}
+        rules={{
+          required: "入力必須パラメータです",
+          pattern: {
+            value: /\d/,
+            message: "数値のみで入力してください",
+          },
+        }}
+        amount
         label="月額(税抜)"
       />
       <TextField formDataKey="firstConsultingDay" label="初回コンサル日" />

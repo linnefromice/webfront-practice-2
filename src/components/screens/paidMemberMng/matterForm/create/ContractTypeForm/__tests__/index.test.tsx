@@ -9,12 +9,12 @@ import * as stories from "../ContractTypeForm.stories";
 const checkCommonItems = (screen: RenderResult) => {
   expect(
     screen.getByRole("radiogroup", {
-      name: /支払方法/i,
+      name: /^支払方法$/i,
     })
   ).toBeInTheDocument();
   expect(
     screen.getByRole("textbox", {
-      name: /※ 支払方法がその他の場合は入力/i,
+      name: "支払方法がその他の場合は入力",
     })
   ).toBeInTheDocument();
 
@@ -121,7 +121,7 @@ describe("src/components/screens/paidMemberMng/matterForm/create/ContractTypeFor
           get("textbox", {
             name: /^電話番号\(会社\)/i,
           }),
-          "0000000000"
+          "00-0000-0000"
         );
         await userEvent.type(
           get("textbox", {
@@ -172,7 +172,7 @@ describe("src/components/screens/paidMemberMng/matterForm/create/ContractTypeFor
         );
         await waitFor(() => expect(onSubmit).toHaveBeenCalledTimes(1));
         await waitFor(() => expect(onError).not.toHaveBeenCalled());
-      });
+      }, 10000);
 
       test("failure", async () => await checkToSubmitFailed("ChiraCeo"));
       test.todo("validations");
