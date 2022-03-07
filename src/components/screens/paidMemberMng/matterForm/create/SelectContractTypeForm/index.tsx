@@ -4,7 +4,7 @@ import { useCommonHooks } from "libs/utils";
 import { VFC } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { SelectContractKeyType, SelectContractType } from "./../types";
-import { FormData } from "./types";
+import { FormData, FormDataLabels } from "./types";
 
 type ContentsType = {
   defaultValues?: FormData;
@@ -31,7 +31,7 @@ export const Contents: VFC<ContentsType> = ({
           <RadioGroup
             formDataKey="selectContractType"
             rules={{ required: "入力必須パラメータです" }}
-            label="新規案件種別"
+            label={FormDataLabels["selectContractType"]}
             id="paid-member-mng-matter-form-select-contract-type"
             choices={(
               Object.keys(SelectContractType) as SelectContractKeyType[]
