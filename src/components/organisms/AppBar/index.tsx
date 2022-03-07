@@ -4,18 +4,15 @@ import {
   Avatar,
   IconButton,
   Stack,
-  Theme,
   Toolbar,
   Tooltip,
-  useMediaQuery,
 } from "@mui/material";
+import { StyleConst } from "constants/styleConstants";
+import { useCommonHooks } from "libs/utils";
 import { ReactNode, VFC } from "react";
-import { StyleConst } from "../../../constants/styleConstants";
 
 const AppBarFrame: VFC<{ children: ReactNode }> = ({ children }) => {
-  const isMobile = useMediaQuery<Theme>((theme) =>
-    theme.breakpoints.down("sm")
-  );
+  const { isMobile } = useCommonHooks();
 
   return (
     <MuiAppBar
@@ -33,9 +30,7 @@ const AppBarFrame: VFC<{ children: ReactNode }> = ({ children }) => {
 };
 
 export const AppBar: VFC<{ openDrawer: () => void }> = ({ openDrawer }) => {
-  const isMobile = useMediaQuery<Theme>((theme) =>
-    theme.breakpoints.down("sm")
-  );
+  const { isMobile } = useCommonHooks();
 
   return (
     <AppBarFrame>

@@ -1,8 +1,7 @@
-import { Button, Radio, Stack } from "@mui/material";
+import { Stack } from "@mui/material";
+import { Button, RadioGroup, TextField } from "components/uiParts";
 import { ReactNode, VFC } from "react";
 import { FormProvider, useForm, UseFormReturn } from "react-hook-form";
-import { RadioGroup } from "../../../../../uiParts/RadioGroup";
-import { TextField } from "../../../../../uiParts/TextField";
 import { SelectContractKeyType } from "../types";
 import { PaymentMethodKeyType, PaymentMethodType } from "./../types";
 import { ChiraCeoForm } from "./forms/ChiraCeoForm";
@@ -12,6 +11,7 @@ import { LetterMeasuresAndChiraCeoForm } from "./forms/LetterMeasuresAndChiraCeo
 import { FormData } from "./types";
 
 type ContentsType = {
+  defaultValues?: FormData;
   onSubmit: (data: FormData) => void;
   onError?: (errors: any) => void;
   backPage: () => void;
@@ -22,7 +22,7 @@ const Wrapper: VFC<
   {
     methods: UseFormReturn<FormData, any>;
     children: ReactNode;
-  } & Omit<ContentsType, "contractType">
+  } & Omit<ContentsType, "defaultValues" | "contractType">
 > = ({ methods, children, onSubmit, onError, backPage }) => {
   const { formState } = methods;
   return (
@@ -30,6 +30,10 @@ const Wrapper: VFC<
       <form onSubmit={methods.handleSubmit(onSubmit, onError)}>
         <Stack spacing={2}>
           {children}
+          <TextField
+            formDataKey="otherPaymentMethod"
+            label="支払方法がその他の場合は入力"
+          />
           <RadioGroup
             formDataKey="paymentMethod"
             rules={{ required: "入力必須パラメータです" }}
@@ -38,17 +42,12 @@ const Wrapper: VFC<
             choices={(
               Object.keys(PaymentMethodType) as PaymentMethodKeyType[]
             ).map((v) => ({ label: PaymentMethodType[v], value: v }))}
-            component={<Radio />}
             direction={"column"}
-          />
-          <TextField
-            formDataKey="otherPaymentMethod"
-            label="※ 支払方法がその他の場合は入力"
           />
           <Stack direction="row" columnGap={2}>
             <Button
-              variant="contained"
-              color="secondary"
+              variant="outlined"
+              color="text"
               fullWidth
               onClick={backPage}
             >
@@ -78,8 +77,14 @@ const getContents = (contractType: SelectContractKeyType): ReactNode => {
   return <></>;
 };
 
-export const Contents: VFC<ContentsType> = ({ contractType, ...rest }) => {
-  const methods = useForm<FormData>();
+export const Contents: VFC<ContentsType> = ({
+  defaultValues,
+  contractType,
+  ...rest
+}) => {
+  const methods = useForm<FormData>({
+    defaultValues: defaultValues,
+  });
 
   return (
     <Wrapper methods={methods} {...rest}>

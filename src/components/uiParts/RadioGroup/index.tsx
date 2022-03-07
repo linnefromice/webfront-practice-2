@@ -3,13 +3,14 @@ import {
   FormControlLabel,
   FormHelperText,
   FormLabel,
+  Radio as MuiRadio,
   RadioGroup as MuiRadioGroup,
   Stack,
 } from "@mui/material";
 import { VFC } from "react";
 import { Controller, RegisterOptions, useFormContext } from "react-hook-form";
 
-type RawRadioGroupType = {
+type NoFormRadioGroupType = {
   value: string;
   onChange: (event: React.ChangeEvent<HTMLInputElement>, value: string) => void;
   id: string;
@@ -23,7 +24,7 @@ type RawRadioGroupType = {
   errorMessage?: string;
 };
 
-export const RawRadioGroup: VFC<RawRadioGroupType> = ({
+export const NoFormRadioGroup: VFC<NoFormRadioGroupType> = ({
   value,
   onChange,
   id,
@@ -73,15 +74,17 @@ export const RawRadioGroup: VFC<RawRadioGroupType> = ({
 };
 
 type RadioGroupProps = Omit<
-  RawRadioGroupType,
-  "value" | "onChange" | "required"
+  NoFormRadioGroupType,
+  "component" | "value" | "onChange" | "required"
 > & {
   formDataKey: string;
   rules?: RegisterOptions;
+  component?: JSX.Element;
 };
 export const RadioGroup: VFC<RadioGroupProps> = ({
   formDataKey,
   rules,
+  component,
   ...props
 }) => {
   const { control } = useFormContext();
@@ -95,8 +98,9 @@ export const RadioGroup: VFC<RadioGroupProps> = ({
         field: { value, onChange },
         fieldState: { invalid, error },
       }) => (
-        <RawRadioGroup
+        <NoFormRadioGroup
           {...props}
+          component={component ? component : <MuiRadio />}
           required={rules?.required ? true : false}
           error={invalid}
           errorMessage={error ? error.message : undefined}

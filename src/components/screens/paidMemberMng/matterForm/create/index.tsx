@@ -1,86 +1,84 @@
 import { Typography } from "@mui/material";
 import Head from "next/head";
 import { ReactNode, VFC } from "react";
+import { ConfirmationView } from "./Confirmation";
 import { ContractTypeForm } from "./ContractTypeForm";
 import { FirstForm } from "./FirstForm";
 import { useMatterForm } from "./hooks";
 import { OnboardingForm } from "./OnboardingForm";
 import { PaymentMethodForm } from "./PaymentMethodForm";
 import { SelectContractTypeForm } from "./SelectContractTypeForm";
-import { Page, UseMatterFormReturn } from "./types";
+import { UseMatterFormReturn } from "./types";
 
-const getPage = ({
-  page,
-  closingFirstForm,
-  closingSelectContractType,
-  closingContractType,
-  closingPaymentMethod,
-  closingOnboarding,
-  backPage,
-  getContractType,
-  getPaymentMethod,
-}: Omit<UseMatterFormReturn, "formInfo"> & {
-  page: Page;
-}): ReactNode => {
-  if (page === "FIRST")
+const getPage = (props: UseMatterFormReturn): ReactNode => {
+  const { formInfo, backPage } = props;
+
+  if (formInfo.currentPage === "FIRST")
     return (
       <FirstForm
         onSubmit={(data) => {
-          closingFirstForm(data);
+          props.closingFirstForm(data);
         }}
+        defaultValues={formInfo.firstFormData}
       />
     );
-  if (page === "SELECT_CONTRACT_TYPE")
+  if (formInfo.currentPage === "SELECT_CONTRACT_TYPE")
     return (
       <SelectContractTypeForm
         onSubmit={(data) => {
-          closingSelectContractType(data);
+          props.closingSelectContractType(data);
         }}
         backPage={backPage}
+        defaultValues={formInfo.selectContractTypeFormData}
       />
     );
-  if (page === "CONTRACT_TYPE") {
-    const contractType = getContractType();
+  if (formInfo.currentPage === "CONTRACT_TYPE") {
+    const contractType = props.getContractType();
     if (contractType !== undefined) {
       return (
         <ContractTypeForm
           contractType={contractType}
           onSubmit={(data) => {
-            closingContractType(data);
+            props.closingContractType(data);
           }}
           backPage={backPage}
+          defaultValues={formInfo.contractTypeFormData}
         />
       );
     }
   }
-  if (page === "PAYMENT_METHOD") {
-    const paymentMethod = getPaymentMethod();
+  if (formInfo.currentPage === "PAYMENT_METHOD") {
+    const paymentMethod = props.getPaymentMethod();
     if (paymentMethod !== undefined) {
       return (
         <PaymentMethodForm
           paymentMethod={paymentMethod}
           onSubmit={(data) => {
-            closingPaymentMethod(data);
+            props.closingPaymentMethod(data);
           }}
           backPage={backPage}
+          defaultValues={formInfo.paymentMethodFormData}
         />
       );
     }
   }
-  if (page === "ONBOARDING")
+  if (formInfo.currentPage === "ONBOARDING")
     return (
       <OnboardingForm
         onSubmit={(data) => {
-          closingOnboarding(data);
+          props.closingOnboarding(data);
         }}
         backPage={backPage}
+        defaultValues={formInfo.onBoardingFormData}
       />
     );
+  if (formInfo.currentPage === "CONFIRMATION")
+    return <ConfirmationView {...formInfo} />;
   return <></>;
 };
 
 export const CreateScreen: VFC = () => {
-  const { formInfo, ...navigateMethods } = useMatterForm();
+  const methods = useMatterForm();
 
   return (
     <>
@@ -90,25 +88,7 @@ export const CreateScreen: VFC = () => {
       <Typography variant="h4" sx={{ marginBottom: 2 }}>
         案件情報フォーム
       </Typography>
-      {getPage({
-        ...navigateMethods,
-        page: formInfo.currentPage,
-      })}
-      {/** Debug code */}
-      {formInfo.currentPage === "CONFIRMATION" && (
-        <>
-          <h6>firstFormData</h6>
-          <div>{JSON.stringify(formInfo.firstFormData)}</div>
-          <h6>selectContractTypeFormData</h6>
-          <div>{JSON.stringify(formInfo.selectContractTypeFormData)}</div>
-          <h6>contractTypeFormData</h6>
-          <div>{JSON.stringify(formInfo.contractTypeFormData)}</div>
-          <h6>paymentMethodFormData</h6>
-          <div>{JSON.stringify(formInfo.paymentMethodFormData)}</div>
-          <h6>onBoardingFormData</h6>
-          <div>{JSON.stringify(formInfo.onBoardingFormData)}</div>
-        </>
-      )}
+      {getPage(methods)}
     </>
   );
 };

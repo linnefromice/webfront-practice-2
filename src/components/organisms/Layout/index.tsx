@@ -1,7 +1,7 @@
 import { Box } from "@mui/material";
+import { StyleConst } from "constants/styleConstants";
+import { useDrawerState } from "libs/stores/useDrawer";
 import { ReactNode, VFC } from "react";
-import { StyleConst } from "../../../constants/styleConstants";
-import { useDrawerState } from "../../../libs/stores/useDrawer";
 import { AppBar } from "../AppBar";
 import { Drawer } from "../Drawer";
 

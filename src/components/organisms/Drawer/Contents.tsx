@@ -9,10 +9,15 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
+import { Link } from "components/uiParts";
 import { ReactNode, VFC } from "react";
 
-const items: { icon: ReactNode; label: string }[] = [
-  { icon: <ListAltIcon />, label: "案件情報" },
+const items: { icon: ReactNode; url?: string; label: string }[] = [
+  {
+    icon: <ListAltIcon />,
+    url: "/paidMemberMng/matterForm/create",
+    label: "案件情報",
+  },
   { icon: <ListAltIcon />, label: "コンサルティング" },
   { icon: <ListAltIcon />, label: "マッチング" },
   { icon: <ListAltIcon />, label: "マッチング成果報告" },
@@ -55,18 +60,20 @@ export const DrawerContents: VFC = () => {
               color: "#FFFFFF",
               "&:hover": {
                 background: "#0c2d48",
-                color: "#039be5",
+                // color: "#039be5",
               },
             }}
           >
             <ListItemIcon sx={{ color: "#999999" }}>{item.icon}</ListItemIcon>
-            <ListItemText
-              primary={item.label}
-              primaryTypographyProps={{
-                fontSize: 14,
-                fontWeight: "medium",
-              }}
-            />
+            <Link href={item.url ? item.url : "/"} noLinkStyle>
+              <ListItemText
+                primary={item.label}
+                primaryTypographyProps={{
+                  fontSize: 14,
+                  fontWeight: "medium",
+                }}
+              />
+            </Link>
           </ListItemButton>
         ))}
       </List>

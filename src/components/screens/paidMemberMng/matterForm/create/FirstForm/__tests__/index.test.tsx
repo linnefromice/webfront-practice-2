@@ -1,6 +1,6 @@
 import { createTheme, ThemeProvider } from "@mui/material";
 import { composeStories } from "@storybook/testing-react";
-import { render, waitFor } from "@testing-library/react";
+import { render, waitFor, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { Contents } from "..";
 import * as stories from "../FirstForm.stories";
@@ -88,7 +88,11 @@ describe("src/components/screens/paidMemberMng/matterForm/create/FirstForm", () 
           "20000101"
         );
         await userEvent.click(
-          get("radio", {
+          within(
+            get("radiogroup", {
+              name: /契約種別/i,
+            })
+          ).getByRole("radio", {
             name: /新規/i,
           })
         );
@@ -121,9 +125,6 @@ describe("src/components/screens/paidMemberMng/matterForm/create/FirstForm", () 
             <Contents onSubmit={onSubmit} onError={onError} />
           </ThemeProvider>
         ); // TODO: remove ThemeProvider
-        const submitButton = screen.getByRole("button", {
-          name: "次ページに遷移",
-        });
         await userEvent.click(
           screen.getByRole("button", {
             name: "次ページに遷移",

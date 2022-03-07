@@ -4,11 +4,14 @@ import { useCallback, useEffect, VFC } from "react";
 import { DropzoneOptions, useDropzone } from "react-dropzone";
 import { useFormContext } from "react-hook-form";
 
-export type RawDropzoneProps = Pick<DropzoneOptions, "onDrop"> & {
+export type NoFormDropzoneProps = Pick<DropzoneOptions, "onDrop"> & {
   accept?: string | string[];
 };
 
-export const RawDropzone: VFC<RawDropzoneProps> = ({ onDrop, accept }) => {
+export const NoFormDropzone: VFC<NoFormDropzoneProps> = ({
+  onDrop,
+  accept,
+}) => {
   const { getRootProps, getInputProps, isDragActive, isDragAccept } =
     useDropzone({
       accept,
@@ -48,8 +51,8 @@ export const RawDropzone: VFC<RawDropzoneProps> = ({ onDrop, accept }) => {
   );
 };
 
-export type WrappedRawDropzoneProps = Pick<
-  RawDropzoneProps,
+export type WrappedNoFormDropzoneProps = Pick<
+  NoFormDropzoneProps,
   "onDrop" | "accept"
 > & {
   label?: string;
@@ -58,7 +61,7 @@ export type WrappedRawDropzoneProps = Pick<
   caption?: string;
 };
 
-export const WrappedRawDropzone: VFC<WrappedRawDropzoneProps> = ({
+export const WrappedNoFormDropzone: VFC<WrappedNoFormDropzoneProps> = ({
   label,
   required,
   errorMessage,
@@ -85,7 +88,7 @@ export const WrappedRawDropzone: VFC<WrappedRawDropzoneProps> = ({
           </Typography>
         </>
       )}
-      <RawDropzone {...props} />
+      <NoFormDropzone {...props} />
       {errorMessage && (
         <Typography color="error" variant="caption" display="block">
           {errorMessage}
@@ -100,7 +103,7 @@ export const WrappedRawDropzone: VFC<WrappedRawDropzoneProps> = ({
   );
 };
 
-export type DropzoneProps = WrappedRawDropzoneProps & {
+export type DropzoneProps = WrappedNoFormDropzoneProps & {
   formDataKey: string;
 };
 
@@ -116,7 +119,7 @@ export const Dropzone: VFC<DropzoneProps> = ({ formDataKey, ...props }) => {
         (!!files?.length && [...files].concat(droppedFiles)) || droppedFiles;
       setValue(formDataKey, newFiles, { shouldValidate: true });
     },
-    [setValue, formDataKey]
+    [files, setValue, formDataKey]
   );
 
   useEffect(() => {
@@ -125,7 +128,7 @@ export const Dropzone: VFC<DropzoneProps> = ({ formDataKey, ...props }) => {
   }, [register, unregister, formDataKey]);
 
   return (
-    <WrappedRawDropzone
+    <WrappedNoFormDropzone
       {...props}
       onDrop={onDrop}
       errorMessage={error ? error.message : undefined}

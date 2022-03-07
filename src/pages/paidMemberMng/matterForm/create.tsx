@@ -1,5 +1,5 @@
+import { CreateScreen } from "components/screens/paidMemberMng/matterForm/create";
 import { NextPage } from "next";
-import { CreateScreen } from "../../../components/screens/paidMemberMng/matterForm/create";
 
 const PaidMemberMngMatterFormCreate: NextPage = () => <CreateScreen />;
 

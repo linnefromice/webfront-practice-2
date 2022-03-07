@@ -1,17 +1,9 @@
-import {
-  Button,
-  Grid,
-  Radio,
-  Stack,
-  Theme,
-  Typography,
-  useMediaQuery,
-} from "@mui/material";
+import { Grid, Stack, Typography } from "@mui/material";
+import { Dropzone } from "components/organisms/Dropzone";
+import { Button, RadioGroup, TextField } from "components/uiParts";
+import { DATE_PATTERN, useCommonHooks } from "libs/utils";
 import { Fragment, VFC } from "react";
 import { FormProvider, useForm } from "react-hook-form";
-import { Dropzone } from "../../../../../organisms/Dropzone";
-import { RadioGroup } from "../../../../../uiParts/RadioGroup";
-import { TextField } from "../../../../../uiParts/TextField";
 import { FormData } from "./types";
 
 const InitialBillingBreakdowns: VFC = () => {
@@ -21,7 +13,7 @@ const InitialBillingBreakdowns: VFC = () => {
     <>
       <Stack direction="row" alignItems="center" spacing={2}>
         <Typography sx={{ fontSize: 12 }}>初回請求額内訳</Typography>
-        <Button variant="contained" sx={{ height: "50%" }}>
+        <Button variant="contained" color="primary" sx={{ height: "50%" }}>
           行追加
         </Button>
       </Stack>
@@ -44,11 +36,7 @@ const InitialBillingBreakdowns: VFC = () => {
               />
             </Grid>
             <Grid item sm={12} md={3}>
-              <Button
-                variant="contained"
-                color="warning"
-                sx={{ height: "100%" }}
-              >
+              <Button variant="contained" color="text" sx={{ height: "100%" }}>
                 行削除
               </Button>
             </Grid>
@@ -60,16 +48,20 @@ const InitialBillingBreakdowns: VFC = () => {
 };
 
 type ContentsType = {
+  defaultValues?: FormData;
   onSubmit: (data: FormData) => void;
   onError?: (errors: any) => void;
 };
-export const Contents: VFC<ContentsType> = ({ onSubmit, onError }) => {
-  const methods = useForm<FormData>();
+export const Contents: VFC<ContentsType> = ({
+  defaultValues,
+  onSubmit,
+  onError,
+}) => {
+  const { isMobile } = useCommonHooks();
+  const methods = useForm<FormData>({
+    defaultValues: defaultValues,
+  });
   const { formState } = methods;
-
-  const isMobile = useMediaQuery<Theme>((theme) =>
-    theme.breakpoints.down("sm")
-  );
 
   return (
     <FormProvider {...methods}>
@@ -84,10 +76,7 @@ export const Contents: VFC<ContentsType> = ({ onSubmit, onError }) => {
             formDataKey="contractDate"
             rules={{
               required: "入力必須パラメータです",
-              pattern: {
-                value: /[0-9]{8}/,
-                message: "yyyyMMdd の形式で日付を入力してください",
-              },
+              pattern: DATE_PATTERN,
             }}
             label="契約日"
             placeholder="yyyyMMdd"
@@ -104,7 +93,6 @@ export const Contents: VFC<ContentsType> = ({ onSubmit, onError }) => {
               { label: "内容更新", value: "CONTENT_RENEWAL" },
               { label: "解約", value: "CANCELLATION" },
             ]}
-            component={<Radio />}
             direction={isMobile ? "column" : "row"}
           />
           <TextField
@@ -159,11 +147,11 @@ export const Contents: VFC<ContentsType> = ({ onSubmit, onError }) => {
   );
 };
 
-export const FirstForm: VFC<Omit<ContentsType, "onError">> = ({ onSubmit }) => {
+export const FirstForm: VFC<Omit<ContentsType, "onError">> = (props) => {
   const onError = (errors: any) => {
     console.log(`execute: onError`);
     console.log(errors);
   };
 
-  return <Contents onSubmit={onSubmit} onError={onError} />;
+  return <Contents onError={onError} {...props} />;
 };

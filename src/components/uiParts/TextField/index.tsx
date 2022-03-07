@@ -11,7 +11,7 @@ import {
   useFormContext,
 } from "react-hook-form";
 
-export const RawTextField: VFC<
+export const NoFormTextField: VFC<
   MuiTextFieldProps & { amount?: boolean; caption?: string }
 > = ({ amount, caption, ...props }) => (
   <>
@@ -59,7 +59,7 @@ export const TextField: VFC<TextFieldProps> = ({
   } = useController({ name: formDataKey, control, rules });
 
   return (
-    <RawTextField
+    <NoFormTextField
       inputRef={ref}
       error={invalid}
       helperText={error ? error.message : undefined}

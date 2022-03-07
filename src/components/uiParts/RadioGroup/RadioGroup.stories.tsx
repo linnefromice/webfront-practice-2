@@ -1,7 +1,7 @@
 import { Radio } from "@mui/material";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { useState } from "react";
-import { RawRadioGroup as RadioGroupComponent } from ".";
+import { NoFormRadioGroup as RadioGroupComponent } from ".";
 
 export default {
   title: "uiParts/RadioGroup",

@@ -7,7 +7,7 @@ const IndexPage: NextPage = () => {
 
   useEffect(() => {
     router.replace("/paidMemberMng/matterForm/create");
-  }, []);
+  }, [router]);
 
   return <></>;
 };

@@ -1,4 +1,5 @@
-import { Button, Stack, Typography } from "@mui/material";
+import { Stack, Typography } from "@mui/material";
+import { Button } from "components/uiParts";
 import { ReactNode, VFC } from "react";
 import { FormProvider, useForm, UseFormReturn } from "react-hook-form";
 import { PaymentMethodKeyType } from "../types";
@@ -31,6 +32,7 @@ const getContents = (paymentMethod: PaymentMethodKeyType) => {
 };
 
 type ContentsType = {
+  defaultValues?: FormData;
   onSubmit: (date: FormData) => void;
   onError?: (errors: any) => void;
   backPage: () => void;
@@ -40,7 +42,7 @@ const Wrapper: VFC<
   {
     methods: UseFormReturn<FormData, any>;
     children: ReactNode;
-  } & Omit<ContentsType, "paymentMethod">
+  } & Omit<ContentsType, "defaultValues" | "paymentMethod">
 > = ({ methods, children, onSubmit, onError, backPage }) => {
   const { formState } = methods;
 
@@ -51,8 +53,8 @@ const Wrapper: VFC<
           {children}
           <Stack direction="row" columnGap={2}>
             <Button
-              variant="contained"
-              color="secondary"
+              variant="outlined"
+              color="text"
               fullWidth
               onClick={backPage}
             >
@@ -73,8 +75,14 @@ const Wrapper: VFC<
   );
 };
 
-export const Contents: VFC<ContentsType> = ({ paymentMethod, ...rest }) => {
-  const methods = useForm<FormData>();
+export const Contents: VFC<ContentsType> = ({
+  defaultValues,
+  paymentMethod,
+  ...rest
+}) => {
+  const methods = useForm<FormData>({
+    defaultValues: defaultValues,
+  });
 
   return (
     <Wrapper methods={methods} {...rest}>
@@ -86,8 +94,6 @@ export const Contents: VFC<ContentsType> = ({ paymentMethod, ...rest }) => {
 export const PaymentMethodForm: VFC<Omit<ContentsType, "onError">> = (
   props
 ) => {
-  const { paymentMethod, onSubmit } = props;
-
   // TODO: consider back page pattern
   // useEffect(() => {
   //   if (paymentMethod === "AccountTransfer" || paymentMethod === "Other")

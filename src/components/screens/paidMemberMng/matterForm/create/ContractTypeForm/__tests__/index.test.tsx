@@ -1,6 +1,6 @@
 import { createTheme, ThemeProvider } from "@mui/material";
 import { composeStories } from "@storybook/testing-react";
-import { render, RenderResult, waitFor } from "@testing-library/react";
+import { render, RenderResult, waitFor, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { Contents } from "..";
 import { SelectContractKeyType } from "../../types";
@@ -9,12 +9,12 @@ import * as stories from "../ContractTypeForm.stories";
 const checkCommonItems = (screen: RenderResult) => {
   expect(
     screen.getByRole("radiogroup", {
-      name: /支払方法/i,
+      name: /^支払方法$/i,
     })
   ).toBeInTheDocument();
   expect(
     screen.getByRole("textbox", {
-      name: /※ 支払方法がその他の場合は入力/i,
+      name: "支払方法がその他の場合は入力",
     })
   ).toBeInTheDocument();
 
@@ -107,7 +107,11 @@ describe("src/components/screens/paidMemberMng/matterForm/create/ContractTypeFor
           "https://example.com/"
         );
         await userEvent.click(
-          get("radio", {
+          within(
+            get("radiogroup", {
+              name: /^従業員規模/i,
+            })
+          ).getByRole("radio", {
             name: /^5名以下/i,
           })
         );
@@ -121,7 +125,7 @@ describe("src/components/screens/paidMemberMng/matterForm/create/ContractTypeFor
           get("textbox", {
             name: /^電話番号\(会社\)/i,
           }),
-          "0000000000"
+          "00-0000-0000"
         );
         await userEvent.type(
           get("textbox", {
@@ -172,7 +176,7 @@ describe("src/components/screens/paidMemberMng/matterForm/create/ContractTypeFor
         );
         await waitFor(() => expect(onSubmit).toHaveBeenCalledTimes(1));
         await waitFor(() => expect(onError).not.toHaveBeenCalled());
-      });
+      }, 10000);
 
       test("failure", async () => await checkToSubmitFailed("ChiraCeo"));
       test.todo("validations");

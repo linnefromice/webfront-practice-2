@@ -1,20 +1,20 @@
-import { Radio, Theme, Typography, useMediaQuery } from "@mui/material";
+import { Typography } from "@mui/material";
+import { RadioGroup, TextField } from "components/uiParts";
+import { DATE_PATTERN, useCommonHooks } from "libs/utils";
 import { VFC } from "react";
-import { RadioGroup } from "../../../../../../uiParts/RadioGroup";
-import { TextField } from "../../../../../../uiParts/TextField";
 import { PaymentCycleKeyType, PaymentCycleType } from "../types";
 
 export const CreditCardForm: VFC = () => {
-  const isMobile = useMediaQuery<Theme>((theme) =>
-    theme.breakpoints.down("sm")
-  );
-
+  const { isMobile } = useCommonHooks();
   return (
     <>
       <Typography variant="h5">クレジットカード</Typography>
       <TextField
         formDataKey="firstWithdrawalDate"
-        rules={{ required: "入力必須パラメータです" }}
+        rules={{
+          required: "入力必須パラメータです",
+          pattern: DATE_PATTERN,
+        }}
         label="初回引き落とし日"
       />
       <RadioGroup
@@ -27,7 +27,6 @@ export const CreditCardForm: VFC = () => {
             value: key,
           })
         )}
-        component={<Radio />}
         direction={isMobile ? "column" : "row"}
       />
       <TextField

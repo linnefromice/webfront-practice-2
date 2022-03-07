@@ -1,6 +1,6 @@
 import { createTheme, ThemeProvider } from "@mui/material";
 import { composeStories } from "@storybook/testing-react";
-import { render, waitFor } from "@testing-library/react";
+import { render, waitFor, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { Contents } from "..";
 import * as stories from "../SelectContractTypeForm.stories";
@@ -44,7 +44,11 @@ describe("src/components/screens/paidMemberMng/matterForm/create/SelectContractT
       ); // TODO: remove ThemeProvider
 
       await userEvent.click(
-        screen.getByRole("radio", {
+        within(
+          screen.getByRole("radiogroup", {
+            name: /新規案件種別/i,
+          })
+        ).getByRole("radio", {
           name: /レターゲット/i,
         })
       );

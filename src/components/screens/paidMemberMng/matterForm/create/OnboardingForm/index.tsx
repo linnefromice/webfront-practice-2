@@ -1,11 +1,20 @@
-import { Button, Stack, Typography } from "@mui/material";
+import { Stack, Typography } from "@mui/material";
+import { Button, TextField } from "components/uiParts";
+import { ONLY_NUMBER_PATTERN } from "libs/utils";
 import { VFC } from "react";
-import { FormProvider, useForm } from "react-hook-form";
-import { TextField } from "../../../../../uiParts/TextField";
+import { FormProvider, RegisterOptions, useForm } from "react-hook-form";
 import { FormData } from "./types";
 
-const formItems: { formDataKey: keyof FormData; label: string }[] = [
-  { formDataKey: "firstConsultationStartTime", label: "初回コンサル開始時刻" },
+const formItems: {
+  formDataKey: keyof FormData;
+  rules?: RegisterOptions;
+  label: string;
+}[] = [
+  {
+    formDataKey: "firstConsultationStartTime",
+    rules: { pattern: ONLY_NUMBER_PATTERN },
+    label: "初回コンサル開始時刻",
+  },
   { formDataKey: "firstConsultantMain", label: "初回コンサル担当(メイン)" },
   { formDataKey: "firstConsultantSub", label: "初回コンサル担当(サブ)" },
   { formDataKey: "kickoffLocation", label: "キックオフ実施場所" },
@@ -23,16 +32,20 @@ const formItems: { formDataKey: keyof FormData; label: string }[] = [
 ];
 
 type ContentsType = {
+  defaultValues?: FormData;
   onSubmit: (date: FormData) => void;
   onError?: (errors: any) => void;
   backPage: () => void;
 };
 export const Contents: VFC<ContentsType> = ({
+  defaultValues,
   onSubmit,
   onError,
   backPage,
 }) => {
-  const methods = useForm<FormData>();
+  const methods = useForm<FormData>({
+    defaultValues: defaultValues,
+  });
   const { formState } = methods;
 
   return (
@@ -46,13 +59,14 @@ export const Contents: VFC<ContentsType> = ({
             <TextField
               key={`OnboardingForm.${v.formDataKey}`}
               formDataKey={v.formDataKey}
+              rules={v.rules}
               label={v.label}
             />
           ))}
           <Stack direction="row" columnGap={2}>
             <Button
-              variant="contained"
-              color="secondary"
+              variant="outlined"
+              color="text"
               fullWidth
               onClick={backPage}
             >
