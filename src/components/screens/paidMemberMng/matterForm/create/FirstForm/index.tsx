@@ -17,13 +17,14 @@ import {
   FormDataLabels,
 } from "./types";
 
+const KEY_INITIAL_BILLING_BREAKDOWNS = "initialBillingBreakdowns";
 const useInitialBillingBreakdowns = (
   unregister: UseFormUnregister<FieldValues>
 ) => {
   const [rowCount, setRowCount] = useState(1);
   const increment = () => setRowCount(rowCount + 1);
   const decrement = () => {
-    unregister(`initialBillingBreakdowns.${rowCount - 1}`); // unregister form data in deleted row
+    unregister(`${KEY_INITIAL_BILLING_BREAKDOWNS}.${rowCount - 1}`); // unregister form data in deleted row
     setRowCount(rowCount - 1);
   };
 
@@ -43,7 +44,7 @@ const InitialBillingBreakdowns: VFC = () => {
     <>
       <Stack direction="row" alignItems="center" spacing={2}>
         <Typography sx={{ fontSize: 12 }}>
-          {FormDataLabels["initialBillingBreakdowns"]}
+          {FormDataLabels[KEY_INITIAL_BILLING_BREAKDOWNS]}
         </Typography>
         <Button
           variant="contained"
@@ -64,17 +65,17 @@ const InitialBillingBreakdowns: VFC = () => {
       </Stack>
       <Grid container spacing={2}>
         {[...Array(rowCount)].map((_, i) => (
-          <Fragment key={`initialBillingBreakdowns.${i}`}>
+          <Fragment key={`${KEY_INITIAL_BILLING_BREAKDOWNS}.${i}`}>
             <Grid item sm={12} md={6}>
               <TextField
-                formDataKey={`initialBillingBreakdowns.${i}.description`}
+                formDataKey={`${KEY_INITIAL_BILLING_BREAKDOWNS}.${i}.description`}
                 label="ラベル"
                 fullWidth
               />
             </Grid>
             <Grid item sm={12} md={6}>
               <TextField
-                formDataKey={`initialBillingBreakdowns.${i}.amount`}
+                formDataKey={`${KEY_INITIAL_BILLING_BREAKDOWNS}.${i}.amount`}
                 label="金額"
                 amount
                 fullWidth
