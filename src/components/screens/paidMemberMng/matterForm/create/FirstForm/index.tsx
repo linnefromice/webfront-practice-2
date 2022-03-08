@@ -171,7 +171,7 @@ export const Contents: VFC<ContentsType> = ({
           <Button
             type="submit"
             variant="contained"
-            // disabled={!formState.isValid && formState.submitCount > 0}
+            disabled={!formState.isValid && formState.submitCount > 0}
           >
             次ページに遷移
           </Button>
