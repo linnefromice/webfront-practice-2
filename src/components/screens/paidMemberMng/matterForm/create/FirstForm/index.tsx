@@ -177,6 +177,13 @@ export const Contents: VFC<ContentsType> = ({
           </Button>
           {process.env.NODE_ENV === "development" && formState.isSubmitted && (
             <div>
+              <Button
+                variant="contained"
+                color="text"
+                onClick={() => methods.trigger()}
+              >
+                {`re trigger`}
+              </Button>
               <h3>FOR DEBUG: RESULT</h3>
               <p>{`isValid: ${formState.isValid}`}</p>
               <h6>values</h6>
