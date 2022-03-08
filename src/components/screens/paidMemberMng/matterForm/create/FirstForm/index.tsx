@@ -2,8 +2,14 @@ import { Grid, Stack, Typography } from "@mui/material";
 import { Dropzone } from "components/organisms/Dropzone";
 import { Button, RadioGroup, TextField } from "components/uiParts";
 import { DATE_PATTERN, useCommonHooks } from "libs/utils";
-import { Fragment, VFC } from "react";
-import { FormProvider, useForm } from "react-hook-form";
+import { Fragment, useState, VFC } from "react";
+import {
+  FieldValues,
+  FormProvider,
+  useForm,
+  useFormContext,
+  UseFormUnregister,
+} from "react-hook-form";
 import {
   ContractType,
   ContractTypeKeyType,
@@ -11,8 +17,27 @@ import {
   FormDataLabels,
 } from "./types";
 
+const useInitialBillingBreakdowns = (
+  unregister: UseFormUnregister<FieldValues>
+) => {
+  const [rowCount, setRowCount] = useState(1);
+  const increment = () => setRowCount(rowCount + 1);
+  const decrement = () => {
+    unregister(`initialBillingBreakdowns.${rowCount - 1}`); // unregister form data in deleted row
+    setRowCount(rowCount - 1);
+  };
+
+  return {
+    rowCount,
+    increment,
+    decrement,
+  };
+};
+
 const InitialBillingBreakdowns: VFC = () => {
-  const array = [...new Array(3)]; // dummy
+  const { unregister } = useFormContext();
+  const { rowCount, increment, decrement } =
+    useInitialBillingBreakdowns(unregister);
 
   return (
     <>
@@ -20,14 +45,27 @@ const InitialBillingBreakdowns: VFC = () => {
         <Typography sx={{ fontSize: 12 }}>
           {FormDataLabels["initialBillingBreakdowns"]}
         </Typography>
-        <Button variant="contained" color="primary" sx={{ height: "50%" }}>
+        <Button
+          variant="contained"
+          color="primary"
+          sx={{ height: "50%" }}
+          onClick={increment}
+        >
           行追加
+        </Button>
+        <Button
+          variant="contained"
+          color="text"
+          sx={{ height: "50%" }}
+          onClick={decrement}
+        >
+          行削除
         </Button>
       </Stack>
       <Grid container spacing={2}>
-        {array.map((_, i) => (
+        {[...Array(rowCount)].map((_, i) => (
           <Fragment key={`initialBillingBreakdowns.${i}`}>
-            <Grid item sm={12} md={3}>
+            <Grid item sm={12} md={6}>
               <TextField
                 formDataKey={`initialBillingBreakdowns.${i}.description`}
                 label="ラベル"
@@ -41,11 +79,6 @@ const InitialBillingBreakdowns: VFC = () => {
                 amount
                 fullWidth
               />
-            </Grid>
-            <Grid item sm={12} md={3}>
-              <Button variant="contained" color="text" sx={{ height: "100%" }}>
-                行削除
-              </Button>
             </Grid>
           </Fragment>
         ))}
@@ -137,7 +170,7 @@ export const Contents: VFC<ContentsType> = ({
           <Button
             type="submit"
             variant="contained"
-            disabled={!formState.isValid && formState.submitCount > 0}
+            // disabled={!formState.isValid && formState.submitCount > 0}
           >
             次ページに遷移
           </Button>
@@ -147,6 +180,16 @@ export const Contents: VFC<ContentsType> = ({
               <p>{`isValid: ${formState.isValid}`}</p>
               <h6>values</h6>
               <p>{JSON.stringify(methods.getValues())}</p>
+              <p>
+                {JSON.stringify(
+                  methods
+                    .getValues("initialBillingBreakdowns")
+                    .filter(
+                      (v) =>
+                        v != null && v.amount != null && v.description != null
+                    )
+                )}
+              </p>
               <h6>errors</h6>
               <p>{JSON.stringify(formState.errors)}</p>
             </div>
