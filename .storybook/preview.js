@@ -1,14 +1,17 @@
 import { CssBaseline } from "@mui/material";
 import { ThemeProvider } from "@mui/material/styles";
+import { ThemeProvider as EmotionThemeProvider } from "emotion-theming";
 import { RouterContext } from "next/dist/shared/lib/router-context";
 import { themeWithComponentStyles } from "../src/constants/theme";
 import { VIEWPORTS } from "./viewports";
 
 const withThemeProvider = (Story, context) => (
-  <ThemeProvider theme={themeWithComponentStyles}>
-    <CssBaseline />
-    <Story {...context} />
-  </ThemeProvider>
+  <EmotionThemeProvider theme={themeWithComponentStyles}>
+    <ThemeProvider theme={themeWithComponentStyles}>
+      <CssBaseline />
+      <Story {...context} />
+    </ThemeProvider>
+  </EmotionThemeProvider>
 );
 
 export const decorators = [withThemeProvider];
