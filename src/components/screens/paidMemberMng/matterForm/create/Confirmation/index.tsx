@@ -3,6 +3,7 @@ import {
   Divider,
   List as MuiList,
   ListItemText as MuiListItemText,
+  Paper,
   Typography,
 } from "@mui/material";
 import { VFC } from "react";
@@ -20,7 +21,11 @@ const ListItem: VFC<{ label: string; value: string }> = ({ label, value }) => (
         {label}
       </Typography>
     }
-    secondary={<Typography variant="body1">{value}</Typography>}
+    secondary={
+      <Paper variant="outlined" sx={{ p: 1 }}>
+        <Typography variant="body1">{value}</Typography>
+      </Paper>
+    }
   />
 );
 
@@ -51,7 +56,7 @@ const Contents: VFC<Props> = (props) => {
       <Divider sx={{ marginTop: 1, marginBottom: 1 }} />
       <List
         keyPrefix="firstForm"
-        label="ページ1"
+        label="基礎情報(ページ1)"
         formLabels={FirstFormDataLabels}
         form={props.firstFormData as { [key: string]: any }}
       />
