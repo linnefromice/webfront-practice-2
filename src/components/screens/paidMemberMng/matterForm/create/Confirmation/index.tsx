@@ -18,7 +18,7 @@ import { MatterFormInfo } from "../types";
 const ListItem: VFC<{ label: string; value: string }> = ({ label, value }) => (
   <MuiListItemText
     primary={
-      <Typography variant="subtitle1" fontSize={12} fontWeight={"bold"}>
+      <Typography variant="subtitle1" fontSize={12}>
         {label}
       </Typography>
     }
@@ -65,14 +65,14 @@ const Contents: VFC<Props> = (props) => {
       />
       <Divider sx={{ marginTop: 1, marginBottom: 1 }} />
       <List
-        keyPrefix="firstForm"
+        keyPrefix="selectContractTypeForm"
         label="案件種別選択(ページ2)"
         formLabels={SelectContractTypeFormDataLabels}
         form={props.selectContractTypeFormData as { [key: string]: any }}
       />
       <Divider sx={{ marginTop: 1, marginBottom: 1 }} />
       <List
-        keyPrefix="selectContractTypeForm"
+        keyPrefix="contractTypeForm"
         label="案件種別毎入力項目(ページ3)"
         formLabels={ContractTypeFormDataLabels}
         form={props.contractTypeFormData as { [key: string]: any }}
