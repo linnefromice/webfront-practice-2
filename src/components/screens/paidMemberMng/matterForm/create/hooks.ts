@@ -49,7 +49,6 @@ export const useMatterForm = (): UseMatterFormReturn => {
   };
 
   const closingOnboarding = (v: OnBoardingFormData) => {
-    console.log(v);
     setFormInfo({
       ...formInfo,
       currentPage: "CONFIRMATION",
@@ -77,6 +76,11 @@ export const useMatterForm = (): UseMatterFormReturn => {
       setFormInfo({
         ...formInfo,
         currentPage: "PAYMENT_METHOD",
+      });
+    if (formInfo.currentPage === "CONFIRMATION")
+      setFormInfo({
+        ...formInfo,
+        currentPage: "ONBOARDING",
       });
   };
 

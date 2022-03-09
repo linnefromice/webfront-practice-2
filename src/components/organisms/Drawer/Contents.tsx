@@ -1,4 +1,6 @@
+import EditIcon from "@mui/icons-material/Edit";
 import ListAltIcon from "@mui/icons-material/ListAlt";
+import TableViewIcon from "@mui/icons-material/TableView";
 import {
   Divider,
   List,
@@ -12,11 +14,31 @@ import {
 import { Link } from "components/uiParts";
 import { ReactNode, VFC } from "react";
 
-const items: { icon: ReactNode; url?: string; label: string }[] = [
+type ListItemType = NestedListItemType & {
+  nestings?: NestedListItemType[];
+};
+
+type NestedListItemType = {
+  icon: ReactNode;
+  url?: string;
+  label: string;
+};
+
+const items: ListItemType[] = [
   {
     icon: <ListAltIcon />,
-    url: "/paidMemberMng/matterForm/create",
     label: "案件情報",
+    nestings: [
+      {
+        icon: <TableViewIcon />,
+        label: "一覧",
+      },
+      {
+        icon: <EditIcon />,
+        url: "/paidMemberMng/matterForm/create",
+        label: "追加",
+      },
+    ],
   },
   { icon: <ListAltIcon />, label: "コンサルティング" },
   { icon: <ListAltIcon />, label: "マッチング" },
@@ -53,28 +75,79 @@ export const DrawerContents: VFC = () => {
         }
       >
         {items.map((item, index) => (
-          <ListItemButton
-            key={`drawer.item.${index}`}
-            sx={{
-              maxHeight: 48,
-              color: "#FFFFFF",
-              "&:hover": {
-                background: "#0c2d48",
-                // color: "#039be5",
-              },
-            }}
-          >
-            <ListItemIcon sx={{ color: "#999999" }}>{item.icon}</ListItemIcon>
-            <Link href={item.url ? item.url : "/"} noLinkStyle>
-              <ListItemText
-                primary={item.label}
-                primaryTypographyProps={{
-                  fontSize: 14,
-                  fontWeight: "medium",
-                }}
-              />
-            </Link>
-          </ListItemButton>
+          <>
+            <ListItemButton
+              key={`drawer.item.${index}`}
+              sx={
+                item.url
+                  ? {
+                      maxHeight: 48,
+                      color: "#FFFFFF",
+                      "&:hover": {
+                        background: "#0c2d48",
+                      },
+                    }
+                  : {
+                      maxHeight: 48,
+                      color: "#FFFFFF",
+                    }
+              }
+              disabled={item.url == null && item.nestings == null}
+              disableRipple={item.url == null}
+            >
+              <ListItemIcon sx={{ color: "gray" }}>{item.icon}</ListItemIcon>
+              {item.url ? (
+                <Link href={item.url ? item.url : "/"} noLinkStyle>
+                  <ListItemText
+                    primary={item.label}
+                    primaryTypographyProps={{
+                      fontSize: 14,
+                      fontWeight: "medium",
+                    }}
+                  />
+                </Link>
+              ) : (
+                <ListItemText
+                  primary={item.label}
+                  primaryTypographyProps={{
+                    fontSize: 14,
+                    fontWeight: "medium",
+                  }}
+                />
+              )}
+            </ListItemButton>
+            {item.nestings &&
+              item.nestings.map((nestedItem, i) => (
+                <List
+                  key={`${nestedItem.label}.${i}`}
+                  component="div"
+                  disablePadding
+                >
+                  <ListItemButton
+                    sx={{
+                      paddingLeft: 4,
+                      maxHeight: 48,
+                      color: "#FFFFFF",
+                      "&:hover": {
+                        background: "#0c2d48",
+                      },
+                    }}
+                    disabled={nestedItem.url == null}
+                  >
+                    <ListItemIcon sx={{ color: "gray" }}>
+                      {nestedItem.icon}
+                    </ListItemIcon>
+                    <ListItemText
+                      primary={nestedItem.label}
+                      primaryTypographyProps={{
+                        fontSize: 14,
+                        fontWeight: "medium",
+                      }}
+                    />
+                  </ListItemButton>
+                </List>
+              ))}
+          </>
         ))}
       </List>
     </>

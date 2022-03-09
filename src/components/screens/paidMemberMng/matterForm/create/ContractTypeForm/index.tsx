@@ -10,6 +10,74 @@ import { LetterGetForm } from "./forms/LetterGetForm";
 import { LetterMeasuresAndChiraCeoForm } from "./forms/LetterMeasuresAndChiraCeoForm";
 import { FormData } from "./types";
 
+/** For Debug */
+const DebugComponent: VFC<{ methods: UseFormReturn<FormData, any> }> = ({
+  methods,
+}) => {
+  const { setValue, formState } = methods;
+  return (
+    <div>
+      <h3>FOR DEBUG</h3>
+      <Button
+        variant="contained"
+        color="text"
+        sx={{ m: 0.25 }}
+        onClick={() => {
+          setValue("companyName", "Example 会社名");
+          setValue("url", "https://example.com");
+          setValue("employeeSize", "LessThan6");
+          setValue("address", "東京都港区N-N-N");
+          setValue("telNumberCompany", "00-0000-0000");
+          setValue("managerName", "Example 担当者名");
+          setValue("managerMailAddress", "example-manager@example.com");
+          setValue("accountingRoleName", "Example 先方経理担当者名");
+          setValue("invoiceShippingMailAddress", "example-invoice@example.com");
+          setValue("initialCost", "240000");
+          setValue("monthlyAmount", "120000");
+          setValue("paymentMethod", "CreditCard");
+          methods.trigger();
+        }}
+      >
+        {`set dummy data (チラCEO)`}
+      </Button>
+      <Button
+        variant="contained"
+        color="text"
+        sx={{ m: 0.25 }}
+        onClick={() =>
+          methods.reset(undefined, {
+            keepErrors: true,
+            keepDirty: true,
+            keepIsSubmitted: true,
+            keepTouched: false,
+            keepIsValid: false,
+            keepSubmitCount: true,
+          })
+        }
+      >
+        {`reset data`}
+      </Button>
+      <Button
+        variant="contained"
+        color="text"
+        sx={{ m: 0.25 }}
+        onClick={() => methods.trigger()}
+      >
+        {`trigger`}
+      </Button>
+      {formState.isSubmitted && (
+        <>
+          <p>{`isValid: ${formState.isValid}`}</p>
+          <h6>values</h6>
+          <p>{JSON.stringify(methods.getValues())}</p>
+          <h6>errors</h6>
+          <p>{JSON.stringify(formState.errors)}</p>
+        </>
+      )}
+    </div>
+  );
+};
+
 type ContentsType = {
   defaultValues?: FormData;
   onSubmit: (data: FormData) => void;
@@ -62,6 +130,9 @@ const Wrapper: VFC<
               次ページに遷移
             </Button>
           </Stack>
+          {process.env.NODE_ENV === "development" && (
+            <DebugComponent methods={methods} />
+          )}
         </Stack>
       </form>
     </FormProvider>
