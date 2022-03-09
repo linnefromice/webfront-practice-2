@@ -2,9 +2,66 @@ import { Stack } from "@mui/material";
 import { Button, RadioGroup } from "components/uiParts";
 import { useCommonHooks } from "libs/utils";
 import { VFC } from "react";
-import { FormProvider, useForm } from "react-hook-form";
+import { FormProvider, useForm, UseFormReturn } from "react-hook-form";
 import { SelectContractKeyType, SelectContractType } from "./../types";
 import { FormData, FormDataLabels } from "./types";
+
+/** For Debug */
+const DebugComponent: VFC<{ methods: UseFormReturn<FormData, any> }> = ({
+  methods,
+}) => {
+  const { setValue, formState } = methods;
+  return (
+    <div>
+      <h3>FOR DEBUG</h3>
+      <Button
+        variant="contained"
+        color="text"
+        sx={{ m: 0.25 }}
+        onClick={() => {
+          setValue("selectContractType", "ChiraCeo");
+          methods.trigger();
+        }}
+      >
+        {`set dummy data`}
+      </Button>
+      <Button
+        variant="contained"
+        color="text"
+        sx={{ m: 0.25 }}
+        onClick={() =>
+          methods.reset(undefined, {
+            keepErrors: true,
+            keepDirty: true,
+            keepIsSubmitted: true,
+            keepTouched: false,
+            keepIsValid: false,
+            keepSubmitCount: true,
+          })
+        }
+      >
+        {`reset data`}
+      </Button>
+      <Button
+        variant="contained"
+        color="text"
+        sx={{ m: 0.25 }}
+        onClick={() => methods.trigger()}
+      >
+        {`trigger`}
+      </Button>
+      {formState.isSubmitted && (
+        <>
+          <p>{`isValid: ${formState.isValid}`}</p>
+          <h6>values</h6>
+          <p>{JSON.stringify(methods.getValues())}</p>
+          <h6>errors</h6>
+          <p>{JSON.stringify(formState.errors)}</p>
+        </>
+      )}
+    </div>
+  );
+};
 
 type ContentsType = {
   defaultValues?: FormData;
@@ -59,15 +116,8 @@ export const Contents: VFC<ContentsType> = ({
               次ページに遷移
             </Button>
           </Stack>
-          {process.env.NODE_ENV === "development" && formState.isSubmitted && (
-            <div>
-              <h3>FOR DEBUG: RESULT</h3>
-              <p>{`isValid: ${formState.isValid}`}</p>
-              <h6>values</h6>
-              <p>{JSON.stringify(methods.getValues())}</p>
-              <h6>errors</h6>
-              <p>{JSON.stringify(formState.errors)}</p>
-            </div>
+          {process.env.NODE_ENV === "development" && (
+            <DebugComponent methods={methods} />
           )}
         </Stack>
       </form>

@@ -8,6 +8,63 @@ import { InvoiceDividedPaymentForm } from "./forms/InvoiceDividedPaymentForm";
 import { InvoiceOnetimePaymentForm } from "./forms/InvoiceOnetimePaymentForm";
 import { FormData } from "./types";
 
+/** For Debug */
+const DebugComponent: VFC<{ methods: UseFormReturn<FormData, any> }> = ({
+  methods,
+}) => {
+  const { setValue, formState } = methods;
+  return (
+    <div>
+      <h3>FOR DEBUG</h3>
+      <Button
+        variant="contained"
+        color="text"
+        sx={{ m: 0.25 }}
+        onClick={() => {
+          setValue("firstWithdrawalDate", "20000101");
+          methods.trigger();
+        }}
+      >
+        {`set dummy data`}
+      </Button>
+      <Button
+        variant="contained"
+        color="text"
+        sx={{ m: 0.25 }}
+        onClick={() =>
+          methods.reset(undefined, {
+            keepErrors: true,
+            keepDirty: true,
+            keepIsSubmitted: true,
+            keepTouched: false,
+            keepIsValid: false,
+            keepSubmitCount: true,
+          })
+        }
+      >
+        {`reset data`}
+      </Button>
+      <Button
+        variant="contained"
+        color="text"
+        sx={{ m: 0.25 }}
+        onClick={() => methods.trigger()}
+      >
+        {`trigger`}
+      </Button>
+      {formState.isSubmitted && (
+        <>
+          <p>{`isValid: ${formState.isValid}`}</p>
+          <h6>values</h6>
+          <p>{JSON.stringify(methods.getValues())}</p>
+          <h6>errors</h6>
+          <p>{JSON.stringify(formState.errors)}</p>
+        </>
+      )}
+    </div>
+  );
+};
+
 const getContents = (paymentMethod: PaymentMethodKeyType) => {
   if (paymentMethod === "CreditCard") return <CreditCardForm />;
   if (paymentMethod === "InvoiceOnetimePayment")
@@ -69,6 +126,9 @@ const Wrapper: VFC<
               次ページに遷移
             </Button>
           </Stack>
+          {process.env.NODE_ENV === "development" && (
+            <DebugComponent methods={methods} />
+          )}
         </Stack>
       </form>
     </FormProvider>
