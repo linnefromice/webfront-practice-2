@@ -31,6 +31,7 @@ const items: ListItemType[] = [
     nestings: [
       {
         icon: <TableViewIcon />,
+        url: "/paidMemberMng/matterForm",
         label: "一覧",
       },
       {
@@ -137,13 +138,25 @@ export const DrawerContents: VFC = () => {
                     <ListItemIcon sx={{ color: "gray" }}>
                       {nestedItem.icon}
                     </ListItemIcon>
-                    <ListItemText
-                      primary={nestedItem.label}
-                      primaryTypographyProps={{
-                        fontSize: 14,
-                        fontWeight: "medium",
-                      }}
-                    />
+                    {nestedItem.url ? (
+                      <Link href={nestedItem.url} noLinkStyle>
+                        <ListItemText
+                          primary={nestedItem.label}
+                          primaryTypographyProps={{
+                            fontSize: 14,
+                            fontWeight: "medium",
+                          }}
+                        />
+                      </Link>
+                    ) : (
+                      <ListItemText
+                        primary={item.label}
+                        primaryTypographyProps={{
+                          fontSize: 14,
+                          fontWeight: "medium",
+                        }}
+                      />
+                    )}
                   </ListItemButton>
                 </List>
               ))}
