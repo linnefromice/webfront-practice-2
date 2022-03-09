@@ -47,7 +47,9 @@ const List: VFC<{
   </MuiList>
 );
 
-type Props = Omit<MatterFormInfo, "currentPage">;
+type Props = Omit<MatterFormInfo, "currentPage"> & {
+  backPage: () => void;
+};
 const Contents: VFC<Props> = (props) => {
   return (
     <>
@@ -91,7 +93,12 @@ const Contents: VFC<Props> = (props) => {
       />
       <Divider sx={{ marginTop: 1, marginBottom: 1 }} />
       <Stack direction="row" columnGap={2}>
-        <Button variant="outlined" color="text" fullWidth>
+        <Button
+          variant="outlined"
+          color="text"
+          fullWidth
+          onClick={props.backPage}
+        >
           前ページに戻る
         </Button>
         <Button variant="contained" fullWidth>

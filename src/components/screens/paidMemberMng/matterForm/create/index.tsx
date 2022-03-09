@@ -73,7 +73,7 @@ const getPage = (props: UseMatterFormReturn): ReactNode => {
       />
     );
   if (formInfo.currentPage === "CONFIRMATION")
-    return <ConfirmationView {...formInfo} />;
+    return <ConfirmationView {...formInfo} backPage={backPage} />;
   return <></>;
 };
 
