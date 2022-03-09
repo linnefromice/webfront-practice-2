@@ -1,11 +1,12 @@
 import {
-  Button,
   Divider,
   List as MuiList,
   ListItemText as MuiListItemText,
   Paper,
+  Stack,
   Typography,
 } from "@mui/material";
+import { Button } from "components/uiParts";
 import { VFC } from "react";
 import { ChiraCeoFormDataLabels as ContractTypeFormDataLabels } from "../ContractTypeForm/types";
 import { FormDataLabels as FirstFormDataLabels } from "../FirstForm/types";
@@ -89,7 +90,14 @@ const Contents: VFC<Props> = (props) => {
         form={props.onBoardingFormData as { [key: string]: any }}
       />
       <Divider sx={{ marginTop: 1, marginBottom: 1 }} />
-      <Button variant="contained">フォーム送信</Button>
+      <Stack direction="row" columnGap={2}>
+        <Button variant="outlined" color="text" fullWidth>
+          前ページに戻る
+        </Button>
+        <Button variant="contained" fullWidth>
+          フォーム送信
+        </Button>
+      </Stack>
     </>
   );
 };
