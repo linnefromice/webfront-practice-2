@@ -18,7 +18,7 @@ export const MANAGER_ROLE_LABELS: { [key in ManagerRole]: string } = {
   MarketingManager: "マーケティング部長",
   OtherGeneralManager: "その他部長",
   OtherAuthorizers: "その他決裁者(部長以下)",
-};
+} as const;
 
 export const CONTACT_METHODS = [
   "Mail",
@@ -44,7 +44,7 @@ export const PLAN_LABELS: { [key in Plan]: string } = {
   LightPlan: "ライトプラン",
   BasicPlan: "ベーシックプラン",
   PremiumPlan: "プレミアムプラン",
-};
+} as const;
 
 export const NEEDS = [
   "AppointmentCuzNoConductor", // アポが取れない/導線がない -> アポが成果
@@ -71,7 +71,7 @@ export const NEEDS_LABELS: { [key in Needs]: string } = {
   LookingForBusinessPartner: "パートナーを探したい",
   ToMeetGoodPerson: "いい人に会いたい(ピュア)",
   Other: "その他",
-};
+} as const;
 
 export const VALUES_SOUGHT = [
   "EndUserAcquisition", // エンドユーザーの獲得
@@ -100,7 +100,7 @@ export const AVERAGE_LEAD_TIME_MONTH = [
   "FromFourToSix", // 3~6ヶ月
   "FromSixToNine", // 6~9ヶ月
   "FromNineToTwelve", // 9~12ヶ月
-];
+] as const;
 type AverageLeadTimeMonth = typeof AVERAGE_LEAD_TIME_MONTH[number];
 export const AVERAGE_LEAD_TIME_MONTH_LABELS: {
   [key in AverageLeadTimeMonth]: string;
@@ -109,7 +109,7 @@ export const AVERAGE_LEAD_TIME_MONTH_LABELS: {
   FromFourToSix: "3ヶ月~6ヶ月",
   FromSixToNine: "6ヶ月~9ヶ月",
   FromNineToTwelve: "9ヶ月~12ヶ月",
-};
+} as const;
 
 export const STATUS = ["OK", "InSomeCases", "NG"];
 type Status = typeof STATUS[number];
@@ -117,7 +117,7 @@ export const STATUS_LABELS: { [key in Status]: string } = {
   OK: "○",
   InSomeCases: "△",
   NG: "×",
-};
+} as const;
 
 export const RESOURCE_STATUS = ["1", "2", "3", "4", "5"];
 type ResourceStatus = typeof RESOURCE_STATUS[number];
@@ -146,7 +146,7 @@ export const EMPLOYEE_SIZES_LABELS: { [key in EmployeeSize]: string } = {
   From11To30: "11~30人",
   From6To10: "6~10人",
   LessThan5: "5人以下",
-};
+} as const;
 
 export const INDUSTRIES = [
   "InformationTechnology", // IT・情報通信業
@@ -180,7 +180,7 @@ export const INDUSTRIES_LABELS: { [key in Industry]: string } = {
   WholesaleRetailBusiness: "卸売業・小売業",
   FoodAndDrinkService: "飲食・サービス",
   RestaurantActualStore: "飲食店・実店舗",
-};
+} as const;
 
 export const PRODUCT_CATEGORIES = [
   "SalesSupport", // 営業支援
@@ -198,7 +198,7 @@ export const PRODUCT_CATEGORIES_LABELS: { [key in ProductCategory]: string } = {
   Office: "オフィス関連",
   EmployeeSupport: "従業員支援関連",
   Other: "その他",
-};
+} as const;
 
 export type FormData = {
   hubspotId: string; // ハブスポットID
@@ -258,4 +258,4 @@ export const FormDataLabels: { [key in keyof FormData]: string } = {
   serviceName: "サービス名",
   serviceUrl: "サービスURL",
   introduction: "紹介文",
-};
+} as const;
