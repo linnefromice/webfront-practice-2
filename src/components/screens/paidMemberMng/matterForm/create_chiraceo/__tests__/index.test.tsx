@@ -1,12 +1,12 @@
 import { createTheme, ThemeProvider } from "@mui/material";
 import { render } from "@testing-library/react";
-import { CreateChiraCeoScreen } from "..";
+import { CreateChiraceoScreen } from "..";
 
 describe("src/components/screens/paidMemberMng/matterForm/create_chiraceo", () => {
   test("has heading", async () => {
     const screen = render(
       <ThemeProvider theme={createTheme()}>
-        <CreateChiraCeoScreen />
+        <CreateChiraceoScreen />
       </ThemeProvider>
     );
     expect(
