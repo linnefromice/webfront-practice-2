@@ -5,7 +5,6 @@ import {
   FormLabel,
   Radio as MuiRadio,
   RadioGroup as MuiRadioGroup,
-  Stack,
 } from "@mui/material";
 import { VFC } from "react";
 import { Controller, RegisterOptions, useFormContext } from "react-hook-form";
@@ -49,22 +48,27 @@ export const NoFormRadioGroup: VFC<NoFormRadioGroupType> = ({
               key={`${id}.${v.label}`}
               label={v.label}
               value={v.value}
+              checked={v.value === value}
               control={component}
             />
           ))}
         </MuiRadioGroup>
       ) : (
-        <MuiRadioGroup aria-labelledby={id} value={value} onChange={onChange}>
-          <Stack direction="row" justifyContent="flex-start">
-            {choices.map((v) => (
-              <FormControlLabel
-                key={`${id}.${v.label}`}
-                label={v.label}
-                value={v.value}
-                control={component}
-              />
-            ))}
-          </Stack>
+        <MuiRadioGroup
+          aria-labelledby={id}
+          value={value}
+          onChange={onChange}
+          row
+        >
+          {choices.map((v) => (
+            <FormControlLabel
+              key={`${id}.${v.label}`}
+              label={v.label}
+              value={v.value}
+              checked={v.value === value}
+              control={component}
+            />
+          ))}
         </MuiRadioGroup>
       )}
       {error && errorMessage && <FormHelperText>{errorMessage}</FormHelperText>}

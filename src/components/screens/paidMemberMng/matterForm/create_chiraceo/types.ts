@@ -93,7 +93,7 @@ export const VALUES_SOUGHT_LABELS: { [key in ValueSought]: string } = {
   ResearchAndDevelopmentOfCommercialProducts: "商材のR&D",
   ImproveSalesMethod: "営業方法の改善をしたい",
   Other: "その他",
-};
+} as const;
 
 export const AVERAGE_LEAD_TIME_MONTH = [
   "LessThanThree", // ~3ヶ月
