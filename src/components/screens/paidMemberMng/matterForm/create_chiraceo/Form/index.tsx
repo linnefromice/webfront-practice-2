@@ -14,7 +14,7 @@ import {
   useCommonHooks,
 } from "libs/utils";
 import { Fragment, VFC } from "react";
-import { FormProvider, useForm } from "react-hook-form";
+import { FormProvider, useForm, UseFormReturn } from "react-hook-form";
 import {
   AVERAGE_LEAD_TIME_MONTH,
   AVERAGE_LEAD_TIME_MONTH_LABELS,
@@ -39,6 +39,86 @@ import {
   VALUES_SOUGHT,
   VALUES_SOUGHT_LABELS,
 } from "../types";
+
+/** For Debug */
+const DebugComponent: VFC<{ methods: UseFormReturn<FormData, any> }> = ({
+  methods,
+}) => {
+  const { setValue, formState } = methods;
+  return (
+    <div>
+      <h3>FOR DEBUG</h3>
+      <Button
+        variant="contained"
+        color="text"
+        sx={{ m: 0.25 }}
+        onClick={() => {
+          setValue("otsunagiManager", "Example おつなぎ担当者");
+          setValue("otsunagiMailAddress", "Example おつなぎメールアドレス");
+          setValue("otsunagiManagerTelNumber", "00-0000-0000");
+          setValue("otsunagiManagerRole", "Chairman");
+          setValue("contactMethodWithOtsunagiManager", "Mail");
+          setValue("operationStartDate", "20000101");
+          setValue("contractEndDate", "20001231");
+          setValue("plan", "NewLightPlan");
+          setValue("needsInIntroduction", "AppointmentCuzCannotGetByAd");
+          setValue("valueSought", "EndUserAcquisition");
+          setValue("kpiMonthlyAppointments", "10");
+          setValue("averageMonthlyUnitPrice", "150000");
+          setValue("averageNumberOfContractMonths", "3");
+          setValue("averageLeadTimeMonth", "LessThanThree");
+          setValue("idealProductTarget", "Example 商材ターゲット");
+          setValue("enableToBusinessAllianceAppointment", "InSomeCases");
+          setValue("serviceThatCannotReceiveMutualProposal", "SalesSupport");
+          setValue("resourceStatusInThreeMonth", "1");
+          setValue("frontManager", "Example フロント担当者");
+          setValue("employeeSize", "LessThan5");
+          setValue("industry", "InformationTechnology");
+          setValue("productCategory", "SalesSupport");
+          setValue("serviceUrl", "Example サービスURL");
+          setValue("introduction", "Example 紹介文");
+          methods.trigger();
+        }}
+      >
+        {`set dummy data`}
+      </Button>
+      <Button
+        variant="contained"
+        color="text"
+        sx={{ m: 0.25 }}
+        onClick={() =>
+          methods.reset(undefined, {
+            keepErrors: true,
+            keepDirty: true,
+            keepIsSubmitted: true,
+            keepTouched: false,
+            keepIsValid: false,
+            keepSubmitCount: true,
+          })
+        }
+      >
+        {`reset data`}
+      </Button>
+      <Button
+        variant="contained"
+        color="text"
+        sx={{ m: 0.25 }}
+        onClick={() => methods.trigger()}
+      >
+        {`trigger`}
+      </Button>
+      {formState.isSubmitted && (
+        <>
+          <p>{`isValid: ${formState.isValid}`}</p>
+          <h6>values</h6>
+          <p>{JSON.stringify(methods.getValues())}</p>
+          <h6>errors</h6>
+          <p>{JSON.stringify(formState.errors)}</p>
+        </>
+      )}
+    </div>
+  );
+};
 
 type CommonCreateInputArgs = { formDataKey: keyof FormData; label?: string };
 type ArgsForTextField = {
@@ -277,6 +357,9 @@ export const Contents: VFC = () => {
             確認画面へ遷移
           </Button>
         </Stack>
+        {process.env.NODE_ENV === "development" && (
+          <DebugComponent methods={methods} />
+        )}
       </form>
     </FormProvider>
   );

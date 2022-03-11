@@ -111,7 +111,7 @@ export const AVERAGE_LEAD_TIME_MONTH_LABELS: {
   FromNineToTwelve: "9ヶ月~12ヶ月",
 } as const;
 
-export const STATUS = ["OK", "InSomeCases", "NG"];
+export const STATUS = ["OK", "InSomeCases", "NG"] as const;
 type Status = typeof STATUS[number];
 export const STATUS_LABELS: { [key in Status]: string } = {
   OK: "○",
