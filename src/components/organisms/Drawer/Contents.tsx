@@ -21,7 +21,7 @@ type ListItemType = NestedListItemType & {
 type NestedListItemType = {
   icon: ReactNode;
   url?: string;
-  label: string;
+  label: ReactNode;
 };
 
 const items: ListItemType[] = [
@@ -38,6 +38,17 @@ const items: ListItemType[] = [
         icon: <EditIcon />,
         url: "/paidMemberMng/matterForm/create",
         label: "追加",
+      },
+      {
+        icon: <EditIcon />,
+        url: "/paidMemberMng/matterForm/create_chiraceo",
+        label: (
+          <Typography fontSize={12}>
+            追加
+            <br />
+            (チラCEO初回ヒアリング)
+          </Typography>
+        ),
       },
     ],
   },
