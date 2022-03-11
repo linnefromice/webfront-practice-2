@@ -36,7 +36,7 @@ export const NoFormTextField: VFC<
   </>
 );
 
-type TextFieldProps = {
+export type TextFieldProps = {
   formDataKey: string;
   rules?: RegisterOptions;
   label: string;

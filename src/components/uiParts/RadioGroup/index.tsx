@@ -73,7 +73,7 @@ export const NoFormRadioGroup: VFC<NoFormRadioGroupType> = ({
   );
 };
 
-type RadioGroupProps = Omit<
+export type RadioGroupProps = Omit<
   NoFormRadioGroupType,
   "component" | "value" | "onChange" | "required"
 > & {
