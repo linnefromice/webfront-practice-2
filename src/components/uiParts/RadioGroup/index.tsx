@@ -41,36 +41,22 @@ export const NoFormRadioGroup: VFC<NoFormRadioGroupType> = ({
       <FormLabel id={id} sx={{ fontSize: 12 }} required={required}>
         {label}
       </FormLabel>
-      {direction === "column" ? (
-        <MuiRadioGroup aria-labelledby={id} value={value} onChange={onChange}>
-          {choices.map((v) => (
-            <FormControlLabel
-              key={`${id}.${v.label}`}
-              label={v.label}
-              value={v.value}
-              checked={v.value === value}
-              control={component}
-            />
-          ))}
-        </MuiRadioGroup>
-      ) : (
-        <MuiRadioGroup
-          aria-labelledby={id}
-          value={value}
-          onChange={onChange}
-          row
-        >
-          {choices.map((v) => (
-            <FormControlLabel
-              key={`${id}.${v.label}`}
-              label={v.label}
-              value={v.value}
-              checked={v.value === value}
-              control={component}
-            />
-          ))}
-        </MuiRadioGroup>
-      )}
+      <MuiRadioGroup
+        aria-labelledby={id}
+        value={value}
+        onChange={onChange}
+        row={direction === "row"}
+      >
+        {choices.map((v) => (
+          <FormControlLabel
+            key={`${id}.${v.label}`}
+            label={v.label}
+            value={v.value}
+            checked={v.value === value}
+            control={component}
+          />
+        ))}
+      </MuiRadioGroup>
       {error && errorMessage && <FormHelperText>{errorMessage}</FormHelperText>}
       {caption && <FormHelperText error={false}>{caption}</FormHelperText>}
     </FormControl>
