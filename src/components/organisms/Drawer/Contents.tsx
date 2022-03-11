@@ -129,9 +129,9 @@ export const DrawerContents: VFC = () => {
               )}
             </ListItemButton>
             {item.nestings &&
-              item.nestings.map((nestedItem, i) => (
+              item.nestings.map((nestedItem, j) => (
                 <List
-                  key={`${nestedItem.label}.${i}`}
+                  key={`drawer.item.${index}.nestedItem.${j}`}
                   component="div"
                   disablePadding
                 >
