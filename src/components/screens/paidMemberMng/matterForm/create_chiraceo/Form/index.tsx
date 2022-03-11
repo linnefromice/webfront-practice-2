@@ -25,7 +25,7 @@ import {
   STATUS_LABELS,
   VALUES_SOUGHT,
   VALUES_SOUGHT_LABELS,
-} from "./types";
+} from "../types";
 
 export const Contents: VFC = () => {
   const methods = useForm<FormData>();
