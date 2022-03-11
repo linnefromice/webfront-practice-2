@@ -1,5 +1,6 @@
 import { Stack } from "@mui/material";
 import { RadioGroup, TextField } from "components/uiParts";
+import { useCommonHooks } from "libs/utils";
 import { VFC } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import {
@@ -29,6 +30,7 @@ import {
 
 export const Contents: VFC = () => {
   const methods = useForm<FormData>();
+  const { isMobile } = useCommonHooks();
   const onSubmit = (v: FormData) => console.log(v); // Temporary
   const onError = (e: any) => console.log(e); // Temporary
 
@@ -57,7 +59,7 @@ export const Contents: VFC = () => {
               label: MANAGER_ROLE_LABELS[v],
               value: v,
             }))}
-            direction={"row"}
+            direction={"column"}
           />
           <RadioGroup
             formDataKey={`contactMethodWithOtsunagiManager`}
@@ -67,7 +69,7 @@ export const Contents: VFC = () => {
               label: v,
               value: v,
             }))}
-            direction={"row"}
+            direction={isMobile ? "column" : "row"}
           />
           <TextField
             formDataKey="operationStartDate"
@@ -85,7 +87,7 @@ export const Contents: VFC = () => {
               label: PLAN_LABELS[v],
               value: v,
             }))}
-            direction={"row"}
+            direction={"column"}
           />
           <RadioGroup
             formDataKey={`needsInIntroduction`}
@@ -95,7 +97,7 @@ export const Contents: VFC = () => {
               label: NEEDS_LABELS[v],
               value: v,
             }))}
-            direction={"row"}
+            direction={"column"}
           />
           <TextField
             formDataKey="introductionBackground"
@@ -109,7 +111,7 @@ export const Contents: VFC = () => {
               label: VALUES_SOUGHT_LABELS[v],
               value: v,
             }))}
-            direction={"row"}
+            direction={"column"}
           />
           <TextField
             formDataKey="kpiMonthlyAppointments"
@@ -131,7 +133,7 @@ export const Contents: VFC = () => {
               label: AVERAGE_LEAD_TIME_MONTH_LABELS[v],
               value: v,
             }))}
-            direction={"row"}
+            direction={isMobile ? "column" : "row"}
           />
           <TextField
             formDataKey="idealProductTarget"
@@ -155,7 +157,7 @@ export const Contents: VFC = () => {
               label: PRODUCT_CATEGORIES_LABELS[v],
               value: v,
             }))}
-            direction={"row"}
+            direction={"column"}
           />
           <RadioGroup
             formDataKey={`resourceStatusInThreeMonth`}
@@ -179,7 +181,7 @@ export const Contents: VFC = () => {
               label: EMPLOYEE_SIZES_LABELS[v],
               value: v,
             }))}
-            direction={"row"}
+            direction={"column"}
           />
           <RadioGroup
             formDataKey={`industry`}
@@ -189,7 +191,7 @@ export const Contents: VFC = () => {
               label: INDUSTRIES_LABELS[v],
               value: v,
             }))}
-            direction={"row"}
+            direction={"column"}
           />
           <RadioGroup
             formDataKey={`productCategory`}
@@ -199,7 +201,7 @@ export const Contents: VFC = () => {
               label: PRODUCT_CATEGORIES_LABELS[v],
               value: v,
             }))}
-            direction={"row"}
+            direction={"column"}
           />
           <TextField
             formDataKey="serviceName"
