@@ -10,6 +10,7 @@ export const useCommonHooks = () => {
 };
 
 // About form validations
+export const REQUIRED_ERROR_MESSAGE = "入力必須パラメータです";
 export const ONLY_NUMBER_PATTERN: ValidationRule<RegExp> = {
   value: /\d/,
   message: "数値のみで入力してください",
