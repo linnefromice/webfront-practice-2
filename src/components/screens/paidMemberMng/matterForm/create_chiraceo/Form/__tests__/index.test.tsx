@@ -94,6 +94,11 @@ describe("src/components/screens/paidMemberMng/matterForm/create_chiraceo/Form",
       expect(
         screen.getByRole("textbox", { name: /^紹介文/ })
       ).toBeInTheDocument();
+      expect(
+        screen.getByRole("button", {
+          name: "確認画面へ遷移",
+        })
+      ).toBeInTheDocument();
     });
   });
 });
