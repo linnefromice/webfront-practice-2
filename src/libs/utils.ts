@@ -2,6 +2,8 @@ import { useMediaQuery } from "@mui/material";
 import { Theme } from "@mui/system";
 import { ValidationRule } from "react-hook-form";
 
+export const IS_STORYBOOK = Boolean(process.env.STORYBOOK);
+
 // About User Interface
 export const useCommonHooks = () => {
   return {
@@ -10,6 +12,7 @@ export const useCommonHooks = () => {
 };
 
 // About form validations
+export const REQUIRED_ERROR_MESSAGE = "入力必須パラメータです";
 export const ONLY_NUMBER_PATTERN: ValidationRule<RegExp> = {
   value: /\d/,
   message: "数値のみで入力してください",

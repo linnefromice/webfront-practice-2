@@ -21,7 +21,7 @@ type ListItemType = NestedListItemType & {
 type NestedListItemType = {
   icon: ReactNode;
   url?: string;
-  label: string;
+  label: ReactNode;
 };
 
 const items: ListItemType[] = [
@@ -31,12 +31,24 @@ const items: ListItemType[] = [
     nestings: [
       {
         icon: <TableViewIcon />,
+        url: "/paidMemberMng/matterForm",
         label: "一覧",
       },
       {
         icon: <EditIcon />,
         url: "/paidMemberMng/matterForm/create",
         label: "追加",
+      },
+      {
+        icon: <EditIcon />,
+        url: "/paidMemberMng/matterForm/create_chiraceo",
+        label: (
+          <Typography fontSize={12}>
+            追加
+            <br />
+            (チラCEO初回ヒアリング)
+          </Typography>
+        ),
       },
     ],
   },
@@ -117,9 +129,9 @@ export const DrawerContents: VFC = () => {
               )}
             </ListItemButton>
             {item.nestings &&
-              item.nestings.map((nestedItem, i) => (
+              item.nestings.map((nestedItem, j) => (
                 <List
-                  key={`${nestedItem.label}.${i}`}
+                  key={`drawer.item.${index}.nestedItem.${j}`}
                   component="div"
                   disablePadding
                 >
@@ -137,13 +149,25 @@ export const DrawerContents: VFC = () => {
                     <ListItemIcon sx={{ color: "gray" }}>
                       {nestedItem.icon}
                     </ListItemIcon>
-                    <ListItemText
-                      primary={nestedItem.label}
-                      primaryTypographyProps={{
-                        fontSize: 14,
-                        fontWeight: "medium",
-                      }}
-                    />
+                    {nestedItem.url ? (
+                      <Link href={nestedItem.url} noLinkStyle>
+                        <ListItemText
+                          primary={nestedItem.label}
+                          primaryTypographyProps={{
+                            fontSize: 14,
+                            fontWeight: "medium",
+                          }}
+                        />
+                      </Link>
+                    ) : (
+                      <ListItemText
+                        primary={item.label}
+                        primaryTypographyProps={{
+                          fontSize: 14,
+                          fontWeight: "medium",
+                        }}
+                      />
+                    )}
                   </ListItemButton>
                 </List>
               ))}
