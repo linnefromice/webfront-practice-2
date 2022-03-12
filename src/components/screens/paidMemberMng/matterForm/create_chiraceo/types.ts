@@ -232,7 +232,7 @@ export type FormData = {
 
 export const FormDataLabels: { [key in keyof FormData]: string } = {
   hubspotId: "ハブスポットID",
-  otsunagiManager: "おつなぎ担当者",
+  otsunagiManager: "おつなぎ担当者名",
   otsunagiMailAddress: "おつなぎメールアドレス",
   otsunagiManagerTelNumber: "おつなぎ担当者連絡先(電話番号)",
   otsunagiManagerRole: "おつなぎ担当者の役職",
