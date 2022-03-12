@@ -2,6 +2,8 @@ import { useMediaQuery } from "@mui/material";
 import { Theme } from "@mui/system";
 import { ValidationRule } from "react-hook-form";
 
+export const IS_STORYBOOK = Boolean(process.env.STORYBOOK);
+
 // About User Interface
 export const useCommonHooks = () => {
   return {

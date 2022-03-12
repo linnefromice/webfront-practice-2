@@ -8,6 +8,7 @@ import {
 } from "components/uiParts";
 import {
   DATE_PATTERN,
+  IS_STORYBOOK,
   ONLY_NUMBER_PATTERN,
   REQUIRED_ERROR_MESSAGE,
   TEL_NUMBER_PATTERN,
@@ -365,7 +366,7 @@ export const Contents: VFC<ContentsProps> = ({
             確認画面へ遷移
           </Button>
         </Stack>
-        {process.env.NODE_ENV === "development" && (
+        {process.env.NODE_ENV === "development" && !IS_STORYBOOK && (
           <DebugComponent methods={methods} />
         )}
       </form>
