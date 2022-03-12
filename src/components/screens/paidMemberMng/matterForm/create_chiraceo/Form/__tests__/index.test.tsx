@@ -101,4 +101,14 @@ describe("src/components/screens/paidMemberMng/matterForm/create_chiraceo/Form",
       ).toBeInTheDocument();
     });
   });
+
+  describe("form function", () => {
+    describe("submit", () => {
+      test.todo("success");
+      test.todo("failure");
+    });
+    describe("validations", () => {
+      test.todo("validations");
+    });
+  });
 });
