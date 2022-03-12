@@ -335,9 +335,16 @@ const createInputComponentArgs = (isMobile: boolean): CreateInputArgs[] => [
 type ContentsProps = {
   onSubmit: (data: FormData) => void;
   onError?: (errors: any) => void;
+  defaultValues?: FormData;
 };
-export const Contents: VFC<ContentsProps> = ({ onSubmit, onError }) => {
-  const methods = useForm<FormData>();
+export const Contents: VFC<ContentsProps> = ({
+  onSubmit,
+  onError,
+  defaultValues,
+}) => {
+  const methods = useForm<FormData>({
+    defaultValues: defaultValues,
+  });
   const { formState } = methods;
   const { isMobile } = useCommonHooks();
   const inputComponentArgs = createInputComponentArgs(isMobile);

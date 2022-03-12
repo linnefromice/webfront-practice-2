@@ -201,7 +201,7 @@ export const PRODUCT_CATEGORIES_LABELS: { [key in ProductCategory]: string } = {
 } as const;
 
 export type FormData = {
-  hubspotId: string; // ハブスポットID
+  hubspotId?: string; // ハブスポットID
   otsunagiManager: string; // おつなぎ担当者
   otsunagiMailAddress: string; // おつなぎメールアドレス
   otsunagiManagerTelNumber: string; // おつなぎ担当者連絡先(電話番号)
@@ -211,7 +211,7 @@ export type FormData = {
   contractEndDate: string; // 契約終了年月日
   plan: Plan; // プラン
   needsInIntroduction: Needs; // 導入時のニーズ
-  introductionBackground: string; // チラCEOの導入背景
+  introductionBackground?: string; // チラCEOの導入背景
   valueSought: ValueSought; // チラCEOに求める価値
   kpiMonthlyAppointments: string; // KPI月間アポ数
   averageMonthlyUnitPrice: string; // 平均月額単価
@@ -225,12 +225,12 @@ export type FormData = {
   employeeSize: EmployeeSize; // 顧客の従業員規模
   industry: Industry; // 業種
   productCategory: ProductCategory; // 商材カテゴリ
-  serviceName: string; // サービス名
+  serviceName?: string; // サービス名
   serviceUrl: string; // サービスURL
   introduction: string; // 紹介文
 };
 
-export const FormDataLabels: { [key in keyof FormData]: string } = {
+export const FormDataLabels: { [key in keyof Required<FormData>]: string } = {
   hubspotId: "ハブスポットID",
   otsunagiManager: "おつなぎ担当者名",
   otsunagiMailAddress: "おつなぎメールアドレス",

@@ -3,7 +3,35 @@ import { composeStories } from "@storybook/testing-react";
 import { render, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { Contents } from "..";
+import { FormData } from "../../types";
 import * as stories from "../Form.stories";
+
+const REQUIRED_ITEM_VALUES: FormData = {
+  otsunagiManager: "Example おつなぎ担当者",
+  otsunagiMailAddress: "Example おつなぎメールアドレス",
+  otsunagiManagerTelNumber: "00-0000-0000",
+  otsunagiManagerRole: "Chairman",
+  contactMethodWithOtsunagiManager: "Mail",
+  operationStartDate: "20000101",
+  contractEndDate: "20001231",
+  plan: "NewLightPlan",
+  needsInIntroduction: "AppointmentCuzNoConductor",
+  valueSought: "Other",
+  kpiMonthlyAppointments: "10",
+  averageMonthlyUnitPrice: "150000",
+  averageNumberOfContractMonths: "3",
+  averageLeadTimeMonth: "LessThanThree",
+  idealProductTarget: "Example 商材ターゲット",
+  enableToBusinessAllianceAppointment: "OK",
+  serviceThatCannotReceiveMutualProposal: "Other",
+  resourceStatusInThreeMonth: "1",
+  frontManager: "Example フロント担当者",
+  employeeSize: "MoreThan3001",
+  industry: "InformationTechnology",
+  productCategory: "Other",
+  serviceUrl: "Example サービスURL",
+  introduction: "Example 紹介文",
+};
 
 describe("src/components/screens/paidMemberMng/matterForm/create_chiraceo/Form", () => {
   const { Form: FormStory } = composeStories(stories);
@@ -106,16 +134,46 @@ describe("src/components/screens/paidMemberMng/matterForm/create_chiraceo/Form",
   });
 
   describe("form function", () => {
+    const setup = async ({
+      filledRequiredItem,
+    }: {
+      filledRequiredItem?: boolean;
+    } = {}) => {
+      const onSubmit = jest.fn();
+      const onError = jest.fn();
+      const screen = render(
+        <ThemeProvider theme={createTheme()}>
+          <Contents
+            onSubmit={onSubmit}
+            onError={onError}
+            defaultValues={
+              filledRequiredItem ? REQUIRED_ITEM_VALUES : undefined
+            }
+          />
+        </ThemeProvider>
+      );
+      return {
+        screen,
+        onSubmit,
+        onError,
+      };
+    };
+
     describe("submit", () => {
-      test.todo("success");
+      test("success", async () => {
+        const { screen, onSubmit, onError } = await setup({
+          filledRequiredItem: true,
+        });
+        await userEvent.click(
+          screen.getByRole("button", {
+            name: "確認画面へ遷移",
+          })
+        );
+        await waitFor(() => expect(onSubmit).toHaveBeenCalledTimes(1));
+        await waitFor(() => expect(onError).not.toHaveBeenCalled());
+      });
       test("failure", async () => {
-        const onSubmit = jest.fn();
-        const onError = jest.fn();
-        const screen = render(
-          <ThemeProvider theme={createTheme()}>
-            <Contents onSubmit={onSubmit} onError={onError} />
-          </ThemeProvider>
-        ); // TODO: remove ThemeProvider
+        const { screen, onSubmit, onError } = await setup();
         await userEvent.click(
           screen.getByRole("button", {
             name: "確認画面へ遷移",
