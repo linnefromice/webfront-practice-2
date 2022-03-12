@@ -1,5 +1,8 @@
+import { createTheme, ThemeProvider } from "@mui/material";
 import { composeStories } from "@storybook/testing-react";
-import { render } from "@testing-library/react";
+import { render, waitFor } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
+import { Contents } from "..";
 import * as stories from "../Form.stories";
 
 describe("src/components/screens/paidMemberMng/matterForm/create_chiraceo/Form", () => {
@@ -105,7 +108,22 @@ describe("src/components/screens/paidMemberMng/matterForm/create_chiraceo/Form",
   describe("form function", () => {
     describe("submit", () => {
       test.todo("success");
-      test.todo("failure");
+      test("failure", async () => {
+        const onSubmit = jest.fn();
+        const onError = jest.fn();
+        const screen = render(
+          <ThemeProvider theme={createTheme()}>
+            <Contents onSubmit={onSubmit} onError={onError} />
+          </ThemeProvider>
+        ); // TODO: remove ThemeProvider
+        await userEvent.click(
+          screen.getByRole("button", {
+            name: "確認画面へ遷移",
+          })
+        );
+        await waitFor(() => expect(onSubmit).not.toHaveBeenCalled());
+        await waitFor(() => expect(onError).toHaveBeenCalledTimes(1));
+      });
     });
     describe("validations", () => {
       test.todo("validations");

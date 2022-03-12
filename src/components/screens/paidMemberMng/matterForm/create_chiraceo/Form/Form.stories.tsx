@@ -1,11 +1,11 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
-import { Form as FormComponent } from ".";
+import { Contents as ContentsComponent } from ".";
 
 export default {
   title: "screens/paidMemberMng/matterForm/create_chiraceo/Form",
-  component: FormComponent,
-} as ComponentMeta<typeof FormComponent>;
+  component: ContentsComponent,
+} as ComponentMeta<typeof ContentsComponent>;
 
-export const Form: ComponentStory<typeof FormComponent> = () => (
-  <FormComponent />
+export const Form: ComponentStory<typeof ContentsComponent> = () => (
+  <ContentsComponent onSubmit={console.log} />
 );
