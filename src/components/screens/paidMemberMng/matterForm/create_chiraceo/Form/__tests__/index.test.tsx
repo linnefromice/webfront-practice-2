@@ -157,7 +157,27 @@ describe("src/components/screens/paidMemberMng/matterForm/create_chiraceo/Form",
       });
     });
     describe("validations", () => {
-      test.todo("validations");
+      const checkRequired = async (name: RegExp) => {
+        const { screen, onSubmit, onError } = await setup({
+          filledRequiredItem: true,
+        });
+        await userEvent.clear(screen.getByRole("textbox", { name }));
+        await userEvent.click(
+          screen.getByRole("button", {
+            name: "確認画面へ遷移",
+          })
+        );
+        await waitFor(() => expect(onSubmit).not.toHaveBeenCalled());
+        await waitFor(() => expect(onError).toHaveBeenCalledTimes(1));
+      };
+
+      test("おつなぎ担当者名 - required", async () =>
+        await checkRequired(/^おつなぎ担当者名/));
+      test("おつなぎメールアドレス - required", async () =>
+        await checkRequired(/^おつなぎメールアドレス/));
+      test("おつなぎ担当者連絡先(電話番号) - required", async () =>
+        await checkRequired(/^おつなぎ担当者連絡先\(電話番号\)/));
+      test.todo("other validations");
     });
   });
 });
