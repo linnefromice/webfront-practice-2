@@ -1,0 +1,28 @@
+import { FormData } from "./types";
+
+export const REQUIRED_FORM_ITEM_VALUES: FormData = {
+  otsunagiManager: "Example おつなぎ担当者",
+  otsunagiMailAddress: "Example おつなぎメールアドレス",
+  otsunagiManagerTelNumber: "00-0000-0000",
+  otsunagiManagerRole: "Chairman",
+  contactMethodWithOtsunagiManager: "Mail",
+  operationStartDate: "20000101",
+  contractEndDate: "20001231",
+  plan: "NewLightPlan",
+  needsInIntroduction: "AppointmentCuzNoConductor",
+  valueSought: "Other",
+  kpiMonthlyAppointments: "10",
+  averageMonthlyUnitPrice: "150000",
+  averageNumberOfContractMonths: "3",
+  averageLeadTimeMonth: "LessThanThree",
+  idealProductTarget: "Example 商材ターゲット",
+  enableToBusinessAllianceAppointment: "OK",
+  serviceThatCannotReceiveMutualProposal: "Other",
+  resourceStatusInThreeMonth: "1",
+  frontManager: "Example フロント担当者",
+  employeeSize: "MoreThan3001",
+  industry: "InformationTechnology",
+  productCategory: "Other",
+  serviceUrl: "Example サービスURL",
+  introduction: "Example 紹介文",
+};
