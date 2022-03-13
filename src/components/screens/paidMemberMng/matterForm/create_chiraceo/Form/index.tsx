@@ -374,9 +374,8 @@ export const Contents: VFC<ContentsProps> = ({
   );
 };
 
-export const Form: VFC = () => {
-  const onSubmit = (v: FormData) => console.log(v); // Temporary
+export const Form: VFC<Omit<ContentsProps, "onError">> = (props) => {
   const onError = (e: any) => console.log(e); // Temporary
 
-  return <Contents onSubmit={onSubmit} onError={onError} />;
+  return <Contents onError={onError} {...props} />;
 };
