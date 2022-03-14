@@ -40,6 +40,17 @@ const items: ListItemType[] = [
         label: "追加",
       },
       {
+        icon: <TableViewIcon />,
+        url: "/paidMemberMng/matterForm/index_chiraceo",
+        label: (
+          <Typography fontSize={12}>
+            一覧
+            <br />
+            (チラCEO初回ヒアリング)
+          </Typography>
+        ),
+      },
+      {
         icon: <EditIcon />,
         url: "/paidMemberMng/matterForm/create_chiraceo",
         label: (
