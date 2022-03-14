@@ -47,12 +47,12 @@ const items: ListItemType[] = [
     nestings: [
       {
         icon: <TableViewIcon />,
-        url: "/paidMemberMng/matterForm/index_chiraceo",
+        url: "/paidMemberMng/consulting",
         label: "一覧",
       },
       {
         icon: <EditIcon />,
-        url: "/paidMemberMng/matterForm/create_chiraceo",
+        url: "/paidMemberMng/consulting/create",
         label: "追加",
       },
     ],
