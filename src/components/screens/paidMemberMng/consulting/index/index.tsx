@@ -10,7 +10,7 @@ import {
 } from "@mui/material";
 import Head from "next/head";
 import { VFC } from "react";
-import { FormDataLabels } from "../create/types";
+import { FormData, FormDataLabels } from "../create/types";
 import { DATAS } from "./mocks";
 
 const Contents: VFC = () => {
@@ -27,15 +27,17 @@ const Contents: VFC = () => {
               >
                 ID
               </TableCell>
-              {Object.keys(FormDataLabels).map((key) => (
-                <TableCell
-                  key={key}
-                  align={`right`}
-                  sx={{ color: "white", bgcolor: "black" }}
-                >
-                  {`${FormDataLabels[key]}`}
-                </TableCell>
-              ))}
+              {(Object.keys(FormDataLabels) as (keyof FormData)[]).map(
+                (key) => (
+                  <TableCell
+                    key={key}
+                    align={`right`}
+                    sx={{ color: "white", bgcolor: "black" }}
+                  >
+                    {`${FormDataLabels[key]}`}
+                  </TableCell>
+                )
+              )}
             </TableRow>
           </TableHead>
           <TableBody>
@@ -44,11 +46,13 @@ const Contents: VFC = () => {
                 <TableRow key={`data.${i}`}>
                   {/** Temporary */}
                   <TableCell>{i + 1}</TableCell>
-                  {Object.keys(FormDataLabels).map((key, j) => (
-                    <TableCell key={`data.${i}.${j}`} align={`right`}>
-                      {v[key]}
-                    </TableCell>
-                  ))}
+                  {(Object.keys(FormDataLabels) as (keyof FormData)[]).map(
+                    (key, j) => (
+                      <TableCell key={`data.${i}.${j}`} align={`right`}>
+                        {v[key]}
+                      </TableCell>
+                    )
+                  )}
                 </TableRow>
               );
             })}
