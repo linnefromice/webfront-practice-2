@@ -5,7 +5,7 @@ import { Confirmation } from "./Confirmation";
 import { Form } from "./Form";
 import { useForm } from "./hooks";
 
-export const CreateChiraceoScreen: VFC = () => {
+export const CreateScreen: VFC = () => {
   const { formInfo, closingForm, backPage } = useForm();
 
   return (
