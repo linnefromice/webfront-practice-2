@@ -10,7 +10,7 @@ import {
 } from "@mui/material";
 import Head from "next/head";
 import { VFC } from "react";
-import { FormDataLabels } from "../create_chiraceo/types";
+import { FormDataLabels } from "../create/types";
 import { DATAS } from "./mocks";
 
 const Contents: VFC = () => {

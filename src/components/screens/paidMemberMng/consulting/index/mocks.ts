@@ -1,5 +1,5 @@
 import { faker } from "@faker-js/faker";
-import { REQUIRED_FORM_ITEM_VALUES } from "../create_chiraceo/mocks";
+import { REQUIRED_FORM_ITEM_VALUES } from "../create/mocks";
 
 export const DATAS = [...Array(100)].map((_) => ({
   ...REQUIRED_FORM_ITEM_VALUES,

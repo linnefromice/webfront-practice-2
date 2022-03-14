@@ -1,4 +1,4 @@
-import { CreateChiraceoScreen } from "components/screens/paidMemberMng/matterForm/create_chiraceo";
+import { CreateChiraceoScreen } from "components/screens/paidMemberMng/consulting/create";
 import { NextPage } from "next";
 
 const PaidMemberMngMatterFormCreateChiraceo: NextPage = () => (
