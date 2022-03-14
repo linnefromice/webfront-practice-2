@@ -39,20 +39,24 @@ const items: ListItemType[] = [
         url: "/paidMemberMng/matterForm/create",
         label: "追加",
       },
+    ],
+  },
+  {
+    icon: <ListAltIcon />,
+    label: "コンサルティング",
+    nestings: [
+      {
+        icon: <TableViewIcon />,
+        url: "/paidMemberMng/consulting",
+        label: "一覧",
+      },
       {
         icon: <EditIcon />,
-        url: "/paidMemberMng/matterForm/create_chiraceo",
-        label: (
-          <Typography fontSize={12}>
-            追加
-            <br />
-            (チラCEO初回ヒアリング)
-          </Typography>
-        ),
+        url: "/paidMemberMng/consulting/create",
+        label: "追加",
       },
     ],
   },
-  { icon: <ListAltIcon />, label: "コンサルティング" },
   { icon: <ListAltIcon />, label: "マッチング" },
   { icon: <ListAltIcon />, label: "マッチング成果報告" },
 ];

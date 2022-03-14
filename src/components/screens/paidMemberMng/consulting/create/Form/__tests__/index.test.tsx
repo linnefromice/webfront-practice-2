@@ -3,35 +3,8 @@ import { composeStories } from "@storybook/testing-react";
 import { render, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { Contents } from "..";
-import { FormData } from "../../types";
+import { REQUIRED_FORM_ITEM_VALUES } from "../../mocks";
 import * as stories from "../Form.stories";
-
-const REQUIRED_ITEM_VALUES: FormData = {
-  otsunagiManager: "Example おつなぎ担当者",
-  otsunagiMailAddress: "Example おつなぎメールアドレス",
-  otsunagiManagerTelNumber: "00-0000-0000",
-  otsunagiManagerRole: "Chairman",
-  contactMethodWithOtsunagiManager: "Mail",
-  operationStartDate: "20000101",
-  contractEndDate: "20001231",
-  plan: "NewLightPlan",
-  needsInIntroduction: "AppointmentCuzNoConductor",
-  valueSought: "Other",
-  kpiMonthlyAppointments: "10",
-  averageMonthlyUnitPrice: "150000",
-  averageNumberOfContractMonths: "3",
-  averageLeadTimeMonth: "LessThanThree",
-  idealProductTarget: "Example 商材ターゲット",
-  enableToBusinessAllianceAppointment: "OK",
-  serviceThatCannotReceiveMutualProposal: "Other",
-  resourceStatusInThreeMonth: "1",
-  frontManager: "Example フロント担当者",
-  employeeSize: "MoreThan3001",
-  industry: "InformationTechnology",
-  productCategory: "Other",
-  serviceUrl: "Example サービスURL",
-  introduction: "Example 紹介文",
-};
 
 describe("src/components/screens/paidMemberMng/matterForm/create_chiraceo/Form", () => {
   const { Form: FormStory } = composeStories(stories);
@@ -147,7 +120,7 @@ describe("src/components/screens/paidMemberMng/matterForm/create_chiraceo/Form",
             onSubmit={onSubmit}
             onError={onError}
             defaultValues={
-              filledRequiredItem ? REQUIRED_ITEM_VALUES : undefined
+              filledRequiredItem ? REQUIRED_FORM_ITEM_VALUES : undefined
             }
           />
         </ThemeProvider>
@@ -184,7 +157,27 @@ describe("src/components/screens/paidMemberMng/matterForm/create_chiraceo/Form",
       });
     });
     describe("validations", () => {
-      test.todo("validations");
+      const checkRequired = async (name: RegExp) => {
+        const { screen, onSubmit, onError } = await setup({
+          filledRequiredItem: true,
+        });
+        await userEvent.clear(screen.getByRole("textbox", { name }));
+        await userEvent.click(
+          screen.getByRole("button", {
+            name: "確認画面へ遷移",
+          })
+        );
+        await waitFor(() => expect(onSubmit).not.toHaveBeenCalled());
+        await waitFor(() => expect(onError).toHaveBeenCalledTimes(1));
+      };
+
+      test("おつなぎ担当者名 - required", async () =>
+        await checkRequired(/^おつなぎ担当者名/));
+      test("おつなぎメールアドレス - required", async () =>
+        await checkRequired(/^おつなぎメールアドレス/));
+      test("おつなぎ担当者連絡先(電話番号) - required", async () =>
+        await checkRequired(/^おつなぎ担当者連絡先\(電話番号\)/));
+      test.todo("other validations");
     });
   });
 });

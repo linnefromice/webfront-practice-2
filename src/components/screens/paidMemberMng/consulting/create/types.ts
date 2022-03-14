@@ -259,3 +259,5 @@ export const FormDataLabels: { [key in keyof Required<FormData>]: string } = {
   serviceUrl: "サービスURL",
   introduction: "紹介文",
 } as const;
+
+export type Page = "FORM" | "CONFIRMATION";
