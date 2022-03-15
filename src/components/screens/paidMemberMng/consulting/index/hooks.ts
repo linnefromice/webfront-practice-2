@@ -1,9 +1,22 @@
+import { useState } from "react";
 import { DATAS } from "./mocks";
 
-export const useGetFormData = (pageNum: number = 1, pageCount: number = 20) => {
-  const startIndex = (pageNum - 1) * pageCount;
-  const endIndex = pageNum * pageCount;
+export const useGetFormData = () => {
+  const [loadCount, setLoadCount] = useState(0);
+  const perNumber = 20;
+  const [datas, setDatas] = useState(DATAS.slice(0, perNumber));
+
+  const loadMore = () => {
+    const _loadCount = loadCount + 1;
+    setDatas([
+      ...datas,
+      ...DATAS.slice(_loadCount * perNumber, (_loadCount + 1) * perNumber),
+    ]);
+    setLoadCount(_loadCount);
+  };
+
   return {
-    datas: DATAS.slice(startIndex, endIndex),
+    datas,
+    loadMore,
   };
 };
