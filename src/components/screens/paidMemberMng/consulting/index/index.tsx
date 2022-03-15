@@ -11,9 +11,11 @@ import {
 import Head from "next/head";
 import { VFC } from "react";
 import { FormData, FormDataLabels } from "../create/types";
-import { DATAS } from "./mocks";
+import { useGetFormData } from "./hooks";
 
 const Contents: VFC = () => {
+  const { datas } = useGetFormData();
+
   return (
     <Paper sx={{ width: "300%" }} style={{ overflowX: "scroll" }}>
       <TableContainer sx={{ maxHeight: "80vh" }}>
@@ -41,7 +43,7 @@ const Contents: VFC = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {DATAS.map((v, i) => {
+            {datas.map((v, i) => {
               return (
                 <TableRow key={`data.${i}`}>
                   {/** Temporary */}
