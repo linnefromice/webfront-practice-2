@@ -8,14 +8,18 @@ import {
   TableRow,
   Typography,
 } from "@mui/material";
-import { Button } from "components/uiParts";
 import Head from "next/head";
 import { VFC } from "react";
 import { FormData, FormDataLabels } from "../create/types";
-import { useGetFormData } from "./hooks";
+import { useSWRForms } from "./hooks";
 
 const Contents: VFC = () => {
-  const { datas, loadMore } = useGetFormData();
+  const { data, error } = useSWRForms();
+
+  if (error) return <div>failed to load</div>;
+  if (!data) return <div>loading...</div>;
+
+  const datas = data.forms;
 
   return (
     <>
@@ -64,9 +68,6 @@ const Contents: VFC = () => {
           </Table>
         </TableContainer>
       </Paper>
-      <Button sx={{ m: 1 }} variant="contained" onClick={loadMore}>
-        LOAD MORE
-      </Button>
     </>
   );
 };

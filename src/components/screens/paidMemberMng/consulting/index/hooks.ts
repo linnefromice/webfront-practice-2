@@ -1,22 +1,38 @@
-import { useState } from "react";
-import { DATAS } from "./mocks";
+import request from "graphql-request";
+import useSWR from "swr";
 
-export const useGetFormData = () => {
-  const [loadCount, setLoadCount] = useState(0);
-  const perNumber = 20;
-  const [datas, setDatas] = useState(DATAS.slice(0, perNumber));
-
-  const loadMore = () => {
-    const _loadCount = loadCount + 1;
-    setDatas([
-      ...datas,
-      ...DATAS.slice(_loadCount * perNumber, (_loadCount + 1) * perNumber),
-    ]);
-    setLoadCount(_loadCount);
-  };
-
-  return {
-    datas,
-    loadMore,
-  };
+const GRAPHQL_API_ENDPOINT = "http://localhost:3000/graphql";
+type FetchData = {
+  forms: FormData[];
 };
+const QUERY = `query GetConsultingForms{
+  forms {
+    otsunagiManager
+    otsunagiMailAddress
+    otsunagiManagerTelNumber
+    otsunagiManagerRole
+    contactMethodWithOtsunagiManager
+    operationStartDate
+    contractEndDate
+    plan
+    needsInIntroduction
+    valueSought
+    kpiMonthlyAppointments
+    averageMonthlyUnitPrice
+    averageNumberOfContractMonths
+    averageLeadTimeMonth
+    idealProductTarget
+    enableToBusinessAllianceAppointment
+    serviceThatCannotReceiveMutualProposal
+    resourceStatusInThreeMonth
+    frontManager
+    employeeSize
+    industry
+    productCategory
+    serviceUrl
+    introduction
+  }
+}`;
+
+export const useSWRForms = () =>
+  useSWR<FetchData>(QUERY, (query) => request(GRAPHQL_API_ENDPOINT, query));
