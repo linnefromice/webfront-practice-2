@@ -1,7 +1,7 @@
 import {
   Paper,
   Table,
-  TableBody,
+  TableBody as MuiTableBody,
   TableCell,
   TableContainer,
   TableHead as MuiTableHead,
@@ -30,6 +30,7 @@ import {
   FormData as SelectContractTypeFormData,
   FormDataLabels as SelectContractTypeFormDataLabels,
 } from "../create/SelectContractTypeForm/types";
+import { MatterFormData, useMatterForm } from "./hooks";
 
 const TableHead: VFC = () => {
   return (
@@ -89,14 +90,81 @@ const TableHead: VFC = () => {
   );
 };
 
+const TableBody: VFC<{ datas: MatterFormData[] }> = ({ datas }) => {
+  return (
+    <MuiTableBody>
+      {datas.map((key, i) => (
+        <TableRow key={`row.${i}`}>
+          <TableCell>{i + 1}</TableCell>
+          {(Object.keys(key.firstFormData) as (keyof FirstFormData)[]).map(
+            (formKey, j) => (
+              <TableCell key={`data.${i}.firstFormData.${j}`} align={`right`}>
+                {key.firstFormData[formKey]}
+              </TableCell>
+            )
+          )}
+          {(
+            Object.keys(
+              key.selectContractTypeFormData
+            ) as (keyof SelectContractTypeFormData)[]
+          ).map((formKey, j) => (
+            <TableCell
+              key={`data.${i}.selectContractTypeFormData.${j}`}
+              align={`right`}
+            >
+              {key.selectContractTypeFormData[formKey]}
+            </TableCell>
+          ))}
+          {(
+            Object.keys(
+              key.contractTypeFormData
+            ) as (keyof ContractTypeFormData)[]
+          ).map((formKey, j) => (
+            <TableCell
+              key={`data.${i}.contractTypeFormData.${j}`}
+              align={`right`}
+            >
+              {key.contractTypeFormData[formKey]}
+            </TableCell>
+          ))}
+          {(
+            Object.keys(
+              key.paymentMethodFormData
+            ) as (keyof PaymentMethodFormData)[]
+          ).map((formKey, j) => (
+            <TableCell
+              key={`data.${i}.paymentMethodFormData.${j}`}
+              align={`right`}
+            >
+              {key.paymentMethodFormData[formKey]}
+            </TableCell>
+          ))}
+          {(
+            Object.keys(key.onBoardingFormData) as (keyof OnboardingFormData)[]
+          ).map((formKey, j) => (
+            <TableCell
+              key={`data.${i}.onBoardingFormData.${j}`}
+              align={`right`}
+            >
+              {key.onBoardingFormData[formKey]}
+            </TableCell>
+          ))}
+        </TableRow>
+      ))}
+    </MuiTableBody>
+  );
+};
+
 const Contents: VFC = () => {
+  const { datas } = useMatterForm();
+
   return (
     <>
       <Paper>
         <TableContainer>
           <Table stickyHeader>
             <TableHead />
-            <TableBody></TableBody>
+            <TableBody datas={datas} />
           </Table>
         </TableContainer>
       </Paper>
