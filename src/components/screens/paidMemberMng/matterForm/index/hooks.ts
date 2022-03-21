@@ -1,85 +1,75 @@
-import faker from "@faker-js/faker";
+import request from "graphql-request";
+import useSWR from "swr";
 import { MatterFormInfo } from "../create/types";
+
+const GRAPHQL_API_ENDPOINT = "http://localhost:3000/graphql";
 
 export type MatterFormData = Required<Omit<MatterFormInfo, "currentPage">>;
 
-const mock: MatterFormData = {
-  firstFormData: {
-    introducer: "",
-    contractDate: "20200101",
-    contractType: "New",
-    contractor: "Example 契約獲得者",
-    applicationFormData: [],
-    businessCardPic: [],
-    closingUrl: "",
-    closingUrlDescription: "",
-    closingDocument: [],
-    initialBillingAmount: "",
-    initialBillingBreakdowns: [],
-  },
-  selectContractTypeFormData: {
-    selectContractType: "ChiraCeo",
-  },
-  contractTypeFormData: {
-    companyName: "Example 会社名",
-    url: "https://example.com",
-    employeeSize: "LessThan6",
-    postCode: "",
-    address: "東京都港区N-N-N",
-    telNumberCompany: "00-0000-0000",
-    telNumberManagerPhone: "",
-    managerName: "Example 担当者",
-    managerRole: "",
-    managerMailAddress: "example-manager@example.com",
-    accountingRoleName: "Example 先方経理担当者名",
-    invoiceShippingMailAddress: "example-invoice@example.com",
-    contractPlan: "Light",
-    initialCost: "240000",
-    monthlyAmount: "120000",
-    firstConsultingDay: "",
-    contractStartDate: "",
-    contractEndDate: "",
-    paymentMethod: "CreditCard",
-  },
-  paymentMethodFormData: {
-    firstWithdrawalDate: "20000101",
-    paymentCycle: "Onetime",
-    otherPaymentCycle: undefined,
-    otherSharedMatters: "",
-  },
-  onBoardingFormData: {
-    firstConsultationStartTime: "",
-    firstConsultantMain: "",
-    firstConsultantSub: "",
-    kickoffLocation: "",
-    specialMattersColumn: "",
-    howToUseIntrinsicValue: "",
-    intrinsicValueKpi: "",
-    howToUseCurrentValue: "",
-    currentValueKpi: "",
-    serviceContents: "",
-    serviceMaterials: "",
-    otherSharedMattersForKickoffStaff: "",
-  },
+type FetchData = {
+  forms: MatterFormData[];
 };
+const QUERY = `query GetMatterForms {
+  forms {
+    firstFormData {
+      introducer
+      contractDate
+      contractType
+      contractor
+      applicationFormData
+      businessCardPic
+      closingUrl
+      closingUrlDescription
+      closingDocument
+      initialBillingAmount
+      initialBillingBreakdowns
+    }
+    selectContractTypeFormData {
+      selectContractType
+    }
+    contractTypeFormData {
+      companyName
+      url
+      employeeSize
+      postCode
+      address
+      telNumberCompany
+      telNumberManagerPhone
+      managerName
+      managerRole
+      managerMailAddress
+      accountingRoleName
+      invoiceShippingMailAddress
+      contractPlan
+      initialCost
+      monthlyAmount
+      firstConsultingDay
+      contractStartDate
+      contractEndDate
+      paymentMethod
+    }
+    paymentMethodFormData {
+      firstWithdrawalDate
+      paymentCycle
+      otherPaymentCycle
+      otherSharedMatters
+    }
+    onBoardingFormData {
+      firstConsultationStartTime
+      firstConsultantMain
+      firstConsultantSub
+      kickoffLocation
+      specialMattersColumn
+      howToUseIntrinsicValue
+      intrinsicValueKpi
+      howToUseCurrentValue
+      currentValueKpi
+      serviceContents
+      serviceMaterials
+      otherSharedMattersForKickoffStaff
+    }
+  }
+}`;
 
-export const useMatterForm = () => {
-  const datas: MatterFormData[] = [...Array(100)].map((_) => ({
-    ...mock,
-    firstFormData: {
-      ...mock.firstFormData,
-      contractor: faker.name.findName(),
-    },
-    contractTypeFormData: {
-      ...mock.contractTypeFormData,
-      telNumberCompany:
-        Math.random() > 0.5
-          ? faker.phone.phoneNumber("03-####-####")
-          : faker.phone.phoneNumber("0##-###-####"),
-      managerMailAddress: faker.internet.email(),
-      invoiceShippingMailAddress: faker.internet.email(),
-    },
-  }));
-
-  return { datas };
-};
+export const useSWRForms = () =>
+  useSWR<FetchData>(QUERY, (query) => request(GRAPHQL_API_ENDPOINT, query));

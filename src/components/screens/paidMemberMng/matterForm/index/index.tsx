@@ -30,7 +30,7 @@ import {
   FormData as SelectContractTypeFormData,
   FormDataLabels as SelectContractTypeFormDataLabels,
 } from "../create/SelectContractTypeForm/types";
-import { MatterFormData, useMatterForm } from "./hooks";
+import { MatterFormData, useSWRForms } from "./hooks";
 
 const TableHead: VFC = () => {
   return (
@@ -243,7 +243,12 @@ const Contents: VFC<{ datas: MatterFormData[] }> = ({ datas }) => {
 };
 
 export const IndexScreen: VFC = () => {
-  const { datas } = useMatterForm();
+  const { data, error } = useSWRForms();
+
+  if (error) return <div>failed to load</div>;
+  if (!data) return <div>loading...</div>;
+
+  const datas = data.forms;
 
   return (
     <>

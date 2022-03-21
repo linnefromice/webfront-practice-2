@@ -6,7 +6,7 @@ const GRAPHQL_API_ENDPOINT = "http://localhost:3000/graphql";
 type FetchData = {
   forms: FormData[];
 };
-const QUERY = `query GetConsultingForms{
+const QUERY = `query GetConsultingForms {
   forms {
     otsunagiManager
     otsunagiMailAddress
