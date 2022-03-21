@@ -1,3 +1,4 @@
+import faker from "@faker-js/faker";
 import { MatterFormInfo } from "../create/types";
 
 export type MatterFormData = Required<Omit<MatterFormInfo, "currentPage">>;
@@ -63,7 +64,22 @@ const mock: MatterFormData = {
 };
 
 export const useMatterForm = () => {
-  const datas: MatterFormData[] = [...Array(100)].map((_) => mock);
+  const datas: MatterFormData[] = [...Array(100)].map((_) => ({
+    ...mock,
+    firstFormData: {
+      ...mock.firstFormData,
+      contractor: faker.name.findName(),
+    },
+    contractTypeFormData: {
+      ...mock.contractTypeFormData,
+      telNumberCompany:
+        Math.random() > 0.5
+          ? faker.phone.phoneNumber("03-####-####")
+          : faker.phone.phoneNumber("0##-###-####"),
+      managerMailAddress: faker.internet.email(),
+      invoiceShippingMailAddress: faker.internet.email(),
+    },
+  }));
 
   return { datas };
 };
