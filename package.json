@@ -10,7 +10,7 @@
     "lint": "next lint --dir src",
     "test": "jest --runInBand",
     "test:ci": "jest --ci --runInBand",
-    "storybook": "start-storybook -p 6006",
+    "storybook": "start-storybook -p 6006 -s public",
     "build-storybook": "build-storybook",
     "prepare": "husky install"
   },

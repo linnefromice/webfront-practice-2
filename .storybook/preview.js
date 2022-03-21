@@ -14,6 +14,15 @@ const withThemeProvider = (Story, context) => (
   </EmotionThemeProvider>
 );
 
+// ref: https://github.com/mswjs/examples/blob/master/examples/with-storybook/.storybook/preview.js
+if (typeof global.process === "undefined") {
+  const { worker } = require("../src/mocks/browser");
+  // Start the mocking when each story is loaded.
+  // Repetitive calls to the `.start()` method do not register a new worker,
+  // but check whether there's an existing once, reusing it, if so.
+  worker.start();
+}
+
 export const decorators = [withThemeProvider];
 
 export const parameters = {
