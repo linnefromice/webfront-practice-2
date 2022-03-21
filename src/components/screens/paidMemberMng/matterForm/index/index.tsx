@@ -96,7 +96,7 @@ const TableBody: VFC<{ datas: MatterFormData[] }> = ({ datas }) => {
       {datas.map((key, i) => (
         <TableRow key={`row.${i}`}>
           <TableCell>{i + 1}</TableCell>
-          {(Object.keys(key.firstFormData) as (keyof FirstFormData)[]).map(
+          {(Object.keys(FirstFormDataLabels) as (keyof FirstFormData)[]).map(
             (formKey, j) => (
               <TableCell key={`data.${i}.firstFormData.${j}`} align={`right`}>
                 {key.firstFormData[formKey]}
@@ -105,7 +105,7 @@ const TableBody: VFC<{ datas: MatterFormData[] }> = ({ datas }) => {
           )}
           {(
             Object.keys(
-              key.selectContractTypeFormData
+              SelectContractTypeFormDataLabels
             ) as (keyof SelectContractTypeFormData)[]
           ).map((formKey, j) => (
             <TableCell
@@ -117,7 +117,7 @@ const TableBody: VFC<{ datas: MatterFormData[] }> = ({ datas }) => {
           ))}
           {(
             Object.keys(
-              key.contractTypeFormData
+              ContractTypeFormDataLabels
             ) as (keyof ContractTypeFormData)[]
           ).map((formKey, j) => (
             <TableCell
@@ -129,7 +129,7 @@ const TableBody: VFC<{ datas: MatterFormData[] }> = ({ datas }) => {
           ))}
           {(
             Object.keys(
-              key.paymentMethodFormData
+              PaymentMethodFormDataLabels
             ) as (keyof PaymentMethodFormData)[]
           ).map((formKey, j) => (
             <TableCell
@@ -140,7 +140,9 @@ const TableBody: VFC<{ datas: MatterFormData[] }> = ({ datas }) => {
             </TableCell>
           ))}
           {(
-            Object.keys(key.onBoardingFormData) as (keyof OnboardingFormData)[]
+            Object.keys(
+              OnboardingFormDataLabels
+            ) as (keyof OnboardingFormData)[]
           ).map((formKey, j) => (
             <TableCell
               key={`data.${i}.onBoardingFormData.${j}`}
@@ -160,8 +162,8 @@ const Contents: VFC = () => {
 
   return (
     <>
-      <Paper>
-        <TableContainer>
+      <Paper sx={{ width: "300%" }} style={{ overflowX: "scroll" }}>
+        <TableContainer sx={{ maxHeight: "80vh" }}>
           <Table stickyHeader>
             <TableHead />
             <TableBody datas={datas} />
