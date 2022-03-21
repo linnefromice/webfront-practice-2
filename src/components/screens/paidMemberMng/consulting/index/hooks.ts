@@ -1,5 +1,6 @@
 import request from "graphql-request";
 import useSWR from "swr";
+import { FormData } from "../create/types";
 
 const GRAPHQL_API_ENDPOINT = "http://localhost:3000/graphql";
 type FetchData = {

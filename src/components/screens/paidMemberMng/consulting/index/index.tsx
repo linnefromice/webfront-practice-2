@@ -13,14 +13,7 @@ import { VFC } from "react";
 import { FormData, FormDataLabels } from "../create/types";
 import { useSWRForms } from "./hooks";
 
-const Contents: VFC = () => {
-  const { data, error } = useSWRForms();
-
-  if (error) return <div>failed to load</div>;
-  if (!data) return <div>loading...</div>;
-
-  const datas = data.forms;
-
+const Contents: VFC<{ datas: FormData[] }> = ({ datas }) => {
   return (
     <>
       <Paper sx={{ width: "300%" }} style={{ overflowX: "scroll" }}>
@@ -73,6 +66,13 @@ const Contents: VFC = () => {
 };
 
 export const IndexScreen: VFC = () => {
+  const { data, error } = useSWRForms();
+
+  if (error) return <div>failed to load</div>;
+  if (!data) return <div>loading...</div>;
+
+  const datas = data.forms;
+
   return (
     <>
       <Head>
@@ -81,7 +81,7 @@ export const IndexScreen: VFC = () => {
       <Typography variant="h4" sx={{ marginBottom: 2 }}>
         案件情報一覧(チラCEO)
       </Typography>
-      <Contents />
+      <Contents datas={datas} />
     </>
   );
 };

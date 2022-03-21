@@ -36,6 +36,78 @@ const TableHead: VFC = () => {
   return (
     <MuiTableHead>
       <TableRow>
+        <TableCell
+          align="center"
+          colSpan={1}
+          sx={{
+            color: "white",
+            bgcolor: "black",
+            border: 1,
+            borderColor: "white",
+          }}
+        />
+        <TableCell
+          align="center"
+          colSpan={Object.keys(FirstFormDataLabels).length}
+          sx={{
+            color: "white",
+            bgcolor: "black",
+            border: 1,
+            borderColor: "white",
+          }}
+        >
+          基礎情報(ページ1)
+        </TableCell>
+        <TableCell
+          align="center"
+          colSpan={Object.keys(SelectContractTypeFormDataLabels).length}
+          sx={{
+            color: "white",
+            bgcolor: "black",
+            border: 1,
+            borderColor: "white",
+          }}
+        >
+          案件種別選択(ページ2)
+        </TableCell>
+        <TableCell
+          align="center"
+          colSpan={Object.keys(ContractTypeFormDataLabels).length}
+          sx={{
+            color: "white",
+            bgcolor: "black",
+            border: 1,
+            borderColor: "white",
+          }}
+        >
+          案件種別毎入力項目(ページ3)
+        </TableCell>
+        <TableCell
+          align="center"
+          colSpan={Object.keys(PaymentMethodFormDataLabels).length}
+          sx={{
+            color: "white",
+            bgcolor: "black",
+            border: 1,
+            borderColor: "white",
+          }}
+        >
+          支払方法(ページ4)
+        </TableCell>
+        <TableCell
+          align="center"
+          colSpan={Object.keys(OnboardingFormDataLabels).length}
+          sx={{
+            color: "white",
+            bgcolor: "black",
+            border: 1,
+            borderColor: "white",
+          }}
+        >
+          オンボーディング情報(ページ5)
+        </TableCell>
+      </TableRow>
+      <TableRow>
         <TableCell align={`right`} sx={{ color: "white", bgcolor: "black" }}>
           ID
         </TableCell>
@@ -157,24 +229,22 @@ const TableBody: VFC<{ datas: MatterFormData[] }> = ({ datas }) => {
   );
 };
 
-const Contents: VFC = () => {
-  const { datas } = useMatterForm();
-
+const Contents: VFC<{ datas: MatterFormData[] }> = ({ datas }) => {
   return (
-    <>
-      <Paper sx={{ width: "300%" }} style={{ overflowX: "scroll" }}>
-        <TableContainer sx={{ maxHeight: "80vh" }}>
-          <Table stickyHeader>
-            <TableHead />
-            <TableBody datas={datas} />
-          </Table>
-        </TableContainer>
-      </Paper>
-    </>
+    <Paper sx={{ width: "300%" }} style={{ overflowX: "scroll" }}>
+      <TableContainer sx={{ maxHeight: "80vh" }}>
+        <Table stickyHeader>
+          <TableHead />
+          <TableBody datas={datas} />
+        </Table>
+      </TableContainer>
+    </Paper>
   );
 };
 
 export const IndexScreen: VFC = () => {
+  const { datas } = useMatterForm();
+
   return (
     <>
       <Head>
@@ -183,7 +253,7 @@ export const IndexScreen: VFC = () => {
       <Typography variant="h4" sx={{ marginBottom: 2 }}>
         案件情報一覧
       </Typography>
-      <Contents />
+      <Contents datas={datas} />
     </>
   );
 };
