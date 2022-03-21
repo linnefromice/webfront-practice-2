@@ -2,7 +2,7 @@ import { composeStories } from "@storybook/testing-react";
 import { render, waitFor } from "@testing-library/react";
 import * as stories from "../IndexScreen.stories";
 
-describe("src/components/screens/paidMemberMng/matterForm/index", () => {
+describe("src/components/screens/paidMemberMng/consulting/index", () => {
   const { IndexScreen: IndexScreenStory } = composeStories(stories);
 
   describe("display items", () => {
@@ -11,7 +11,7 @@ describe("src/components/screens/paidMemberMng/matterForm/index", () => {
       await waitFor(() => {
         expect(
           screen.getByRole("heading", {
-            name: "案件情報一覧",
+            name: "案件情報一覧(チラCEO)",
           })
         ).toBeInTheDocument();
       });
@@ -22,28 +22,13 @@ describe("src/components/screens/paidMemberMng/matterForm/index", () => {
       await waitFor(() => {
         expect(
           screen.getByRole("columnheader", {
-            name: "基礎情報(ページ1)",
+            name: "ID",
           })
         ).toBeInTheDocument();
       });
       expect(
         screen.getByRole("columnheader", {
-          name: "案件種別選択(ページ2)",
-        })
-      ).toBeInTheDocument();
-      expect(
-        screen.getByRole("columnheader", {
-          name: "案件種別毎入力項目(ページ3)",
-        })
-      ).toBeInTheDocument();
-      expect(
-        screen.getByRole("columnheader", {
-          name: "支払方法(ページ4)",
-        })
-      ).toBeInTheDocument();
-      expect(
-        screen.getByRole("columnheader", {
-          name: "オンボーディング情報(ページ5)",
+          name: "紹介文",
         })
       ).toBeInTheDocument();
     });

@@ -3,7 +3,7 @@ import { Confirmation as ConfirmationComponent } from ".";
 import { REQUIRED_FORM_ITEM_VALUES } from "../mocks";
 
 export default {
-  title: "screens/paidMemberMng/matterForm/create_chiraceo/Confirmation",
+  title: "screens/paidMemberMng/consulting/create/Confirmation",
   component: ConfirmationComponent,
 } as ComponentMeta<typeof ConfirmationComponent>;
 

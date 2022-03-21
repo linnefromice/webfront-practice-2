@@ -2,7 +2,7 @@ import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { Contents as ContentsComponent } from ".";
 
 export default {
-  title: "screens/paidMemberMng/matterForm/create_chiraceo/Form",
+  title: "screens/paidMemberMng/consulting/create/Form",
   component: ContentsComponent,
 } as ComponentMeta<typeof ContentsComponent>;
 
