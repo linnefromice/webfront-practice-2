@@ -24,38 +24,42 @@ type NestedListItemType = {
   label: ReactNode;
 };
 
+const _matterFormNestings: NestedListItemType[] = [
+  {
+    icon: <TableViewIcon />,
+    url: "/paidMemberMng/matterForm",
+    label: "一覧",
+  },
+  {
+    icon: <EditIcon />,
+    url: "/paidMemberMng/matterForm/create",
+    label: "追加",
+  },
+];
+
+const _consultingNetings: NestedListItemType[] = [
+  {
+    icon: <TableViewIcon />,
+    url: "/paidMemberMng/consulting",
+    label: "一覧",
+  },
+  {
+    icon: <EditIcon />,
+    url: "/paidMemberMng/consulting/create",
+    label: "追加",
+  },
+];
+
 const items: ListItemType[] = [
   {
     icon: <ListAltIcon />,
     label: "案件情報",
-    nestings: [
-      {
-        icon: <TableViewIcon />,
-        url: "/paidMemberMng/matterForm",
-        label: "一覧",
-      },
-      {
-        icon: <EditIcon />,
-        url: "/paidMemberMng/matterForm/create",
-        label: "追加",
-      },
-    ],
+    nestings: _matterFormNestings,
   },
   {
     icon: <ListAltIcon />,
     label: "コンサルティング",
-    nestings: [
-      {
-        icon: <TableViewIcon />,
-        url: "/paidMemberMng/consulting",
-        label: "一覧",
-      },
-      {
-        icon: <EditIcon />,
-        url: "/paidMemberMng/consulting/create",
-        label: "追加",
-      },
-    ],
+    nestings: _consultingNetings,
   },
   { icon: <ListAltIcon />, label: "マッチング" },
   { icon: <ListAltIcon />, label: "マッチング成果報告" },
