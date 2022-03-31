@@ -2,7 +2,7 @@ import { PaymentMethodKeyType } from "../types";
 
 type CommonFormData = {
   paymentMethod: PaymentMethodKeyType;
-  otherPaymentMethod?: string;
+  otherPaymentMethod: string;
 };
 
 export const EmployeeSize = {
@@ -26,6 +26,31 @@ export const ContractPlan = {
   MajorDevelopment: "大手開拓プラン",
 } as const;
 export type ContractPlanKeyType = keyof typeof ContractPlan;
+
+export const ChiraCeoFormDataKeys = [
+  "paymentMethod", // for CommonFormData
+  "otherPaymentMethod", // for CommonFormData
+  "companyName",
+  "url",
+  "employeeSize",
+  "postCode",
+  "address",
+  "telNumberCompany",
+  "telNumberManagerPhone",
+  "managerName",
+  "managerRole",
+  "managerMailAddress",
+  "accountingRoleName",
+  "invoiceShippingMailAddress",
+  "contractPlan",
+  "initialCost",
+  "monthlyAmount",
+  "firstConsultingDay",
+  "contractStartDate",
+  "contractEndDate",
+];
+type ChiraCeoFormDataKey = typeof ChiraCeoFormDataKeys[number];
+
 export type ChiraCeoFormData = CommonFormData & {
   companyName: string; // 企業名
   url: string; // URL
@@ -47,7 +72,7 @@ export type ChiraCeoFormData = CommonFormData & {
   contractEndDate: string; // 契約終了日
 };
 export const ChiraCeoFormDataLabels: {
-  [key in keyof Required<ChiraCeoFormData>]: string;
+  [key in ChiraCeoFormDataKey]: string;
 } = {
   paymentMethod: "支払方法",
   otherPaymentMethod: "支払方法がその他の場合は入力",

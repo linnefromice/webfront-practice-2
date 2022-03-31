@@ -10,6 +10,22 @@ export const ContractType = {
   Cancellation: "解約",
 } as const;
 export type ContractTypeKeyType = keyof typeof ContractType;
+
+export const FormDataKeys = [
+  "introducer",
+  "contractDate",
+  "contractType",
+  "contractor",
+  "applicationFormData",
+  "businessCardPic",
+  "closingUrl",
+  "closingUrlDescription",
+  "closingDocument",
+  "initialBillingAmount",
+  "initialBillingBreakdowns",
+];
+type FormDataKey = typeof FormDataKeys[number];
+
 export type FormData = {
   introducer: string; // 受注企業を紹介した企業
   contractDate: string; // 契約日
@@ -24,7 +40,7 @@ export type FormData = {
   initialBillingBreakdowns: InitialBillingBreakdownData[]; // 初回請求内訳
 };
 
-export const FormDataLabels: { [key in keyof Required<FormData>]: string } = {
+export const FormDataLabels: { [key in FormDataKey]: string } = {
   introducer: "今回受注企業を紹介くださった企業",
   contractDate: "契約日",
   contractType: "契約種別",
