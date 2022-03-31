@@ -12,6 +12,7 @@ import {
   Typography,
 } from "@mui/material";
 import { Link } from "components/uiParts";
+import { Colors } from "constants/theme";
 import { ReactNode, VFC } from "react";
 
 type ListItemType = NestedListItemType & {
@@ -72,7 +73,7 @@ const Header: VFC = () => {
         variant="h5"
         gutterBottom
         component="div"
-        sx={{ color: "#FFFFFF" }}
+        sx={{ color: Colors.white }}
       >
         Onlystory
       </Typography>
@@ -80,7 +81,7 @@ const Header: VFC = () => {
         variant="subtitle1"
         gutterBottom
         component="div"
-        sx={{ color: "#999999" }}
+        sx={{ color: Colors.white }}
       >
         inhouse app
       </Typography>
@@ -89,37 +90,36 @@ const Header: VFC = () => {
 };
 
 const NestedItem: VFC<{ item: NestedListItemType }> = ({ item }) => {
+  const _primaryTypographyProps = {
+    fontSize: 14,
+    fontWeight: "medium",
+  };
+
   return (
-    <List key={`drawer.item.nestedItems.${j}`} component="div" disablePadding>
+    <List component="div" disablePadding>
       <ListItemButton
         sx={{
           paddingLeft: 4,
           maxHeight: 48,
-          color: "#FFFFFF",
+          color: Colors.white,
           "&:hover": {
             background: "#0c2d48",
           },
         }}
         disabled={item.url == null}
       >
-        <ListItemIcon sx={{ color: "gray" }}>{item.icon}</ListItemIcon>
+        <ListItemIcon sx={{ color: Colors.gray }}>{item.icon}</ListItemIcon>
         {item.url ? (
           <Link href={item.url} noLinkStyle>
             <ListItemText
               primary={item.label}
-              primaryTypographyProps={{
-                fontSize: 14,
-                fontWeight: "medium",
-              }}
+              primaryTypographyProps={_primaryTypographyProps}
             />
           </Link>
         ) : (
           <ListItemText
             primary={item.label}
-            primaryTypographyProps={{
-              fontSize: 14,
-              fontWeight: "medium",
-            }}
+            primaryTypographyProps={_primaryTypographyProps}
           />
         )}
       </ListItemButton>
@@ -128,44 +128,44 @@ const NestedItem: VFC<{ item: NestedListItemType }> = ({ item }) => {
 };
 
 const Item: VFC<{ item: ListItemType }> = ({ item }) => {
+  const _listItemButtonSx = {
+    maxHeight: 48,
+    color: Colors.white,
+  };
+
+  const _primaryTypographyProps = {
+    fontSize: 14,
+    fontWeight: "medium",
+  };
+
   return (
     <>
       <ListItemButton
         sx={
           item.url
             ? {
-                maxHeight: 48,
-                color: "#FFFFFF",
+                ..._listItemButtonSx,
                 "&:hover": {
                   background: "#0c2d48",
                 },
               }
-            : {
-                maxHeight: 48,
-                color: "#FFFFFF",
-              }
+            : _listItemButtonSx
         }
         disabled={item.url == null && item.nestings == null}
         disableRipple={item.url == null}
       >
-        <ListItemIcon sx={{ color: "gray" }}>{item.icon}</ListItemIcon>
+        <ListItemIcon sx={{ color: Colors.gray }}>{item.icon}</ListItemIcon>
         {item.url ? (
           <Link href={item.url ? item.url : "/"} noLinkStyle>
             <ListItemText
               primary={item.label}
-              primaryTypographyProps={{
-                fontSize: 14,
-                fontWeight: "medium",
-              }}
+              primaryTypographyProps={_primaryTypographyProps}
             />
           </Link>
         ) : (
           <ListItemText
             primary={item.label}
-            primaryTypographyProps={{
-              fontSize: 14,
-              fontWeight: "medium",
-            }}
+            primaryTypographyProps={_primaryTypographyProps}
           />
         )}
       </ListItemButton>
@@ -181,10 +181,15 @@ export const DrawerContents: VFC = () => {
   return (
     <>
       <Header />
-      <Divider sx={{ backgroundColor: "#FFFFFF" }} />
+      <Divider sx={{ backgroundColor: Colors.white }} />
       <List
         subheader={
-          <ListSubheader sx={{ background: "#031525", color: "#FFFFFF" }}>
+          <ListSubheader
+            sx={{
+              background: "#031525", // because not reflected BaseDrawer styling
+              color: Colors.white,
+            }}
+          >
             有料会員管理
           </ListSubheader>
         }

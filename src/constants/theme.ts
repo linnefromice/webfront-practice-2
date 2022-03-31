@@ -1,5 +1,13 @@
 import { createTheme } from "@mui/material";
 
+// Create style definitions for sx props
+export const Colors = {
+  white: "#FFFFFF",
+  gray: "#999999",
+  black: "#000000",
+};
+
+// Create theme
 const baseTheme = createTheme({
   palette: {
     primary: {
