@@ -12,23 +12,28 @@ import {
 import Head from "next/head";
 import { VFC } from "react";
 import {
+  ChiraCeoFormDataKeys as ContractTypeFormDataKeys,
   ChiraCeoFormDataLabels as ContractTypeFormDataLabels,
   FormData as ContractTypeFormData,
 } from "../create/ContractTypeForm/types";
 import {
   FormData as FirstFormData,
+  FormDataKeys as FirstFormDataKeys,
   FormDataLabels as FirstFormDataLabels,
 } from "../create/FirstForm/types";
 import {
   FormData as OnboardingFormData,
+  FormDataKeys as OnboardingFormDataKeys,
   FormDataLabels as OnboardingFormDataLabels,
 } from "../create/OnboardingForm/types";
 import {
+  CreditCardFormDataKeys as PaymentMethodFormDataKeys,
   CreditCardFormDataLabels as PaymentMethodFormDataLabels,
   FormData as PaymentMethodFormData,
 } from "../create/PaymentMethodForm/types";
 import {
   FormData as SelectContractTypeFormData,
+  FormDataKeys as SelectContractTypeFormDataKeys,
   FormDataLabels as SelectContractTypeFormDataLabels,
 } from "../create/SelectContractTypeForm/types";
 import { MatterFormData, useSWRForms } from "./hooks";
@@ -58,23 +63,23 @@ const primaryHeadCellPropsList: Omit<TablePrimaryHeadCellProps, "sxProps">[] = [
   },
   {
     value: "基礎情報(ページ1)",
-    length: Object.keys(FirstFormDataLabels).length,
+    length: FirstFormDataKeys.length,
   },
   {
     value: "案件種別選択(ページ2)",
-    length: Object.keys(SelectContractTypeFormDataLabels).length,
+    length: SelectContractTypeFormDataKeys.length,
   },
   {
     value: "案件種別毎入力項目(ページ3)",
-    length: Object.keys(ContractTypeFormDataLabels).length,
+    length: ContractTypeFormDataKeys.length,
   },
   {
     value: "支払方法(ページ4)",
-    length: Object.keys(PaymentMethodFormDataLabels).length,
+    length: PaymentMethodFormDataKeys.length,
   },
   {
     value: "オンボーディング情報(ページ5)",
-    length: Object.keys(OnboardingFormDataLabels).length,
+    length: OnboardingFormDataKeys.length,
   },
 ];
 
@@ -99,47 +104,31 @@ const TableHead: VFC = () => {
         <TableCell align={`right`} sx={{ color: "white", bgcolor: "black" }}>
           ID
         </TableCell>
-        {(Object.keys(FirstFormDataLabels) as (keyof FirstFormData)[]).map(
-          (key) => (
-            <TableCell
-              key={key}
-              sx={{ color: "white", bgcolor: "black" }}
-            >{`${FirstFormDataLabels[key]}`}</TableCell>
-          )
-        )}
-        {(
-          Object.keys(
-            SelectContractTypeFormDataLabels
-          ) as (keyof SelectContractTypeFormData)[]
-        ).map((key) => (
+        {FirstFormDataKeys.map((key) => (
+          <TableCell
+            key={key}
+            sx={{ color: "white", bgcolor: "black" }}
+          >{`${FirstFormDataLabels[key]}`}</TableCell>
+        ))}
+        {SelectContractTypeFormDataKeys.map((key) => (
           <TableCell
             key={key}
             sx={{ color: "white", bgcolor: "black" }}
           >{`${SelectContractTypeFormDataLabels[key]}`}</TableCell>
         ))}
-        {(
-          Object.keys(
-            ContractTypeFormDataLabels
-          ) as (keyof ContractTypeFormData)[]
-        ).map((key) => (
+        {ContractTypeFormDataKeys.map((key) => (
           <TableCell
             key={key}
             sx={{ color: "white", bgcolor: "black" }}
           >{`${ContractTypeFormDataLabels[key]}`}</TableCell>
         ))}
-        {(
-          Object.keys(
-            PaymentMethodFormDataLabels
-          ) as (keyof PaymentMethodFormData)[]
-        ).map((key) => (
+        {PaymentMethodFormDataKeys.map((key) => (
           <TableCell
             key={key}
             sx={{ color: "white", bgcolor: "black" }}
           >{`${PaymentMethodFormDataLabels[key]}`}</TableCell>
         ))}
-        {(
-          Object.keys(OnboardingFormDataLabels) as (keyof OnboardingFormData)[]
-        ).map((key) => (
+        {OnboardingFormDataKeys.map((key) => (
           <TableCell
             key={key}
             sx={{ color: "white", bgcolor: "black" }}
@@ -156,17 +145,13 @@ const TableBody: VFC<{ datas: MatterFormData[] }> = ({ datas }) => {
       {datas.map((key, i) => (
         <TableRow key={`row.${i}`}>
           <TableCell>{i + 1}</TableCell>
-          {(Object.keys(FirstFormDataLabels) as (keyof FirstFormData)[]).map(
-            (formKey, j) => (
-              <TableCell key={`data.${i}.firstFormData.${j}`} align={`right`}>
-                {key.firstFormData[formKey]}
-              </TableCell>
-            )
-          )}
+          {(FirstFormDataKeys as (keyof FirstFormData)[]).map((formKey, j) => (
+            <TableCell key={`data.${i}.firstFormData.${j}`} align={`right`}>
+              {key.firstFormData[formKey]}
+            </TableCell>
+          ))}
           {(
-            Object.keys(
-              SelectContractTypeFormDataLabels
-            ) as (keyof SelectContractTypeFormData)[]
+            SelectContractTypeFormDataKeys as (keyof SelectContractTypeFormData)[]
           ).map((formKey, j) => (
             <TableCell
               key={`data.${i}.selectContractTypeFormData.${j}`}
@@ -175,42 +160,36 @@ const TableBody: VFC<{ datas: MatterFormData[] }> = ({ datas }) => {
               {key.selectContractTypeFormData[formKey]}
             </TableCell>
           ))}
-          {(
-            Object.keys(
-              ContractTypeFormDataLabels
-            ) as (keyof ContractTypeFormData)[]
-          ).map((formKey, j) => (
-            <TableCell
-              key={`data.${i}.contractTypeFormData.${j}`}
-              align={`right`}
-            >
-              {key.contractTypeFormData[formKey]}
-            </TableCell>
-          ))}
-          {(
-            Object.keys(
-              PaymentMethodFormDataLabels
-            ) as (keyof PaymentMethodFormData)[]
-          ).map((formKey, j) => (
-            <TableCell
-              key={`data.${i}.paymentMethodFormData.${j}`}
-              align={`right`}
-            >
-              {key.paymentMethodFormData[formKey]}
-            </TableCell>
-          ))}
-          {(
-            Object.keys(
-              OnboardingFormDataLabels
-            ) as (keyof OnboardingFormData)[]
-          ).map((formKey, j) => (
-            <TableCell
-              key={`data.${i}.onBoardingFormData.${j}`}
-              align={`right`}
-            >
-              {key.onBoardingFormData[formKey]}
-            </TableCell>
-          ))}
+          {(ContractTypeFormDataKeys as (keyof ContractTypeFormData)[]).map(
+            (formKey, j) => (
+              <TableCell
+                key={`data.${i}.contractTypeFormData.${j}`}
+                align={`right`}
+              >
+                {key.contractTypeFormData[formKey]}
+              </TableCell>
+            )
+          )}
+          {(PaymentMethodFormDataKeys as (keyof PaymentMethodFormData)[]).map(
+            (formKey, j) => (
+              <TableCell
+                key={`data.${i}.paymentMethodFormData.${j}`}
+                align={`right`}
+              >
+                {key.paymentMethodFormData[formKey]}
+              </TableCell>
+            )
+          )}
+          {(OnboardingFormDataKeys as (keyof OnboardingFormData)[]).map(
+            (formKey, j) => (
+              <TableCell
+                key={`data.${i}.onBoardingFormData.${j}`}
+                align={`right`}
+              >
+                {key.onBoardingFormData[formKey]}
+              </TableCell>
+            )
+          )}
         </TableRow>
       ))}
     </MuiTableBody>

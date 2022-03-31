@@ -1,3 +1,19 @@
+export const FormDataKeys = [
+  "firstConsultationStartTime",
+  "firstConsultantMain",
+  "firstConsultantSub",
+  "kickoffLocation",
+  "specialMattersColumn",
+  "howToUseIntrinsicValue",
+  "intrinsicValueKpi",
+  "howToUseCurrentValue",
+  "currentValueKpi",
+  "serviceContents",
+  "serviceMaterials",
+  "otherSharedMattersForKickoffStaff",
+];
+type FormDataKey = typeof FormDataKeys[number];
+
 export type FormData = {
   firstConsultationStartTime: string; // 初回コンサル開始時刻
   firstConsultantMain: string; // 初回コンサル担当(メイン)
@@ -13,7 +29,7 @@ export type FormData = {
   otherSharedMattersForKickoffStaff: string; // その他キックオフ担当向け共有事項
 };
 
-export const FormDataLabels: { [key in keyof Required<FormData>]: string } = {
+export const FormDataLabels: { [key in FormDataKey]: string } = {
   firstConsultationStartTime: "初回コンサル開始時刻",
   firstConsultantMain: "初回コンサル担当(メイン)",
   firstConsultantSub: "初回コンサル担当(サブ)",
