@@ -65,27 +65,122 @@ const items: ListItemType[] = [
   { icon: <ListAltIcon />, label: "マッチング成果報告" },
 ];
 
+const Header: VFC = () => {
+  return (
+    <Stack justifyContent="center" alignItems="center">
+      <Typography
+        variant="h5"
+        gutterBottom
+        component="div"
+        sx={{ color: "#FFFFFF" }}
+      >
+        Onlystory
+      </Typography>
+      <Typography
+        variant="subtitle1"
+        gutterBottom
+        component="div"
+        sx={{ color: "#999999" }}
+      >
+        inhouse app
+      </Typography>
+    </Stack>
+  );
+};
+
+const NestedItem: VFC<{ item: NestedListItemType }> = ({ item }) => {
+  return (
+    <List key={`drawer.item.nestedItems.${j}`} component="div" disablePadding>
+      <ListItemButton
+        sx={{
+          paddingLeft: 4,
+          maxHeight: 48,
+          color: "#FFFFFF",
+          "&:hover": {
+            background: "#0c2d48",
+          },
+        }}
+        disabled={item.url == null}
+      >
+        <ListItemIcon sx={{ color: "gray" }}>{item.icon}</ListItemIcon>
+        {item.url ? (
+          <Link href={item.url} noLinkStyle>
+            <ListItemText
+              primary={item.label}
+              primaryTypographyProps={{
+                fontSize: 14,
+                fontWeight: "medium",
+              }}
+            />
+          </Link>
+        ) : (
+          <ListItemText
+            primary={item.label}
+            primaryTypographyProps={{
+              fontSize: 14,
+              fontWeight: "medium",
+            }}
+          />
+        )}
+      </ListItemButton>
+    </List>
+  );
+};
+
+const Item: VFC<{ item: ListItemType }> = ({ item }) => {
+  return (
+    <>
+      <ListItemButton
+        sx={
+          item.url
+            ? {
+                maxHeight: 48,
+                color: "#FFFFFF",
+                "&:hover": {
+                  background: "#0c2d48",
+                },
+              }
+            : {
+                maxHeight: 48,
+                color: "#FFFFFF",
+              }
+        }
+        disabled={item.url == null && item.nestings == null}
+        disableRipple={item.url == null}
+      >
+        <ListItemIcon sx={{ color: "gray" }}>{item.icon}</ListItemIcon>
+        {item.url ? (
+          <Link href={item.url ? item.url : "/"} noLinkStyle>
+            <ListItemText
+              primary={item.label}
+              primaryTypographyProps={{
+                fontSize: 14,
+                fontWeight: "medium",
+              }}
+            />
+          </Link>
+        ) : (
+          <ListItemText
+            primary={item.label}
+            primaryTypographyProps={{
+              fontSize: 14,
+              fontWeight: "medium",
+            }}
+          />
+        )}
+      </ListItemButton>
+      {item.nestings &&
+        item.nestings.map((nestedItem, j) => (
+          <NestedItem key={`drawer.item.nestedItems.${j}`} item={nestedItem} />
+        ))}
+    </>
+  );
+};
+
 export const DrawerContents: VFC = () => {
   return (
     <>
-      <Stack justifyContent="center" alignItems="center">
-        <Typography
-          variant="h5"
-          gutterBottom
-          component="div"
-          sx={{ color: "#FFFFFF" }}
-        >
-          Onlystory
-        </Typography>
-        <Typography
-          variant="subtitle1"
-          gutterBottom
-          component="div"
-          sx={{ color: "#999999" }}
-        >
-          inhouse app
-        </Typography>
-      </Stack>
+      <Header />
       <Divider sx={{ backgroundColor: "#FFFFFF" }} />
       <List
         subheader={
@@ -95,91 +190,7 @@ export const DrawerContents: VFC = () => {
         }
       >
         {items.map((item, index) => (
-          <>
-            <ListItemButton
-              key={`drawer.item.${index}`}
-              sx={
-                item.url
-                  ? {
-                      maxHeight: 48,
-                      color: "#FFFFFF",
-                      "&:hover": {
-                        background: "#0c2d48",
-                      },
-                    }
-                  : {
-                      maxHeight: 48,
-                      color: "#FFFFFF",
-                    }
-              }
-              disabled={item.url == null && item.nestings == null}
-              disableRipple={item.url == null}
-            >
-              <ListItemIcon sx={{ color: "gray" }}>{item.icon}</ListItemIcon>
-              {item.url ? (
-                <Link href={item.url ? item.url : "/"} noLinkStyle>
-                  <ListItemText
-                    primary={item.label}
-                    primaryTypographyProps={{
-                      fontSize: 14,
-                      fontWeight: "medium",
-                    }}
-                  />
-                </Link>
-              ) : (
-                <ListItemText
-                  primary={item.label}
-                  primaryTypographyProps={{
-                    fontSize: 14,
-                    fontWeight: "medium",
-                  }}
-                />
-              )}
-            </ListItemButton>
-            {item.nestings &&
-              item.nestings.map((nestedItem, j) => (
-                <List
-                  key={`drawer.item.${index}.nestedItem.${j}`}
-                  component="div"
-                  disablePadding
-                >
-                  <ListItemButton
-                    sx={{
-                      paddingLeft: 4,
-                      maxHeight: 48,
-                      color: "#FFFFFF",
-                      "&:hover": {
-                        background: "#0c2d48",
-                      },
-                    }}
-                    disabled={nestedItem.url == null}
-                  >
-                    <ListItemIcon sx={{ color: "gray" }}>
-                      {nestedItem.icon}
-                    </ListItemIcon>
-                    {nestedItem.url ? (
-                      <Link href={nestedItem.url} noLinkStyle>
-                        <ListItemText
-                          primary={nestedItem.label}
-                          primaryTypographyProps={{
-                            fontSize: 14,
-                            fontWeight: "medium",
-                          }}
-                        />
-                      </Link>
-                    ) : (
-                      <ListItemText
-                        primary={item.label}
-                        primaryTypographyProps={{
-                          fontSize: 14,
-                          fontWeight: "medium",
-                        }}
-                      />
-                    )}
-                  </ListItemButton>
-                </List>
-              ))}
-          </>
+          <Item key={`drawer.item.${index}`} item={item} />
         ))}
       </List>
     </>
