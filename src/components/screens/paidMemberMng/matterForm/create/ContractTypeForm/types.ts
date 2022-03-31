@@ -2,7 +2,7 @@ import { PaymentMethodKeyType } from "../types";
 
 type CommonFormData = {
   paymentMethod: PaymentMethodKeyType;
-  otherPaymentMethod?: string;
+  otherPaymentMethod: string;
 };
 
 export const EmployeeSize = {

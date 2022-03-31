@@ -16,7 +16,7 @@ type CreditCardFormDataKey = typeof CreditCardFormDataKeys[number];
 type CreditCardFormData = {
   firstWithdrawalDate: string; // 初回引き落とし日
   paymentCycle: PaymentCycleKeyType; // 支払いのサイクル
-  otherPaymentCycle?: string; // その他(支払いのサイクル)
+  otherPaymentCycle: string; // その他(支払いのサイクル)
   otherSharedMatters: string; // その他経理チーム向け共有事項
 };
 export const CreditCardFormDataLabels: {

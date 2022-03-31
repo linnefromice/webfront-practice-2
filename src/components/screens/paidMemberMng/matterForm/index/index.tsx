@@ -113,56 +113,36 @@ const TableHead: VFC = () => {
 const TableBody: VFC<{ datas: MatterFormData[] }> = ({ datas }) => {
   return (
     <MuiTableBody>
-      {datas.map((key, i) => (
-        <TableRow key={`row.${i}`}>
-          <TableCell>{i + 1}</TableCell>
-          {(FirstFormDataKeys as (keyof FirstFormData)[]).map((formKey, j) => (
-            <TableCell key={`data.${i}.firstFormData.${j}`} align={`right`}>
-              {key.firstFormData[formKey]}
-            </TableCell>
-          ))}
-          {(
+      {datas.map((key, i) => {
+        // create cell data list with considering the sort order
+        const cellDatas = [(i + 1).toString()].concat(
+          (FirstFormDataKeys as (keyof FirstFormData)[]).map(
+            (_formKey) => key.firstFormData[_formKey].toString() // TODO: consider file type object (use toString instead)
+          ),
+          (
             SelectContractTypeFormDataKeys as (keyof SelectContractTypeFormData)[]
-          ).map((formKey, j) => (
-            <TableCell
-              key={`data.${i}.selectContractTypeFormData.${j}`}
-              align={`right`}
-            >
-              {key.selectContractTypeFormData[formKey]}
-            </TableCell>
-          ))}
-          {(ContractTypeFormDataKeys as (keyof ContractTypeFormData)[]).map(
-            (formKey, j) => (
-              <TableCell
-                key={`data.${i}.contractTypeFormData.${j}`}
-                align={`right`}
-              >
-                {key.contractTypeFormData[formKey]}
+          ).map((_formKey) => key.selectContractTypeFormData[_formKey]),
+          (ContractTypeFormDataKeys as (keyof ContractTypeFormData)[]).map(
+            (_formKey) => key.contractTypeFormData[_formKey]
+          ),
+          (PaymentMethodFormDataKeys as (keyof PaymentMethodFormData)[]).map(
+            (_formKey) => key.paymentMethodFormData[_formKey]
+          ),
+          (OnboardingFormDataKeys as (keyof OnboardingFormData)[]).map(
+            (_formKey) => key.onBoardingFormData[_formKey].toString()
+          )
+        );
+
+        return (
+          <TableRow key={`row.${i}`}>
+            {cellDatas.map((v, j) => (
+              <TableCell key={`row.${i}.cell.${j}`} align={`right`}>
+                {v}
               </TableCell>
-            )
-          )}
-          {(PaymentMethodFormDataKeys as (keyof PaymentMethodFormData)[]).map(
-            (formKey, j) => (
-              <TableCell
-                key={`data.${i}.paymentMethodFormData.${j}`}
-                align={`right`}
-              >
-                {key.paymentMethodFormData[formKey]}
-              </TableCell>
-            )
-          )}
-          {(OnboardingFormDataKeys as (keyof OnboardingFormData)[]).map(
-            (formKey, j) => (
-              <TableCell
-                key={`data.${i}.onBoardingFormData.${j}`}
-                align={`right`}
-              >
-                {key.onBoardingFormData[formKey]}
-              </TableCell>
-            )
-          )}
-        </TableRow>
-      ))}
+            ))}
+          </TableRow>
+        );
+      })}
     </MuiTableBody>
   );
 };
