@@ -1,6 +1,5 @@
 import {
   Paper,
-  SxProps,
   Table,
   TableBody as MuiTableBody,
   TableCell,
@@ -38,25 +37,7 @@ import {
 } from "../create/SelectContractTypeForm/types";
 import { MatterFormData, useSWRForms } from "./hooks";
 
-type TablePrimaryHeadCellProps = {
-  sxProps: SxProps;
-  length: number;
-  value: string;
-};
-
-const TablePrimaryHeadCell: VFC<TablePrimaryHeadCellProps> = ({
-  sxProps,
-  length,
-  value,
-}) => {
-  return (
-    <TableCell align="center" colSpan={length} sx={sxProps}>
-      {value}
-    </TableCell>
-  );
-};
-
-const primaryHeadCellPropsList: Omit<TablePrimaryHeadCellProps, "sxProps">[] = [
+const primaryHeadCellPropsList: { length: number; value: string }[] = [
   {
     value: "",
     length: 1,
@@ -83,56 +64,46 @@ const primaryHeadCellPropsList: Omit<TablePrimaryHeadCellProps, "sxProps">[] = [
   },
 ];
 
+// create table header label list with considering the sort order
+const secondaryHeadCellValueList: string[] = ["ID"].concat(
+  FirstFormDataKeys.map((key) => FirstFormDataLabels[key]),
+  SelectContractTypeFormDataKeys.map(
+    (key) => SelectContractTypeFormDataLabels[key]
+  ),
+  ContractTypeFormDataKeys.map((key) => ContractTypeFormDataLabels[key]),
+  PaymentMethodFormDataKeys.map((key) => PaymentMethodFormDataLabels[key]),
+  OnboardingFormDataKeys.map((key) => OnboardingFormDataLabels[key])
+);
+
 const TableHead: VFC = () => {
   return (
     <MuiTableHead>
       <TableRow>
         {primaryHeadCellPropsList.map((v, i) => (
-          <TablePrimaryHeadCell
+          <TableCell
             key={`tablePrimaryHeadCell.${i}`}
-            {...v}
-            sxProps={{
+            align="center"
+            colSpan={v.length}
+            sx={{
               color: "white",
               bgcolor: "black",
               border: 1,
               borderColor: "white",
             }}
-          />
+          >
+            {v.value}
+          </TableCell>
         ))}
       </TableRow>
       <TableRow>
-        <TableCell align={`right`} sx={{ color: "white", bgcolor: "black" }}>
-          ID
-        </TableCell>
-        {FirstFormDataKeys.map((key) => (
+        {secondaryHeadCellValueList.map((v, i) => (
           <TableCell
-            key={key}
+            key={`tableSecondaryHeadCell.${i}`}
+            align={`right`}
             sx={{ color: "white", bgcolor: "black" }}
-          >{`${FirstFormDataLabels[key]}`}</TableCell>
-        ))}
-        {SelectContractTypeFormDataKeys.map((key) => (
-          <TableCell
-            key={key}
-            sx={{ color: "white", bgcolor: "black" }}
-          >{`${SelectContractTypeFormDataLabels[key]}`}</TableCell>
-        ))}
-        {ContractTypeFormDataKeys.map((key) => (
-          <TableCell
-            key={key}
-            sx={{ color: "white", bgcolor: "black" }}
-          >{`${ContractTypeFormDataLabels[key]}`}</TableCell>
-        ))}
-        {PaymentMethodFormDataKeys.map((key) => (
-          <TableCell
-            key={key}
-            sx={{ color: "white", bgcolor: "black" }}
-          >{`${PaymentMethodFormDataLabels[key]}`}</TableCell>
-        ))}
-        {OnboardingFormDataKeys.map((key) => (
-          <TableCell
-            key={key}
-            sx={{ color: "white", bgcolor: "black" }}
-          >{`${OnboardingFormDataLabels[key]}`}</TableCell>
+          >
+            {v}
+          </TableCell>
         ))}
       </TableRow>
     </MuiTableHead>
