@@ -51,38 +51,30 @@ const TablePrimaryHeadCell: VFC<TablePrimaryHeadCellProps> = ({
   );
 };
 
-const primaryHeadCellSx = {
-  color: "white",
-  bgcolor: "black",
-  border: 1,
-  borderColor: "white",
-};
-
-const primaryHeadCellPropsList: TablePrimaryHeadCellProps[] = [
+const primaryHeadCellPropsList: Omit<TablePrimaryHeadCellProps, "sxProps">[] = [
+  {
+    value: "",
+    length: 1,
+  },
   {
     value: "基礎情報(ページ1)",
     length: Object.keys(FirstFormDataLabels).length,
-    sxProps: primaryHeadCellSx,
   },
   {
     value: "案件種別選択(ページ2)",
     length: Object.keys(SelectContractTypeFormDataLabels).length,
-    sxProps: primaryHeadCellSx,
   },
   {
     value: "案件種別毎入力項目(ページ3)",
     length: Object.keys(ContractTypeFormDataLabels).length,
-    sxProps: primaryHeadCellSx,
   },
   {
     value: "支払方法(ページ4)",
     length: Object.keys(PaymentMethodFormDataLabels).length,
-    sxProps: primaryHeadCellSx,
   },
   {
     value: "オンボーディング情報(ページ5)",
     length: Object.keys(OnboardingFormDataLabels).length,
-    sxProps: primaryHeadCellSx,
   },
 ];
 
@@ -90,18 +82,17 @@ const TableHead: VFC = () => {
   return (
     <MuiTableHead>
       <TableRow>
-        <TableCell
-          align="center"
-          colSpan={1}
-          sx={{
-            color: "white",
-            bgcolor: "black",
-            border: 1,
-            borderColor: "white",
-          }}
-        />
         {primaryHeadCellPropsList.map((v, i) => (
-          <TablePrimaryHeadCell key={`tablePrimaryHeadCell.${i}`} {...v} />
+          <TablePrimaryHeadCell
+            key={`tablePrimaryHeadCell.${i}`}
+            {...v}
+            sxProps={{
+              color: "white",
+              bgcolor: "black",
+              border: 1,
+              borderColor: "white",
+            }}
+          />
         ))}
       </TableRow>
       <TableRow>
