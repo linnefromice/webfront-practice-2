@@ -1,5 +1,6 @@
 import {
   Paper,
+  SxProps,
   Table,
   TableBody as MuiTableBody,
   TableCell,
@@ -32,6 +33,59 @@ import {
 } from "../create/SelectContractTypeForm/types";
 import { MatterFormData, useSWRForms } from "./hooks";
 
+type TablePrimaryHeadCellProps = {
+  sxProps: SxProps;
+  length: number;
+  value: string;
+};
+
+const TablePrimaryHeadCell: VFC<TablePrimaryHeadCellProps> = ({
+  sxProps,
+  length,
+  value,
+}) => {
+  return (
+    <TableCell align="center" colSpan={length} sx={sxProps}>
+      {value}
+    </TableCell>
+  );
+};
+
+const primaryHeadCellSx = {
+  color: "white",
+  bgcolor: "black",
+  border: 1,
+  borderColor: "white",
+};
+
+const primaryHeadCellPropsList: TablePrimaryHeadCellProps[] = [
+  {
+    value: "基礎情報(ページ1)",
+    length: Object.keys(FirstFormDataLabels).length,
+    sxProps: primaryHeadCellSx,
+  },
+  {
+    value: "案件種別選択(ページ2)",
+    length: Object.keys(SelectContractTypeFormDataLabels).length,
+    sxProps: primaryHeadCellSx,
+  },
+  {
+    value: "案件種別毎入力項目(ページ3)",
+    length: Object.keys(ContractTypeFormDataLabels).length,
+    sxProps: primaryHeadCellSx,
+  },
+  {
+    value: "支払方法(ページ4)",
+    length: Object.keys(PaymentMethodFormDataLabels).length,
+    sxProps: primaryHeadCellSx,
+  },
+  {
+    value: "オンボーディング情報(ページ5)",
+    length: Object.keys(OnboardingFormDataLabels).length,
+    sxProps: primaryHeadCellSx,
+  },
+];
+
 const TableHead: VFC = () => {
   return (
     <MuiTableHead>
@@ -46,66 +100,9 @@ const TableHead: VFC = () => {
             borderColor: "white",
           }}
         />
-        <TableCell
-          align="center"
-          colSpan={Object.keys(FirstFormDataLabels).length}
-          sx={{
-            color: "white",
-            bgcolor: "black",
-            border: 1,
-            borderColor: "white",
-          }}
-        >
-          基礎情報(ページ1)
-        </TableCell>
-        <TableCell
-          align="center"
-          colSpan={Object.keys(SelectContractTypeFormDataLabels).length}
-          sx={{
-            color: "white",
-            bgcolor: "black",
-            border: 1,
-            borderColor: "white",
-          }}
-        >
-          案件種別選択(ページ2)
-        </TableCell>
-        <TableCell
-          align="center"
-          colSpan={Object.keys(ContractTypeFormDataLabels).length}
-          sx={{
-            color: "white",
-            bgcolor: "black",
-            border: 1,
-            borderColor: "white",
-          }}
-        >
-          案件種別毎入力項目(ページ3)
-        </TableCell>
-        <TableCell
-          align="center"
-          colSpan={Object.keys(PaymentMethodFormDataLabels).length}
-          sx={{
-            color: "white",
-            bgcolor: "black",
-            border: 1,
-            borderColor: "white",
-          }}
-        >
-          支払方法(ページ4)
-        </TableCell>
-        <TableCell
-          align="center"
-          colSpan={Object.keys(OnboardingFormDataLabels).length}
-          sx={{
-            color: "white",
-            bgcolor: "black",
-            border: 1,
-            borderColor: "white",
-          }}
-        >
-          オンボーディング情報(ページ5)
-        </TableCell>
+        {primaryHeadCellPropsList.map((v, i) => (
+          <TablePrimaryHeadCell key={`tablePrimaryHeadCell.${i}`} {...v} />
+        ))}
       </TableRow>
       <TableRow>
         <TableCell align={`right`} sx={{ color: "white", bgcolor: "black" }}>
