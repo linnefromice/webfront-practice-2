@@ -21,6 +21,7 @@ const MOCK: MatterFormData = {
   },
   contractTypeFormData: {
     companyName: "Example 会社名",
+    otherPaymentMethod: "",
     url: "https://example.com",
     employeeSize: "LessThan6",
     postCode: "",
@@ -43,7 +44,7 @@ const MOCK: MatterFormData = {
   paymentMethodFormData: {
     firstWithdrawalDate: "20000101",
     paymentCycle: "Onetime",
-    otherPaymentCycle: undefined,
+    otherPaymentCycle: "",
     otherSharedMatters: "",
   },
   onBoardingFormData: {
